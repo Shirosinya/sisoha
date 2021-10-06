@@ -230,13 +230,10 @@ class RegupersonilController extends Controller
             // to fetch data at Desember 27th 2045, Group D
             $date = $request->datepicker; //ini ngereturn YYYY-mm-dd (js value) gabisa di dd harus var_dump
             $str_arr = explode("-",$date); //misahin year month day
-            // var_dump($str_arr[0]);
             $year  = $str_arr[0] ?? date('Y');
             $month = $str_arr[1] ?? date('n');
             $day   = $str_arr[2] ?? date('d');
             $day = ltrim($day, '0');
-            // var_dump($year);
-            // $group = $request->query('group') ?? null;
             $group = null;
             $code = 400;
             if($year < 2020){
@@ -281,13 +278,10 @@ class RegupersonilController extends Controller
             $shifts = array();
             $reg = Regu::all();
             $str_arr = explode("-",$date); //misahin year month day
-            // var_dump($str_arr[0]);
             $year  = $str_arr[0] ?? date('Y');
             $month = $str_arr[1] ?? date('n');
             $day   = $str_arr[2] ?? date('d');
             $day = ltrim($day, '0');
-            // var_dump($year);
-            // $group = $request->query('group') ?? null;
             $group = null;
             $code = 400;
             if($year < 2020){
@@ -325,15 +319,8 @@ class RegupersonilController extends Controller
                 }else{$value = '4';}
                 $store_shift = Regu::where('id',$id) //updating shift_id
                     ->update(['shift_id'=>$value]);
-                // dd($shifts);
             }
         }
-
-        //menampilkan nama regu, mulai shift dan selesai shift dengan leftjoin tabel regu dan shift
-        // $regus = Regu::leftjoin('shifts','regus.shift_id','=','shifts.id')
-        // ->select('regus.nama as nama','shifts.mulai as mulai','shifts.selesai as selesai')->get();
-        // $regus = Regu::all();
-        // dd($regus);
 
         $leveluser = Auth::user()->level_user; //mengambil level_user
         if($leveluser == 'admin'){ //check kalau level admin, maka akan ditampilkan dari semua zona
@@ -427,9 +414,9 @@ class RegupersonilController extends Controller
             'regu_id'   =>$input['regu'],
         ]))
         {
-            return redirect('/regupersonil')->with('status', 'Data Berhasil Diupdate!');
+            return redirect('/tugas-jaga')->with('status', 'Data Berhasil Diupdate!');
         }
-        return redirect('/regupersonil')->with('error', 'Kesalahan saat mengupdate!');
+        return redirect('/tugas-jaga')->with('error', 'Kesalahan saat mengupdate!');
         
     }
 

@@ -9,6 +9,7 @@ use App\Models\Regu;
 use App\Models\Tugas;
 use App\Models\Zona;
 use App\Models\Pos;
+use App\Models\PosSatpam;
 
 class RekapController extends Controller
 {
@@ -41,13 +42,15 @@ class RekapController extends Controller
             array_push($pos_array, $pos);
         }
         // dd($pos_array[0]);
-        $tugas_jagas = Satpam::leftjoin('zonas','satpams.zona_id', '=', 'zonas.id')
-            ->select('satpams.nama as nama','satpams.nik as nik', 'satpams.status as status','zonas.nama as nama_zona')
-            ->where('zonas.id', '=', $userzona)
-            ->get();
+        $tugas_jagas = Satpam::all()->where('zona_id', '=', $userzona);
             // ->first();
 		    // dd($tugas_jagas);
         return view('jurnal.rekap', compact('page_title', 'page_description','action','logo','logoText','tugass','tugas_jagas'));
+    }
+
+    public function tugasJaga()
+    {
+        
     }
 
     /**

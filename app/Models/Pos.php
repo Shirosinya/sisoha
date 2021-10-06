@@ -24,4 +24,9 @@ class Pos extends Model
     {
         return $this->belongsTo(Zona::class);
     }
+
+    public function pos_satpam()
+    {
+        return $this->hasMany(PosSatpam::class);
+    }
 }

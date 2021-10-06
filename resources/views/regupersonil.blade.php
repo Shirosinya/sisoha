@@ -25,7 +25,7 @@
                         $today = date('Y-m-d');
                         // echo $today;
                         ?>
-                    <div class="card">
+                        <div class="card">
                             <!-- <div class="card-header">
                                 <h4 class="card-title">Regu dan Personil</h4>
                             </div> -->
@@ -150,6 +150,7 @@
                                                                             </div>
                                                                         </td>
                                                                     </tr>
+                                                                    <!-- MODAL UPDATE -->
                                                                     <div class="modal fade bd-example-modal-lg" id="editModal{{$value->id}}" tabindex="-1" role="dialog" aria-hidden="true">
                                                                         <div class="modal-dialog modal-lg">
                                                                             <div class="modal-content">
@@ -236,16 +237,6 @@
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
-                                                                                        <!-- <div class="form-check">
-                                                                                            <label class="col-sm-3 col-form-label">Jabatan</label>
-                                                                                            <div class="col-sm-9">
-                                                                                                <select name="jabatan" class="form-control" id="jabatan_edit" >
-                                                                                                    <option value="penjaga"  {{ $value->jabatan == 'penjaga' ? 'selected' : '' }}>Penjaga</option>
-                                                                                                    <option value="kajaga"  {{ $value->jabatan == 'kajaga' ? 'selected' : '' }}>Kajaga</option>
-                                                                                                    <option value="wakajaga" {{ $value->jabatan == 'wakajaga' ? 'selected' : '' }}>Wakajaga</option>
-                                                                                                </select>
-                                                                                            </div>
-                                                                                        </div> -->
                                                                                 </div>
                                                                                         <div class="modal-footer">
                                                                                             <button type="button" class="btn btn-danger light" data-dismiss="modal">Tutup</button>
@@ -255,6 +246,7 @@
                                                                             </div>    
                                                                         </div>
                                                                     </div>
+                                                                    <!-- MODAL UPDATE END -->
                                                                     <!--MODAL HAPUS-->
                                                                     <div class="modal fade" id="hapusModal{{$value->id}}">
                                                                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -306,9 +298,9 @@
                                                                             <th width="100px">#</th>
                                                                             <th width="200px">Nama Regu</th>
                                                                             <th width="200px">Shift Hari ini</th>
-                                                                            <th width="200px">Mulai</th>
-                                                                            <th width="200px">Selesai</th>
-                                                                            <th width="100px">Aksi</th>
+                                                                            <th width="150px">Mulai</th>
+                                                                            <th width="150px">Selesai</th>
+                                                                            <th width="100px">Detail</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>

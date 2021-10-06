@@ -15,11 +15,11 @@ class PosSeeder extends Seeder
     public function run()
     {
         $poss = [
-            ['Pos1', 'lorem ipsum', '1'],
-            ['Pos2', 'lorem ipsum', '1'],
-            ['Pos3', 'lorem ipsum', '1'],
-            ['Pos4', 'lorem ipsum', '1'],
-            ['Pos5', 'lorem ipsum', '1'],
+            ['RIK', 'lorem ipsum', '1'],
+            ['TD I', 'lorem ipsum', '1'],
+            ['TD II', 'lorem ipsum', '1'],
+            ['PGU', 'lorem ipsum', '1'],
+            ['II', 'lorem ipsum', '1'],
             ['Pos6', 'lorem ipsum', '2'],
             ['Pos7', 'lorem ipsum', '2'],
             ['Pos8', 'lorem ipsum', '2'],

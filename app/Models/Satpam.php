@@ -14,6 +14,10 @@ class Satpam extends Model
         'nik',
         'jabatan',
         'status',
+        'pos_1',
+        'pos_2',
+        'pos_3',
+        'pos_4',
         'regu_id',
         'zona_id',
     ];
@@ -31,6 +35,11 @@ class Satpam extends Model
     public function zona()
     {
         return $this->belongsTo(Zona::class);
+    }
+
+    public function pos_satpam()
+    {
+        return $this->hasMany(PosSatpam::class);
     }
 
     // public function pos()

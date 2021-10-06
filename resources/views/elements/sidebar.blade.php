@@ -21,7 +21,7 @@
                         <ul aria-expanded="false">
                             <li><a href="{!! url('/rekap'); !!}">Rekap</a></li>
                             <li><a href="#">Pergantian Shift</a></li>
-                            <li><a href="#">Tugas Jaga</a></li>
+                            <li><a href="{!! url('/tugas-jaga'); !!}">Tugas Jaga</a></li>
                             <li><a href="#">Pam Swakarsa</a></li>
                             <li><a href="#">Produksi</a></li>
                             <li><a href="#">Pemindahan</a></li>

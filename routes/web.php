@@ -28,8 +28,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/regupersonil/{id}/update','RegupersonilController@update')->name('updatepersonil');
     Route::post('/regupersonil/{id}/destroy','RegupersonilController@destroy')->name('hapuspersonil');
     Route::GET('/regupersonil/{datepicker}','RegupersonilController@index');
-
+    //rekap
     Route::get('/rekap', 'RekapController@index');
+    //tugas jaga
+    Route::get('/tugas-jaga', 'TugasJagaController@index');
+    Route::post('/tugas-jaga/{id}/update','TugasJagaController@PlottingPos');
 });
 
 Route::get('/dashboard', function () {
