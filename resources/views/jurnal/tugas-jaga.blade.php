@@ -45,12 +45,12 @@
                                                     <table class="table table-responsive-md">
                                                         <thead>
                                                             <tr>
-                                                                <th rowspan="2" style="vertical-align: middle;"><strong>#</strong></th>
-                                                                <th rowspan="2" style="vertical-align: middle;"><strong>NAMA</strong></th>
-                                                                <th rowspan="2" style="vertical-align: middle;"><strong>NIK</strong></th>
+                                                                <th rowspan="2" style="vertical-align: middle; text-align:center;"><strong>#</strong></th>
+                                                                <th rowspan="2" style="vertical-align: middle; text-align:center;"><strong>NAMA</strong></th>
+                                                                <th rowspan="2" style="vertical-align: middle; text-align:center;"><strong>NIK</strong></th>
                                                                 <th colspan="4" style="text-align:center;"><strong>JAM AREA TUGAS</strong></th>
-                                                                <th rowspan="2" style="vertical-align: middle;"><strong>KETERANGAN</strong></th>
-                                                                <th rowspan="2" style="vertical-align: middle;"><strong>AKSI</strong></th>
+                                                                <th rowspan="2" style="vertical-align: middle; text-align:center;"><strong>KETERANGAN</strong></th>
+                                                                <th rowspan="2" style="vertical-align: middle; text-align:center;"><strong>AKSI</strong></th>
                                                                 <tr>
                                                                 @foreach($detail_shiftA as $dsA)
                                                                     <th style="text-align:center;"><b>{{\Carbon\Carbon::parse($dsA->waktu_awal)->format('H:i')}}
@@ -64,9 +64,9 @@
                                                             @foreach($reguA_arr as $reguA)
                                                             <?php $pos_arr = array(); ?>
                                                             <tr>
-                                                                <td><strong>{{$no++}}</strong></td>
+                                                                <td style="text-align:center;"><strong>{{$no++}}</strong></td>
                                                                 <td>{{$reguA->nama}}</td>
-                                                                <td>{{$reguA->nik}}</td>
+                                                                <td style="text-align:center;">{{$reguA->nik}}</td>
                                                                 @if($reguA->jabatan == 'kajaga')
                                                                     <td colspan="4" style="text-align:center;">KAJAGA</td>
                                                                 @elseif($reguA->jabatan == 'wakajaga')
@@ -83,7 +83,10 @@
                                                                     @endforeach
                                                                 @endif
                                                                 <td style="text-align:center;">{{$reguA->status}}</td>
-                                                                <td>
+                                                                @if($reguA->jabatan == 'kajaga' || $reguA->jabatan == 'wakajaga')
+                                                                <td style="text-align:center;">-</td>
+                                                                @else
+                                                                <td style="text-align:center;">
                                                                     <div class="d-flex">
                                                                         <button type="button" style="border:none;" data-toggle="modal" data-target="#editModal{{$reguA->id}}">
                                                                             <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1 btn-edit"><i class="fa fa-pencil"></i></a>
@@ -102,15 +105,15 @@
                                                                                     <form id="form-plot-personil" name="form-plot-personil" method="POST" action="/tugas-jaga/{{$reguA->id}}/update">
                                                                                         @csrf
                                                                                         <div class="form-group row">
-                                                                                            <label class="col-sm-3 col-form-label">Nama</label>
-                                                                                            <div class="col-sm-9">
-                                                                                                <input readonly name="nama" value="{{ $reguA->nama }}" type="text" class="form-control" placeholder="Masukkan Nama Personil">
+                                                                                            <label class="col-sm-3">Nama</label>
+                                                                                            <div class="col-sm-9" style="text-align:left;">
+                                                                                                <h4>{{$reguA->nama}}</h4>
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="form-group row">
-                                                                                            <label class="col-sm-3 col-form-label">NIK</label>
-                                                                                            <div class="col-sm-9">
-                                                                                                <input readonly name="nik" value="{{ $reguA->nik }}" type="text" oninput="this.value = this.value.toUpperCase()" class="form-control" placeholder="Masukkan NIK">
+                                                                                            <label class="col-sm-3">NIK</label>
+                                                                                            <div class="col-sm-9" style="text-align:left;">
+                                                                                                <h4>{{$reguA->nik}}</h4>
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="form-group row">
@@ -184,6 +187,7 @@
                                                                     </div>
                                                                     <!-- MODAL UPDATE END -->
                                                                 </td>
+                                                                @endif
                                                             </tr>
                                                             @endforeach
                                                         </tbody>
@@ -197,12 +201,12 @@
                                                     <table class="table table-responsive-md">
                                                         <thead>
                                                             <tr>
-                                                                <th rowspan="2" style="vertical-align: middle;"><strong>#</strong></th>
-                                                                <th rowspan="2" style="vertical-align: middle;"><strong>NAMA</strong></th>
-                                                                <th rowspan="2" style="vertical-align: middle;"><strong>NIK</strong></th>
+                                                                <th rowspan="2" style="vertical-align: middle; text-align:center;"><strong>#</strong></th>
+                                                                <th rowspan="2" style="vertical-align: middle; text-align:center;"><strong>NAMA</strong></th>
+                                                                <th rowspan="2" style="vertical-align: middle; text-align:center;"><strong>NIK</strong></th>
                                                                 <th colspan="4" style="text-align:center;"><strong>JAM AREA TUGAS</strong></th>
-                                                                <th rowspan="2" style="vertical-align: middle;"><strong>KETERANGAN</strong></th>
-                                                                <th rowspan="2" style="vertical-align: middle;"><strong>AKSI</strong></th>
+                                                                <th rowspan="2" style="vertical-align: middle; text-align:center;"><strong>KETERANGAN</strong></th>
+                                                                <th rowspan="2" style="vertical-align: middle; text-align:center;"><strong>AKSI</strong></th>
                                                                 <tr>
                                                                 @foreach($detail_shiftB as $dsB)
                                                                     <th style="text-align:center;"><b>{{\Carbon\Carbon::parse($dsB->waktu_awal)->format('H:i')}}
@@ -216,9 +220,9 @@
                                                             @foreach($reguB_arr as $reguB)
                                                                 <?php $pos_arr = array(); ?>
                                                             <tr>
-                                                                <td><strong>{{$no++}}</strong></td>
+                                                                <td style="text-align:center;"><strong>{{$no++}}</strong></td>
                                                                 <td>{{$reguB->nama}}</td>
-                                                                <td>{{$reguB->nik}}</td>
+                                                                <td style="text-align:center;">{{$reguB->nik}}</td>
                                                                 @if($reguB->jabatan == 'kajaga')
                                                                     <td colspan="4" style="text-align:center;">KAJAGA</td>
                                                                 @elseif($reguB->jabatan == 'wakajaga')
@@ -235,7 +239,10 @@
                                                                     @endforeach
                                                                 @endif
                                                                 <td style="text-align:center;">{{$reguB->status}}</td>
-                                                                <td>
+                                                                @if($reguB->jabatan == 'kajaga' || $reguB->jabatan == 'wakajaga')
+                                                                <td style="text-align:center;">-</td>
+                                                                @else
+                                                                <td style="text-align:center;">
                                                                     <div class="d-flex">
                                                                         <button type="button" style="border:none;" data-toggle="modal" data-target="#editModal{{$reguB->id}}">
                                                                             <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1 btn-edit"><i class="fa fa-pencil"></i></a>
@@ -254,15 +261,15 @@
                                                                                     <form id="form-plot-personil" name="form-plot-personil" method="POST" action="/tugas-jaga/{{$reguB->id}}/update">
                                                                                         @csrf
                                                                                         <div class="form-group row">
-                                                                                            <label class="col-sm-3 col-form-label">Nama</label>
-                                                                                            <div class="col-sm-9">
-                                                                                                <input readonly name="nama" value="{{ $reguB->nama }}" type="text" class="form-control" placeholder="Masukkan Nama Personil">
+                                                                                            <label class="col-sm-3">Nama</label>
+                                                                                            <div class="col-sm-9" style="text-align:left;">
+                                                                                                <h4>{{$reguB->nama}}</h4>
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="form-group row">
-                                                                                            <label class="col-sm-3 col-form-label">NIK</label>
-                                                                                            <div class="col-sm-9">
-                                                                                                <input readonly name="nik" value="{{ $reguB->nik }}" type="text" oninput="this.value = this.value.toUpperCase()" class="form-control" placeholder="Masukkan NIK">
+                                                                                            <label class="col-sm-3">NIK</label>
+                                                                                            <div class="col-sm-9" style="text-align:left;">
+                                                                                                <h4>{{$reguB->nik}}</h4>
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="form-group row">
@@ -336,6 +343,7 @@
                                                                     </div>
                                                                     <!-- MODAL UPDATE END -->
                                                                 </td>
+                                                                @endif
                                                             </tr>
                                                             @endforeach
                                                         </tbody>
@@ -349,12 +357,12 @@
                                                     <table class="table table-responsive-md">
                                                         <thead>
                                                             <tr>
-                                                                <th rowspan="2" style="vertical-align: middle;"><strong>#</strong></th>
-                                                                <th rowspan="2" style="vertical-align: middle;"><strong>NAMA</strong></th>
-                                                                <th rowspan="2" style="vertical-align: middle;"><strong>NIK</strong></th>
+                                                                <th rowspan="2" style="vertical-align: middle; text-align:center;"><strong>#</strong></th>
+                                                                <th rowspan="2" style="vertical-align: middle; text-align:center;"><strong>NAMA</strong></th>
+                                                                <th rowspan="2" style="vertical-align: middle; text-align:center;"><strong>NIK</strong></th>
                                                                 <th colspan="4" style="text-align:center;"><strong>JAM AREA TUGAS</strong></th>
-                                                                <th rowspan="2" style="vertical-align: middle;"><strong>KETERANGAN</strong></th>
-                                                                <th rowspan="2" style="vertical-align: middle;"><strong>AKSI</strong></th>
+                                                                <th rowspan="2" style="vertical-align: middle; text-align:center;"><strong>KETERANGAN</strong></th>
+                                                                <th rowspan="2" style="vertical-align: middle; text-align:center;"><strong>AKSI</strong></th>
                                                                 <tr>
                                                                 @foreach($detail_shiftC as $dsC)
                                                                     <th style="text-align:center;"><b>{{\Carbon\Carbon::parse($dsC->waktu_awal)->format('H:i')}}
@@ -368,9 +376,9 @@
                                                             @foreach($reguC_arr as $reguC)
                                                             <?php $pos_arr = array(); ?>
                                                             <tr>
-                                                                <td><strong>{{$no++}}</strong></td>
+                                                                <td style="text-align:center;"><strong>{{$no++}}</strong></td>
                                                                 <td>{{$reguC->nama}}</td>
-                                                                <td>{{$reguC->nik}}</td>
+                                                                <td style="text-align:center;">{{$reguC->nik}}</td>
                                                                 @if($reguC->jabatan == 'kajaga')
                                                                     <td colspan="4" style="text-align:center;">KAJAGA</td>
                                                                 @elseif($reguC->jabatan == 'wakajaga')
@@ -387,6 +395,9 @@
                                                                     @endforeach
                                                                 @endif
                                                                 <td style="text-align:center;">{{$reguC->status}}</td>
+                                                                @if($reguC->jabatan == 'kajaga' || $reguC->jabatan == 'wakajaga')
+                                                                <td style="text-align:center;">-</td>
+                                                                @else
                                                                 <td>
                                                                     <div class="d-flex">
                                                                         <button type="button" style="border:none;" data-toggle="modal" data-target="#editModal{{$reguC->id}}">
@@ -406,15 +417,15 @@
                                                                                     <form id="form-plot-personil" name="form-plot-personil" method="POST" action="/tugas-jaga/{{$reguC->id}}/update">
                                                                                         @csrf
                                                                                         <div class="form-group row">
-                                                                                            <label class="col-sm-3 col-form-label">Nama</label>
-                                                                                            <div class="col-sm-9">
-                                                                                                <input readonly name="nama" value="{{ $reguC->nama }}" type="text" class="form-control" placeholder="Masukkan Nama Personil">
+                                                                                            <label class="col-sm-3">Nama</label>
+                                                                                            <div class="col-sm-9" style="text-align:left;">
+                                                                                                <h4>{{$reguC->nama}}</h4>
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="form-group row">
-                                                                                            <label class="col-sm-3 col-form-label">NIK</label>
-                                                                                            <div class="col-sm-9">
-                                                                                                <input readonly name="nik" value="{{ $reguC->nik }}" type="text" oninput="this.value = this.value.toUpperCase()" class="form-control" placeholder="Masukkan NIK">
+                                                                                            <label class="col-sm-3">NIK</label>
+                                                                                            <div class="col-sm-9" style="text-align:left;">
+                                                                                                <h4>{{$reguC->nik}}</h4>
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="form-group row">
@@ -488,6 +499,7 @@
                                                                     </div>
                                                                     <!-- MODAL UPDATE END -->
                                                                 </td>
+                                                                @endif
                                                             </tr>
                                                             @endforeach
                                                         </tbody>
@@ -501,12 +513,12 @@
                                                     <table class="table table-responsive-md">
                                                         <thead>
                                                             <tr>
-                                                                <th rowspan="2" style="vertical-align: middle;"><strong>#</strong></th>
-                                                                <th rowspan="2" style="vertical-align: middle;"><strong>NAMA</strong></th>
-                                                                <th rowspan="2" style="vertical-align: middle;"><strong>NIK</strong></th>
+                                                                <th rowspan="2" style="vertical-align: middle; text-align:center;"><strong>#</strong></th>
+                                                                <th rowspan="2" style="vertical-align: middle; text-align:center;"><strong>NAMA</strong></th>
+                                                                <th rowspan="2" style="vertical-align: middle; text-align:center;"><strong>NIK</strong></th>
                                                                 <th colspan="4" style="text-align:center;"><strong>JAM AREA TUGAS</strong></th>
-                                                                <th rowspan="2" style="vertical-align: middle;"><strong>KETERANGAN</strong></th>
-                                                                <th rowspan="2" style="vertical-align: middle;"><strong>AKSI</strong></th>
+                                                                <th rowspan="2" style="vertical-align: middle; text-align:center;"><strong>KETERANGAN</strong></th>
+                                                                <th rowspan="2" style="vertical-align: middle; text-align:center;"><strong>AKSI</strong></th>
                                                                 <tr>
                                                                 @foreach($detail_shiftD as $dsD)
                                                                     <th style="text-align:center;"><b>{{\Carbon\Carbon::parse($dsD->waktu_awal)->format('H:i')}}
@@ -520,9 +532,9 @@
                                                             @foreach($reguD_arr as $reguD)
                                                             <?php $pos_arr = array(); ?>
                                                             <tr>
-                                                                <td><strong>{{$no++}}</strong></td>
+                                                                <td style="text-align:center;"><strong>{{$no++}}</strong></td>
                                                                 <td>{{$reguD->nama}}</td>
-                                                                <td>{{$reguD->nik}}</td>
+                                                                <td style="text-align:center;">{{$reguD->nik}}</td>
                                                                 @if($reguD->jabatan == 'kajaga')
                                                                     <td colspan="4" style="text-align:center;">KAJAGA</td>
                                                                 @elseif($reguD->jabatan == 'wakajaga')
@@ -539,7 +551,10 @@
                                                                     @endforeach
                                                                 @endif
                                                                 <td style="text-align:center;">{{$reguD->status}}</td>
-                                                                <td>
+                                                                @if($reguD->jabatan == 'kajaga' || $reguD->jabatan == 'wakajaga')
+                                                                <td style="text-align:center;">-</td>
+                                                                @else
+                                                                <td style="text-align:center;">
                                                                     <div class="d-flex">
                                                                         <button type="button" style="border:none;" data-toggle="modal" data-target="#editModal{{$reguD->id}}">
                                                                             <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1 btn-edit"><i class="fa fa-pencil"></i></a>
@@ -558,15 +573,15 @@
                                                                                     <form id="form-plot-personil" name="form-plot-personil" method="POST" action="/tugas-jaga/{{$reguD->id}}/update">
                                                                                         @csrf
                                                                                         <div class="form-group row">
-                                                                                            <label class="col-sm-3 col-form-label">Nama</label>
-                                                                                            <div class="col-sm-9">
-                                                                                                <input readonly name="nama" value="{{ $reguD->nama }}" type="text" class="form-control" placeholder="Masukkan Nama Personil">
+                                                                                            <label class="col-sm-3">Nama</label>
+                                                                                            <div class="col-sm-9" style="text-align:left;">
+                                                                                                <h4>{{$reguD->nama}}</h4>
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="form-group row">
-                                                                                            <label class="col-sm-3 col-form-label">NIK</label>
-                                                                                            <div class="col-sm-9">
-                                                                                                <input readonly name="nik" value="{{ $reguD->nik }}" type="text" oninput="this.value = this.value.toUpperCase()" class="form-control" placeholder="Masukkan NIK">
+                                                                                            <label class="col-sm-3">NIK</label>
+                                                                                            <div class="col-sm-9" style="text-align:left;">
+                                                                                                <h4>{{$reguD->nik}}</h4>
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="form-group row">
@@ -640,6 +655,7 @@
                                                                     </div>
                                                                     <!-- MODAL UPDATE END -->
                                                                 </td>
+                                                                @endif
                                                             </tr>
                                                             @endforeach
                                                         </tbody>
