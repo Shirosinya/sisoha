@@ -67,7 +67,7 @@ class TugasJagaController extends Controller
                 ->update(['shift_id'=>$value]);
         }
 
-        $page_title = 'Rekap';
+        $page_title = 'Tugas Jaga';
         $page_description = 'Some description for the page';
         $logo = "images/petro-logo.png";
         $logoText = "images/petro-text.png";

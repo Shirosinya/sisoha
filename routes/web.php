@@ -22,21 +22,24 @@ Auth::routes();
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/regupersonil', 'RegupersonilController@index');
-    // Route::post('/regupersonil/store', 'RegupersonilController@store');
     Route::post('/createpersonil', 'RegupersonilController@store')->name('createpersonil');
-    // Route::get('/regupersonil/{id}/edit','OmahadminController@editpersonil')->name('editpersonil');
     Route::post('/regupersonil/{id}/update','RegupersonilController@update')->name('updatepersonil');
     Route::post('/regupersonil/{id}/destroy','RegupersonilController@destroy')->name('hapuspersonil');
     Route::GET('/regupersonil/{datepicker}','RegupersonilController@index');
+
     //rekap
     Route::get('/rekap', 'RekapController@index');
+    
     //tugas jaga
     Route::get('/tugas-jaga', 'TugasJagaController@index');
     Route::post('/tugas-jaga/{id}/update','TugasJagaController@PlottingPos');
+
+    //Pergantian Shift
+    Route::get('/pergantian-shift','PergantianShiftController@index');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';

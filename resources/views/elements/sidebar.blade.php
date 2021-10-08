@@ -20,7 +20,7 @@
 						</a>
                         <ul aria-expanded="false">
                             <li><a href="{!! url('/rekap'); !!}">Rekap</a></li>
-                            <li><a href="#">Pergantian Shift</a></li>
+                            <li><a href="{!! url('/pergantian-shift'); !!}">Pergantian Shift</a></li>
                             <li><a href="{!! url('/tugas-jaga'); !!}">Tugas Jaga</a></li>
                             <li><a href="#">Pam Swakarsa</a></li>
                             <li><a href="#">Produksi</a></li>
