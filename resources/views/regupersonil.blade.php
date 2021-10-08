@@ -375,24 +375,4 @@
                     </div>
                 </div>
 </div>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-    // $.ajaxSetup({
-    // headers: {
-    //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    // }
-    // });
-//    $("#submitMe").click(function() {
-//        $.ajax({
-//           type: 'GET',
-//           url: "/regupersonil?"+$("#datepicker").val();
-//           method: "GET",
-        //   data: $('#dateForm').serialize(),
-    //       success: function() {
-    //         window.open(url);
-    //       }
-    //    });
-    //    return false;
-    // })
-</script>
 @endsection			

@@ -414,9 +414,9 @@ class RegupersonilController extends Controller
             'regu_id'   =>$input['regu'],
         ]))
         {
-            return redirect('/tugas-jaga')->with('status', 'Data Berhasil Diupdate!');
+            return redirect('/regupersonil')->with('status', 'Data Berhasil Diupdate!');
         }
-        return redirect('/tugas-jaga')->with('error', 'Kesalahan saat mengupdate!');
+        return redirect('/regupersonil')->with('error', 'Kesalahan saat mengupdate!');
         
     }
 

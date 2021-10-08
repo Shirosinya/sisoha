@@ -62,7 +62,9 @@
                                                         <tbody>
                                                         <?php $no = 1; ?>
                                                             @foreach($reguA_arr as $reguA)
-                                                            <?php $pos_arr = array(); ?>
+                                                            <?php 
+                                                                $pos_arr = array();
+                                                                ?>
                                                             <tr>
                                                                 <td style="text-align:center;"><strong>{{$no++}}</strong></td>
                                                                 <td>{{$reguA->nama}}</td>
@@ -71,20 +73,27 @@
                                                                     <td colspan="4" style="text-align:center;">KAJAGA</td>
                                                                 @elseif($reguA->jabatan == 'wakajaga')
                                                                     <td colspan="4" style="text-align:center;">WAKAJAGA</td>
-                                                                @elseif($reguA->pos_satpam->isEmpty())
-                                                                    <td style="text-align:center;">-</td>
-                                                                    <td style="text-align:center;">-</td>
-                                                                    <td style="text-align:center;">-</td>
-                                                                    <td style="text-align:center;">-</td>
                                                                 @else
-                                                                    @foreach($reguA->pos_satpam as $pos)
-                                                                        <td style="text-align:center;">{{$pos->pos->nama_pos}}</td>
-                                                                        <?php array_push($pos_arr,$pos->pos->nama_pos);?>
-                                                                    @endforeach
+                                                                    @if($pos_satpams->contains('satpam_id', $reguA->id))
+                                                                        @foreach($pos_satpams->where('satpam_id', $reguA->id) as $ps)
+                                                                            @if($ps->satpam_id == $reguA->id && $ps->pos != null)
+                                                                                <td style="text-align:center;">{{$ps->pos->nama_pos}}</td>
+                                                                                <?php array_push($pos_arr,$ps->pos->nama_pos);?> 
+                                                                            @else
+                                                                                <td style="text-align:center;">-</td>
+                                                                                <?php array_push($pos_arr,null);?> 
+                                                                            @endif
+                                                                        @endforeach
+                                                                    @else
+                                                                        <td style="text-align:center;">-</td>
+                                                                        <td style="text-align:center;">-</td>
+                                                                        <td style="text-align:center;">-</td>
+                                                                        <td style="text-align:center;">-</td>
+                                                                    @endif
                                                                 @endif
                                                                 <td style="text-align:center;">{{$reguA->status}}</td>
                                                                 @if($reguA->jabatan == 'kajaga' || $reguA->jabatan == 'wakajaga')
-                                                                <td style="text-align:center;">-</td>
+                                                                <td style="text-align:center;"></td>
                                                                 @else
                                                                 <td style="text-align:center;">
                                                                     <div class="d-flex">
@@ -122,7 +131,7 @@
                                                                                                 <select name="pos_1" class="form-control" id="exampleFormControlSelect1">
                                                                                                     <option value="">-</option>
                                                                                                     @foreach($poss as $true_pos)
-                                                                                                        @if(empty($pos_arr))
+                                                                                                        @if(empty($pos_arr[0]))
                                                                                                             <option value="{{$true_pos->nama_pos}}" >{{$true_pos->nama_pos}}</option>
                                                                                                         @else
                                                                                                             <option value="{{$true_pos->nama_pos}}" {{$true_pos->nama_pos == $pos_arr[0] ? 'selected' : '' }} >{{$true_pos->nama_pos}}</option>
@@ -137,7 +146,7 @@
                                                                                                 <select name = "pos_2" class="form-control" id="exampleFormControlSelect2">
                                                                                                     <option value="">-</option>
                                                                                                     @foreach($poss as $true_pos)
-                                                                                                        @if(empty($pos_arr))
+                                                                                                        @if(empty($pos_arr[1]))
                                                                                                             <option value="{{$true_pos->nama_pos}}" >{{$true_pos->nama_pos}}</option>
                                                                                                         @else
                                                                                                             <option value="{{$true_pos->nama_pos}}" {{$true_pos->nama_pos == $pos_arr[1] ? 'selected' : '' }} >{{$true_pos->nama_pos}}</option>
@@ -152,7 +161,7 @@
                                                                                                 <select name = "pos_3" class="form-control" id="exampleFormControlSelect3">
                                                                                                     <option value="">-</option>
                                                                                                     @foreach($poss as $true_pos)
-                                                                                                        @if(empty($pos_arr))
+                                                                                                        @if(empty($pos_arr[2]))
                                                                                                             <option value="{{$true_pos->nama_pos}}" >{{$true_pos->nama_pos}}</option>
                                                                                                         @else
                                                                                                             <option value="{{$true_pos->nama_pos}}" {{$true_pos->nama_pos == $pos_arr[2] ? 'selected' : '' }} >{{$true_pos->nama_pos}}</option>
@@ -167,7 +176,7 @@
                                                                                                 <select name = "pos_4" class="form-control" id="exampleFormControlSelect4">
                                                                                                     <option value="">-</option>
                                                                                                     @foreach($poss as $true_pos)
-                                                                                                        @if(empty($pos_arr))
+                                                                                                        @if(empty($pos_arr[3]))
                                                                                                             <option value="{{$true_pos->nama_pos}}" >{{$true_pos->nama_pos}}</option>
                                                                                                         @else
                                                                                                             <option value="{{$true_pos->nama_pos}}" {{$true_pos->nama_pos == $pos_arr[3] ? 'selected' : '' }} >{{$true_pos->nama_pos}}</option>
@@ -227,20 +236,27 @@
                                                                     <td colspan="4" style="text-align:center;">KAJAGA</td>
                                                                 @elseif($reguB->jabatan == 'wakajaga')
                                                                     <td colspan="4" style="text-align:center;">WAKAJAGA</td>
-                                                                @elseif($reguB->pos_satpam->isEmpty())
-                                                                    <td style="text-align:center;">-</td>
-                                                                    <td style="text-align:center;">-</td>
-                                                                    <td style="text-align:center;">-</td>
-                                                                    <td style="text-align:center;">-</td>
                                                                 @else
-                                                                    @foreach($reguB->pos_satpam as $pos)
-                                                                        <td style="text-align:center;">{{$pos->pos->nama_pos}}</td>
-                                                                        <?php array_push($pos_arr,$pos->pos->nama_pos);?>
-                                                                    @endforeach
+                                                                    @if($pos_satpams->contains('satpam_id', $reguB->id))
+                                                                        @foreach($pos_satpams->where('satpam_id', $reguB->id) as $ps)
+                                                                            @if($ps->satpam_id == $reguB->id && $ps->pos != null)
+                                                                                <td style="text-align:center;">{{$ps->pos->nama_pos}}</td>
+                                                                                <?php array_push($pos_arr,$ps->pos->nama_pos);?> 
+                                                                            @else
+                                                                                <td style="text-align:center;">-</td>
+                                                                                <?php array_push($pos_arr,null);?> 
+                                                                            @endif
+                                                                        @endforeach
+                                                                    @else
+                                                                        <td style="text-align:center;">-</td>
+                                                                        <td style="text-align:center;">-</td>
+                                                                        <td style="text-align:center;">-</td>
+                                                                        <td style="text-align:center;">-</td>
+                                                                    @endif
                                                                 @endif
                                                                 <td style="text-align:center;">{{$reguB->status}}</td>
                                                                 @if($reguB->jabatan == 'kajaga' || $reguB->jabatan == 'wakajaga')
-                                                                <td style="text-align:center;">-</td>
+                                                                <td style="text-align:center;"></td>
                                                                 @else
                                                                 <td style="text-align:center;">
                                                                     <div class="d-flex">
@@ -278,7 +294,7 @@
                                                                                                 <select name="pos_1" class="form-control" id="exampleFormControlSelect1">
                                                                                                     <option value="">-</option>
                                                                                                     @foreach($poss as $true_pos)
-                                                                                                        @if(empty($pos_arr))
+                                                                                                        @if(empty($pos_arr[0]))
                                                                                                             <option value="{{$true_pos->nama_pos}}" >{{$true_pos->nama_pos}}</option>
                                                                                                         @else
                                                                                                             <option value="{{$true_pos->nama_pos}}" {{$true_pos->nama_pos == $pos_arr[0] ? 'selected' : '' }} >{{$true_pos->nama_pos}}</option>
@@ -293,7 +309,7 @@
                                                                                                 <select name = "pos_2" class="form-control" id="exampleFormControlSelect2">
                                                                                                     <option value="">-</option>
                                                                                                     @foreach($poss as $true_pos)
-                                                                                                        @if(empty($pos_arr))
+                                                                                                        @if(empty($pos_arr[1]))
                                                                                                             <option value="{{$true_pos->nama_pos}}" >{{$true_pos->nama_pos}}</option>
                                                                                                         @else
                                                                                                             <option value="{{$true_pos->nama_pos}}" {{$true_pos->nama_pos == $pos_arr[1] ? 'selected' : '' }} >{{$true_pos->nama_pos}}</option>
@@ -308,7 +324,7 @@
                                                                                                 <select name = "pos_3" class="form-control" id="exampleFormControlSelect3">
                                                                                                     <option value="">-</option>
                                                                                                     @foreach($poss as $true_pos)
-                                                                                                        @if(empty($pos_arr))
+                                                                                                        @if(empty($pos_arr[2]))
                                                                                                             <option value="{{$true_pos->nama_pos}}" >{{$true_pos->nama_pos}}</option>
                                                                                                         @else
                                                                                                             <option value="{{$true_pos->nama_pos}}" {{$true_pos->nama_pos == $pos_arr[2] ? 'selected' : '' }} >{{$true_pos->nama_pos}}</option>
@@ -323,7 +339,7 @@
                                                                                                 <select name = "pos_4" class="form-control" id="exampleFormControlSelect4">
                                                                                                     <option value="">-</option>
                                                                                                     @foreach($poss as $true_pos)
-                                                                                                        @if(empty($pos_arr))
+                                                                                                        @if(empty($pos_arr[3]))
                                                                                                             <option value="{{$true_pos->nama_pos}}" >{{$true_pos->nama_pos}}</option>
                                                                                                         @else
                                                                                                             <option value="{{$true_pos->nama_pos}}" {{$true_pos->nama_pos == $pos_arr[3] ? 'selected' : '' }} >{{$true_pos->nama_pos}}</option>
@@ -389,14 +405,26 @@
                                                                     <td style="text-align:center;">-</td>
                                                                     <td style="text-align:center;">-</td>
                                                                 @else
-                                                                    @foreach($reguC->pos_satpam as $pos)
-                                                                        <td style="text-align:center;">{{$pos->pos->nama_pos}}</td>
-                                                                        <?php array_push($pos_arr,$pos->pos->nama_pos);?>
-                                                                    @endforeach
+                                                                    @if($pos_satpams->contains('satpam_id', $reguC->id))
+                                                                        @foreach($pos_satpams->where('satpam_id', $reguC->id) as $ps)
+                                                                            @if($ps->satpam_id == $reguC->id && $ps->pos != null)
+                                                                                <td style="text-align:center;">{{$ps->pos->nama_pos}}</td>
+                                                                                <?php array_push($pos_arr,$ps->pos->nama_pos);?> 
+                                                                            @else
+                                                                                <td style="text-align:center;">-</td>
+                                                                                <?php array_push($pos_arr,null);?> 
+                                                                            @endif
+                                                                        @endforeach
+                                                                    @else
+                                                                        <td style="text-align:center;">-</td>
+                                                                        <td style="text-align:center;">-</td>
+                                                                        <td style="text-align:center;">-</td>
+                                                                        <td style="text-align:center;">-</td>
+                                                                    @endif
                                                                 @endif
                                                                 <td style="text-align:center;">{{$reguC->status}}</td>
                                                                 @if($reguC->jabatan == 'kajaga' || $reguC->jabatan == 'wakajaga')
-                                                                <td style="text-align:center;">-</td>
+                                                                <td style="text-align:center;"></td>
                                                                 @else
                                                                 <td>
                                                                     <div class="d-flex">
@@ -434,7 +462,7 @@
                                                                                                 <select name="pos_1" class="form-control" id="exampleFormControlSelect1">
                                                                                                     <option value="">-</option>
                                                                                                     @foreach($poss as $true_pos)
-                                                                                                        @if(empty($pos_arr))
+                                                                                                        @if(empty($pos_arr[0]))
                                                                                                             <option value="{{$true_pos->nama_pos}}" >{{$true_pos->nama_pos}}</option>
                                                                                                         @else
                                                                                                             <option value="{{$true_pos->nama_pos}}" {{$true_pos->nama_pos == $pos_arr[0] ? 'selected' : '' }} >{{$true_pos->nama_pos}}</option>
@@ -449,7 +477,7 @@
                                                                                                 <select name = "pos_2" class="form-control" id="exampleFormControlSelect2">
                                                                                                     <option value="">-</option>
                                                                                                     @foreach($poss as $true_pos)
-                                                                                                        @if(empty($pos_arr))
+                                                                                                        @if(empty($pos_arr[1]))
                                                                                                             <option value="{{$true_pos->nama_pos}}" >{{$true_pos->nama_pos}}</option>
                                                                                                         @else
                                                                                                             <option value="{{$true_pos->nama_pos}}" {{$true_pos->nama_pos == $pos_arr[1] ? 'selected' : '' }} >{{$true_pos->nama_pos}}</option>
@@ -464,7 +492,7 @@
                                                                                                 <select name = "pos_3" class="form-control" id="exampleFormControlSelect3">
                                                                                                     <option value="">-</option>
                                                                                                     @foreach($poss as $true_pos)
-                                                                                                        @if(empty($pos_arr))
+                                                                                                        @if(empty($pos_arr[2]))
                                                                                                             <option value="{{$true_pos->nama_pos}}" >{{$true_pos->nama_pos}}</option>
                                                                                                         @else
                                                                                                             <option value="{{$true_pos->nama_pos}}" {{$true_pos->nama_pos == $pos_arr[2] ? 'selected' : '' }} >{{$true_pos->nama_pos}}</option>
@@ -479,7 +507,7 @@
                                                                                                 <select name = "pos_4" class="form-control" id="exampleFormControlSelect4">
                                                                                                     <option value="">-</option>
                                                                                                     @foreach($poss as $true_pos)
-                                                                                                        @if(empty($pos_arr))
+                                                                                                        @if(empty($pos_arr[3]))
                                                                                                             <option value="{{$true_pos->nama_pos}}" >{{$true_pos->nama_pos}}</option>
                                                                                                         @else
                                                                                                             <option value="{{$true_pos->nama_pos}}" {{$true_pos->nama_pos == $pos_arr[3] ? 'selected' : '' }} >{{$true_pos->nama_pos}}</option>
@@ -545,14 +573,26 @@
                                                                     <td style="text-align:center;">-</td>
                                                                     <td style="text-align:center;">-</td>
                                                                 @else
-                                                                    @foreach($reguD->pos_satpam as $pos)
-                                                                        <td style="text-align:center;">{{$pos->pos == null ? '-' : $pos->pos->nama_pos}}</td>
-                                                                        <?php array_push($pos_arr, $pos->pos == null ? '-' : $pos->pos->nama_pos);?>
-                                                                    @endforeach
+                                                                    @if($pos_satpams->contains('satpam_id', $reguD->id))
+                                                                        @foreach($pos_satpams->where('satpam_id', $reguD->id) as $ps)
+                                                                            @if($ps->satpam_id == $reguD->id && $ps->pos != null)
+                                                                                <td style="text-align:center;">{{$ps->pos->nama_pos}}</td>
+                                                                                <?php array_push($pos_arr,$ps->pos->nama_pos);?> 
+                                                                            @else
+                                                                                <td style="text-align:center;">-</td>
+                                                                                <?php array_push($pos_arr,null);?> 
+                                                                            @endif
+                                                                        @endforeach
+                                                                    @else
+                                                                        <td style="text-align:center;">-</td>
+                                                                        <td style="text-align:center;">-</td>
+                                                                        <td style="text-align:center;">-</td>
+                                                                        <td style="text-align:center;">-</td>
+                                                                    @endif
                                                                 @endif
                                                                 <td style="text-align:center;">{{$reguD->status}}</td>
                                                                 @if($reguD->jabatan == 'kajaga' || $reguD->jabatan == 'wakajaga')
-                                                                <td style="text-align:center;">-</td>
+                                                                <td style="text-align:center;"></td>
                                                                 @else
                                                                 <td style="text-align:center;">
                                                                     <div class="d-flex">
@@ -590,7 +630,7 @@
                                                                                                 <select name="pos_1" class="form-control" id="exampleFormControlSelect1">
                                                                                                     <option value="null">-</option>
                                                                                                     @foreach($poss as $true_pos)
-                                                                                                        @if(empty($pos_arr))
+                                                                                                        @if(empty($pos_arr[0]))
                                                                                                             <option value="{{$true_pos->nama_pos}}" >{{$true_pos->nama_pos}}</option>
                                                                                                         @else
                                                                                                             <option value="{{$true_pos->nama_pos}}" {{$true_pos->nama_pos == $pos_arr[0] ? 'selected' : '' }} >{{$true_pos->nama_pos}}</option>
@@ -605,7 +645,7 @@
                                                                                                 <select name = "pos_2" class="form-control" id="exampleFormControlSelect2">
                                                                                                     <option value="null">-</option>
                                                                                                     @foreach($poss as $true_pos)
-                                                                                                        @if(empty($pos_arr))
+                                                                                                        @if(empty($pos_arr[1]))
                                                                                                             <option value="{{$true_pos->nama_pos}}" >{{$true_pos->nama_pos}}</option>
                                                                                                         @else
                                                                                                             <option value="{{$true_pos->nama_pos}}" {{$true_pos->nama_pos == $pos_arr[1] ? 'selected' : '' }} >{{$true_pos->nama_pos}}</option>
@@ -620,7 +660,7 @@
                                                                                                 <select name = "pos_3" class="form-control" id="exampleFormControlSelect3">
                                                                                                     <option value="null">-</option>
                                                                                                     @foreach($poss as $true_pos)
-                                                                                                        @if(empty($pos_arr))
+                                                                                                        @if(empty($pos_arr[2]))
                                                                                                             <option value="{{$true_pos->nama_pos}}" >{{$true_pos->nama_pos}}</option>
                                                                                                         @else
                                                                                                             <option value="{{$true_pos->nama_pos}}" {{$true_pos->nama_pos == $pos_arr[2] ? 'selected' : '' }} >{{$true_pos->nama_pos}}</option>
@@ -635,7 +675,7 @@
                                                                                                 <select name = "pos_4" class="form-control" id="exampleFormControlSelect4">
                                                                                                     <option value="null">-</option>
                                                                                                     @foreach($poss as $true_pos)
-                                                                                                        @if(empty($pos_arr))
+                                                                                                        @if(empty($pos_arr[3]))
                                                                                                             <option value="{{$true_pos->nama_pos}}" >{{$true_pos->nama_pos}}</option>
                                                                                                         @else
                                                                                                             <option value="{{$true_pos->nama_pos}}" {{$true_pos->nama_pos == $pos_arr[3] ? 'selected' : '' }} >{{$true_pos->nama_pos}}</option>

@@ -76,7 +76,6 @@ class TugasJagaController extends Controller
         $leveluser = Auth::user()->level_user; //mengambil level_user
         if($leveluser == 'admin'){ //check kalau level admin, maka akan ditampilkan dari semua zona
             $satpams = Satpam::all();
-            // $regus = Regu::all();
         }else{                      //else, akan ditampilkan sesuai zona masing2 akun
             $userzona = Auth::user()->zona->id;
             $satpams = Satpam::all()->where('zona_id',$userzona);
@@ -87,12 +86,12 @@ class TugasJagaController extends Controller
         foreach($poss as $pos){
             array_push($pos_array, $pos);
         }
-        // $shitA = Satpam::all();
-        // $pos_satpams = PosSatpam::all();
+        
         $reguA_arr = array();
         $reguB_arr = array(); 
         $reguC_arr = array();
-        $reguD_arr = array();   
+        $reguD_arr = array();
+        //memasukkan data satpam ke array sesuai regunya masing2   
         foreach($satpams as $satpam){
             if($satpam->regu->nama == 'Regu A'){
                 array_push($reguA_arr,$satpam);
@@ -104,37 +103,33 @@ class TugasJagaController extends Controller
                 array_push($reguD_arr,$satpam);
             }
         }
-
-        $shiftA = "";
+        //memasukkan id shift masing2 regu untuk hari ini.
         foreach ($reguA_arr as $reguA){
             $shiftA =$reguA->regu->shift->id;
         }
-        $shiftB = "";
         foreach ($reguB_arr as $reguB){
             $shiftB =$reguB->regu->shift->id;
         }
-        $shiftC = "";
         foreach ($reguC_arr as $reguC){
             $shiftC =$reguC->regu->shift->id;
         }
-        $shiftD = "";
         foreach ($reguD_arr as $reguD){
             $shiftD =$reguD->regu->shift->id;
         }
 
-        
+        //mengambil detail shift dari shift hari ini
         $detail_shiftA = DetailShift::all()->where('shift_id','=',$shiftA);
         $detail_shiftB = DetailShift::all()->where('shift_id','=',$shiftB);
         $detail_shiftC = DetailShift::all()->where('shift_id','=',$shiftC);
         $detail_shiftD = DetailShift::all()->where('shift_id','=',$shiftD);
-        // foreach($reguB_arr as $reguB){
-        //     dd($reguB_arr);
-        // }
-        
+
+        //mengambil data pos satpam hari ini
+        $pos_satpams = PosSatpam::whereDate('created_at','=',date('Y-m-d'))->get();
+        // dd($pos_satpams);
      
         return view('jurnal.tugas-jaga', compact('page_title', 'page_description','shiftA','shiftB','shiftC','shiftD',
         'action','logo','logoText','poss','satpams','reguA_arr','reguB_arr','reguC_arr','reguD_arr', 'detail_shiftA',
-        'detail_shiftB','detail_shiftC','detail_shiftD'));
+        'detail_shiftB','detail_shiftC','detail_shiftD','pos_satpams'));
     }
 
     /**
@@ -157,25 +152,37 @@ class TugasJagaController extends Controller
     {
         $input = $request->all();
         $satpam = Satpam::all()->where('id',$id)->first();
-        $pos_satpam = PosSatpam::all();
+        
+        //mengambil id shift dari satpam untuk menyesuaikan detail shift hari ini
         $shift_id = $satpam->regu->shift->id;
+        //mengambil detail2 shift dari shift satpam terpilih
         $detail_shift = DetailShift::all()->where('shift_id',$shift_id);
+
+        //mengambil data pada tabel pos yang namanya sesuai dengan nama dari $request untuk tiap pos_1 sampai pos_4
         $pos_1 = Pos::all()->where('nama_pos',$input['pos_1'])->first();
         $pos_2 = Pos::all()->where('nama_pos',$input['pos_2'])->first();
         $pos_3 = Pos::all()->where('nama_pos',$input['pos_3'])->first();
         $pos_4 = Pos::all()->where('nama_pos',$input['pos_4'])->first();
         
+        //mengecheck apakah data tiap pos_1 sampai pos_4. Apabila null maka variable menampung nilai null
+        //jika tidak, variable menampung id dari $pos_1/$pos_2/$pos_3/$pos_4 
         $pos1_val = $pos_1 == null ? null : $pos_1->id;
         $pos2_val = $pos_2 == null ? null : $pos_2->id;
         $pos3_val = $pos_3 == null ? null : $pos_3->id;
         $pos4_val = $pos_4 == null ? null : $pos_4->id;
+
+        //menampung id $pos_1 sampai $pos_4 ke array.
         $poss = array( $pos1_val, $pos2_val, $pos3_val, $pos4_val);
 
-        $candidate = PosSatpam::all()->where('satpam_id',$id);
+        //pengambil data pos_satpam hari ini yang id satpamnya sama dengan id satpam yang mau di plot pos nya
+        $candidate = PosSatpam::whereDate('created_at','=',date('Y-m-d'))->where('satpam_id',$id)->get();
         $i = 0;
+
+        //Apabila data pos satpam >= 4 row, maka akan di update. Jika tidak maka akan membuat baru.
         if($candidate->count() >= 4){
+            //$candidate terdiri lebih dari satu data pos_satpam, maka di loop untuk diambil idnya.
             foreach($candidate as $candid){
-                // dd($candid->id);
+                //looping $detail_shift yang berisi detail shift dari shift satpam terpilih.
                 foreach($detail_shift as $ds){
                     PosSatpam::where('id',$candid->id)->update([
                         'jadwal_shift'  => $ds->waktu_awal,
@@ -187,6 +194,7 @@ class TugasJagaController extends Controller
             }
             
         }else{
+            //looping $detail_shift yang berisi detail shift dari shift satpam terpilih.
             foreach($detail_shift as $ds){
                 PosSatpam::create([
                     'jadwal_shift'  => $ds->waktu_awal,
@@ -196,7 +204,8 @@ class TugasJagaController extends Controller
                 $i++;
             }
         }
-            
+        
+        //code return untuk redirect ke tab spesifik sesuai regu satpam terpilih.
         if($satpam->regu->nama == 'Regu A'){
            return redirect('/tugas-jaga')->withInput(['tab'=>'tab-reguA']); 
         }elseif($satpam->regu->nama == 'Regu B'){
@@ -207,7 +216,6 @@ class TugasJagaController extends Controller
             return redirect('/tugas-jaga')->withInput(['tab'=>'tab-reguD']);
         }
         
-        //}
         // return redirect('/tugas-jaga')->with('error', 'Kesalahan saat mengupdate!');
     }
 
