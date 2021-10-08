@@ -1,4 +1,4 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://storage.googleapis.com/pkg-portal-bucket/pg_logo_header.png" width="400"></a></p>
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://1.bp.blogspot.com/-ynxQPctQ5iM/XlNfxQuxSgI/AAAAAAAAAU4/myDNLEAT7gkOiiasoNe_yVt70ZoF4-PvgCLcBGAsYHQ/s1600/petrokimia.jpg" width="400"></a></p>
 
 ## Tentang Sisoha
 
