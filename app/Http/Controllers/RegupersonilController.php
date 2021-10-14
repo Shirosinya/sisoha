@@ -412,7 +412,7 @@ class RegupersonilController extends Controller
             'jabatan'   =>$input['jabatan'],
             'status'    =>$input['status'],
             'regu_id'   =>$input['regu'],
-        ]))
+        ]));
         {
             return redirect('/regupersonil')->with('status', 'Data Berhasil Diupdate!');
         }

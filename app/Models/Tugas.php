@@ -12,12 +12,14 @@ class Tugas extends Model
     public $table = 'tugass';
 
     protected $fillable = [
+        'pukul',
         'uraian_tugas',
         'keterangan',
+        'regu_id',
     ];
 
     public function shift()
     {
-        return $this->belongsTo(Shift::class);
+        return $this->belongsTo(Regu::class);
     }
 }

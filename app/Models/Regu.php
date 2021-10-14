@@ -23,4 +23,9 @@ class Regu extends Model
     {
         return $this->belongsTo(Shift::class);
     }
+
+    public function tugas()
+    {
+        return $this->belongsTo(Tugas::class);
+    }
 }

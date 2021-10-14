@@ -20,11 +20,6 @@ class Shift extends Model
         'selesai' => 'date:hh:mm'
     ];
 
-    public function tugas()
-    {
-        return $this->belongsTo(Tugas::class);
-    }
-
     public function detail_shifts()
     {
         return $this->hasMany(DetailShift::class);

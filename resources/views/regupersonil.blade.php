@@ -111,7 +111,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <!-- MODAL TAMBAH END -->
+                                                    <!-- MODAL TAMBAH END -->
                                                     <div class="card-body">
                                                         <div class="table-responsive">
                                                             <table id="example" class="display min-w850">
@@ -259,9 +259,9 @@
                                                                                     </div>
                                                                                         <form method="POST" action="/regupersonil/{{$value->id}}/destroy">
                                                                                         @csrf
-                                                                                            <button type="submit" class="btn btn-danger btn-sm">Confirm</button>
+                                                                                            <button type="submit" class="btn btn-danger btn-sm">Konfirmasi</button>
                                                                                         </form>
-                                                                                        <button class="btn btn-link btn-sm" data-dismiss="modal">Cancel</button>
+                                                                                        <button class="btn btn-link btn-sm" data-dismiss="modal">Batal</button>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
