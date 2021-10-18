@@ -16,9 +16,10 @@ class Tugas extends Model
         'uraian_tugas',
         'keterangan',
         'regu_id',
+        'zona_id',
     ];
 
-    public function shift()
+    public function regu()
     {
         return $this->belongsTo(Regu::class);
     }

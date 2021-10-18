@@ -104,15 +104,19 @@ class TugasJagaController extends Controller
             }
         }
         //memasukkan id shift masing2 regu untuk hari ini.
+        $shiftA = "";
         foreach ($reguA_arr as $reguA){
             $shiftA =$reguA->regu->shift->id;
         }
+        $shiftB = "";
         foreach ($reguB_arr as $reguB){
             $shiftB =$reguB->regu->shift->id;
         }
+        $shiftC = "";
         foreach ($reguC_arr as $reguC){
             $shiftC =$reguC->regu->shift->id;
         }
+        $shiftD = "";
         foreach ($reguD_arr as $reguD){
             $shiftD =$reguD->regu->shift->id;
         }

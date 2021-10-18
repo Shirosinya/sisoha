@@ -21,6 +21,8 @@ class CreateTugassTable extends Migration
             ->default('Aman, Tertib Terkendali');
             $table->timestamps();
             $table->foreignId('regu_id');
+            //fake id just for identifier
+            $table->foreignId('zona_id');
         });
     }
 

@@ -15,9 +15,9 @@ class TugasSeeder extends Seeder
     public function run()
     {
         $tugass = [
-            ['14:00','Ini uraian tugas penerimaan shift 2 dari shift 1', '2'],
-            ['06:23', 'Ini uraian tugas penerimaan shift 1 dari shift 3', '1'],
-            ['20:29', 'Ini uraian tugas penerimaan shift 3 dari shift 2', '3'],
+            ['14:00','Ini uraian tugas penerimaan shift 2 dari shift 1', '2','2'],
+            ['06:23', 'Ini uraian tugas penerimaan shift 1 dari shift 3', '1','1'],
+            ['20:29', 'Ini uraian tugas penerimaan shift 3 dari shift 2', '3','1'],
         ];
         foreach ($tugass as $key => $value) {
             $tugas = Tugas::updateOrCreate([
@@ -26,6 +26,7 @@ class TugasSeeder extends Seeder
                 'pukul' => $value[0],
                 'uraian_tugas' => $value[1],
                 'regu_id' => $value[2],
+                'zona_id' => $value[3],
             ]);
         }
     }

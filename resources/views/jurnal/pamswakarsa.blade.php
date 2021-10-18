@@ -10,7 +10,7 @@
                 <div class="page-titles">
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="javascript:void(0)">Jurnal</a></li>
-						<li class="breadcrumb-item active"><a href="javascript:void(0)">Pergantian Shift</a></li>
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">Pamswakarsa</a></li>
 					</ol>
                 </div>
                 <!-- row -->
@@ -19,7 +19,7 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Laporan Pergantian Shift</h4>
+                                <h4 class="card-title">Pamswakarsa</h4>
                                 <h4 class="card-title"><?php echo date('d-m-Y'); ?></h4>
                             </div>
                             <div class="card-body">
@@ -47,42 +47,26 @@
                                                     </div>
                                                 @endif
                                                 <!-- MODAL TAMBAH A-->
-                                                    <button type="button" class="btn btn-primary btn-md mb-2" data-toggle="modal" data-target="#tambahModalA">+ Tambah Lap. Shift</button>
+                                                    <button type="button" class="btn btn-primary btn-md mb-2" data-toggle="modal" data-target="#tambahModalA">+ Tambah Data</button>
                                                     <div class="modal fade bd-example-modal-lg" id="tambahModalA" tabindex="-1" role="dialog" aria-hidden="true">
                                                         <div class="modal-dialog modal-lg">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title">Tambah Laporan Pergantian Shift</h5>
+                                                                    <h5 class="modal-title">Tambah Pamswakarsa</h5>
                                                                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body">
                                                                     <h3 style="margin-top:-15px; margin-bottom:15px;" >REGU A</h3>
-                                                                    <form id="form-create-lapshift" name="form-create-lapshift" method="POST" action="{{route('createlapshift')}}">
+                                                                    <form id="form-create-pamswakarsa" name="form-create-pamswakarsa" method="POST" action="{{route('createpamswakarsa')}}">
                                                                         @csrf
                                                                         <input type="hidden" name="regu_id" value="1">
-                                                                        <input type="hidden" name="zona_id" value="{{$zonaid}}">
                                                                         <div class="form-group row">
-                                                                        <label class="col-sm-3 col-form-label">Pukul</label>
-                                                                            <div class="col-sm-9">
-                                                                                <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
-                                                                                    <input name="pukul" type="text" class="form-control" value="00:00"> <span class="input-group-append"><span class="input-group-text">
-                                                                                        <i class="fa fa-clock-o"></i></span></span>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group row">
-                                                                            <label class="col-sm-3 col-form-label">Uraian Tugas</label>
-                                                                            <div class="col-sm-9">
-                                                                                <textarea required maxlength="150" name="uraian_tugas" rows="4" type="text" oninput="" class="form-control" placeholder="Masukkan Uraian Tugas"></textarea>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group row">
-                                                                            <label class="col-sm-3 col-form-label">Keterangan</label>
+                                                                            <label class="col-sm-3 col-form-label">Wilayah</label>
                                                                             <div class="col-sm-9">
                                                                                 <select name="keterangan" class="form-control" id="keterangan">
-                                                                                <option value="Aman, Tertib Terkendali">Aman, Tertib Terkendali</option>
-                                                                                <option value="Tidak Aman, Perlu Tindakan Lanjutan">Tidak Aman, Perlu Tindakan Lanjutan</option>
+                                                                                <option value="Produksi I">Produksi I</option>
+                                                                                <option value="Pemeliharaan">Pemeliharaan I</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
@@ -101,65 +85,69 @@
                                                         <thead>
                                                             <tr>
                                                                 <th class="width80"><strong>#</strong></th>
-                                                                <th><strong>Jam</strong></th>
-                                                                <th><strong>Uraian Tugas</strong></th>
-                                                                <th><strong>Keterangan</strong></th>
+                                                                <th><strong>Wilayah</strong></th>
+                                                                <th><strong>Petugas</strong></th>
+                                                                <th><strong>Pekerja Organik</strong></th>
+                                                                <th><strong>Pekerja Bantu</strong></th>
+                                                                <th><strong>Orang Kontrak</strong></th>
                                                                 <th></th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <?php $no = 1; ?>
-                                                            @foreach($tugass->where('regu_id','=','1') as $tugas)
+                                                            @foreach($pamswakarsas->where('regu_id','=','1') as $pamswakarsa)
                                                             <tr>
                                                                 <td><strong>{{$no++}}</strong></td>
-                                                                <td>{{\Carbon\Carbon::parse($tugas->pukul)->format('H:i')}}</td>
-                                                                <td>{{$tugas->uraian_tugas}}</td>
-                                                                <td>{{$tugas->keterangan}}</td>
+                                                                <td>{{$pamswakarsa->wilayah}}</td>
+                                                                <td>{{$pamswakarsa->nama_petugas}}</td>
+                                                                <td>{{$pamswakarsa->po}}</td>
+                                                                <td>{{$pamswakarsa->pb}}</td>
+                                                                <td>{{$pamswakarsa->ok}}</td>
                                                                 <td>
                                                                     <div class="dropdown">
                                                                         <button type="button" class="btn btn-primary light sharp" data-toggle="dropdown">
                                                                             <svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="5" cy="12" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="19" cy="12" r="2"/></g></svg>
                                                                         </button>
                                                                         <div class="dropdown-menu">
-                                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#editModal{{$tugas->id}}">Edit</a>
-                                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#hapusModal{{$tugas->id}}">Delete</a>
+                                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#editModal{{$pamswakarsa->id}}">Edit</a>
+                                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#hapusModal{{$pamswakarsa->id}}">Delete</a>
                                                                         </div>
                                                                     </div>
                                                                     <!-- MODAL UPDATE A -->
-                                                                    <div class="modal fade bd-example-modal-lg" id="editModal{{$tugas->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                                                                    <div class="modal fade bd-example-modal-lg" id="editModal{{$pamswakarsa->id}}" tabindex="-1" role="dialog" aria-hidden="true">
                                                                         <div class="modal-dialog modal-lg">
                                                                             <div class="modal-content">
                                                                                 <div class="modal-header">
-                                                                                    <h5 class="modal-title">Edit Laporan Pergantian Shift</h5>
+                                                                                    <h5 class="modal-title">Edit Pamswakarsa</h5>
                                                                                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                                                                                     </button>
                                                                                 </div>
                                                                                 <div class="modal-body">
                                                                                     <h3 style="margin-top:-15px; margin-bottom:15px;" >REGU A</h3>
-                                                                                    <form id="form-update-lapshift" name="form-update-lapshift" method="POST" action="/pergantian-shift/{{$tugas->id}}/update">
+                                                                                    <form id="form-update-pamswakarsa" name="form-update-pamswakarsa" method="POST" action="/pamswakarsa/{{$pamswakarsa->id}}/update">
                                                                                         @csrf
-                                                                                        <input type="hidden" name="regu_id" value="{{$tugas->regu_id}}">
+                                                                                        <input type="hidden" name="regu_id" value="{{$pamswakarsa->regu_id}}">
                                                                                         <div class="form-group row">
                                                                                         <label class="col-sm-3 col-form-label">Pukul</label>
                                                                                             <div class="col-sm-9">
                                                                                                 <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
-                                                                                                    <input name="pukul" type="text" class="form-control" value="{{\Carbon\Carbon::parse($tugas->pukul)->format('H:i')}}"> <span class="input-group-append"><span class="input-group-text">
+                                                                                                    <input name="pukul" type="text" class="form-control" value="{{\Carbon\Carbon::parse($pamswakarsa->pukul)->format('H:i')}}"> <span class="input-group-append"><span class="input-group-text">
                                                                                                         <i class="fa fa-clock-o"></i></span></span>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="form-group row">
-                                                                                            <label class="col-sm-3 col-form-label">Uraian Tugas</label>
+                                                                                            <label class="col-sm-3 col-form-label">Uraian pamswakarsa</label>
                                                                                             <div class="col-sm-9">
-                                                                                                <textarea required maxlength="150" name="uraian_tugas" rows="4" type="text" oninput="" class="form-control" placeholder="Masukkan Uraian Tugas">{{$tugas->uraian_tugas}}</textarea>
+                                                                                                <textarea required maxlength="150" name="uraian_pamswakarsa" rows="4" type="text" oninput="" class="form-control" placeholder="Masukkan Uraian pamswakarsa">{{$pamswakarsa->uraian_pamswakarsa}}</textarea>
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="form-group row">
                                                                                             <label class="col-sm-3 col-form-label">Keterangan</label>
                                                                                             <div class="col-sm-9">
                                                                                                 <select name="keterangan" class="form-control" id="keterangan">
-                                                                                                <option value="Aman, Tertib Terkendali" {{ $tugas->keterangan == 'Aman, Tertib Terkendali' ? 'selected': '' }}>Aman, Tertib Terkendali</option>
-                                                                                                <option value="Tidak Aman, Perlu Tindakan Lanjutan" {{ $tugas->keterangan == 'Tidak Aman, Perlu Tindakan Lanjutan' ? 'selected': '' }}>Tidak Aman, Perlu Tindakan Lanjutan</option>
+                                                                                                <option value="Aman, Tertib Terkendali" {{ $pamswakarsa->keterangan == 'Aman, Tertib Terkendali' ? 'selected': '' }}>Aman, Tertib Terkendali</option>
+                                                                                                <option value="Tidak Aman, Perlu Tindakan Lanjutan" {{ $pamswakarsa->keterangan == 'Tidak Aman, Perlu Tindakan Lanjutan' ? 'selected': '' }}>Tidak Aman, Perlu Tindakan Lanjutan</option>
                                                                                                 </select>
                                                                                             </div>
                                                                                         </div>
@@ -174,7 +162,7 @@
                                                                     </div>
                                                                     <!-- MODAL UPDATE A END -->
                                                                     <!--MODAL HAPUS A-->
-                                                                    <div class="modal fade" id="hapusModal{{$tugas->id}}">
+                                                                    <div class="modal fade" id="hapusModal{{$pamswakarsa->id}}">
                                                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                                                             <div class="modal-content">
                                                                                 <div class="modal-body">
@@ -185,7 +173,7 @@
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="modal-footer">
-                                                                                    <form method="POST" action="/pergantian-shift/{{$tugas->id}}/destroy">
+                                                                                    <form method="POST" action="/pamswakarsa/{{$pamswakarsa->id}}/destroy">
                                                                                     @csrf
                                                                                         <button type="submit" class="btn btn-danger btn-sm">Konfirmasi</button>
                                                                                     </form>
@@ -216,16 +204,15 @@
                                                         <div class="modal-dialog modal-lg">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title">Tambah Laporan Pergantian Shift</h5>
+                                                                    <h5 class="modal-title">Tambah Pamswakarsa</h5>
                                                                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body">
                                                                     <h3 style="margin-top:-15px; margin-bottom:15px;" >REGU B</h3>
-                                                                    <form id="form-create-lapshift" name="form-create-lapshift" method="POST" action="{{route('createlapshift')}}">
+                                                                    <form id="form-create-pamswakarsa" name="form-create-pamswakarsa" method="POST" action="{{route('createpamswakarsa')}}">
                                                                         @csrf
                                                                         <input type="hidden" name="regu_id" value="2">
-                                                                        <input type="hidden" name="zona_id" value="{{$zonaid}}">
                                                                         <div class="form-group row">
                                                                         <label class="col-sm-3 col-form-label">Pukul</label>
                                                                             <div class="col-sm-9">
@@ -236,9 +223,9 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group row">
-                                                                            <label class="col-sm-3 col-form-label">Uraian Tugas</label>
+                                                                            <label class="col-sm-3 col-form-label">Uraian pamswakarsa</label>
                                                                             <div class="col-sm-9">
-                                                                                <textarea required maxlength="150" name="uraian_tugas" rows="4" type="text" oninput="" class="form-control" placeholder="Masukkan Uraian Tugas"></textarea>
+                                                                                <textarea required maxlength="150" name="uraian_pamswakarsa" rows="4" type="text" oninput="" class="form-control" placeholder="Masukkan Uraian pamswakarsa"></textarea>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group row">
@@ -266,63 +253,63 @@
                                                             <tr>
                                                                 <th class="width80"><strong>#</strong></th>
                                                                 <th><strong>Jam</strong></th>
-                                                                <th><strong>Uraian Tugas</strong></th>
+                                                                <th><strong>Uraian pamswakarsa</strong></th>
                                                                 <th><strong>Keterangan</strong></th>
                                                                 <th></th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <?php $no = 1; ?>
-                                                            @foreach($tugass->where('regu_id','=','2') as $tugas)
+                                                            @foreach($pamswakarsas->where('regu_id','=','2') as $pamswakarsa)
                                                             <tr>
                                                                 <td><strong>{{$no++}}</strong></td>
-                                                                <td>{{\Carbon\Carbon::parse($tugas->pukul)->format('H:i')}}</td>
-                                                                <td>{{$tugas->uraian_tugas}}</td>
-                                                                <td>{{$tugas->keterangan}}</td>
+                                                                <td>{{\Carbon\Carbon::parse($pamswakarsa->pukul)->format('H:i')}}</td>
+                                                                <td>{{$pamswakarsa->uraian_pamswakarsa}}</td>
+                                                                <td>{{$pamswakarsa->keterangan}}</td>
                                                                 <td>
                                                                     <div class="dropdown">
                                                                         <button type="button" class="btn btn-primary light sharp" data-toggle="dropdown">
                                                                             <svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="5" cy="12" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="19" cy="12" r="2"/></g></svg>
                                                                         </button>
                                                                         <div class="dropdown-menu">
-                                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#editModal{{$tugas->id}}">Edit</a>
-                                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#hapusModal{{$tugas->id}}">Delete</a>
+                                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#editModal{{$pamswakarsa->id}}">Edit</a>
+                                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#hapusModal{{$pamswakarsa->id}}">Delete</a>
                                                                         </div>
                                                                         <!-- MODAL UPDATE B -->
-                                                                        <div class="modal fade bd-example-modal-lg" id="editModal{{$tugas->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                                                                        <div class="modal fade bd-example-modal-lg" id="editModal{{$pamswakarsa->id}}" tabindex="-1" role="dialog" aria-hidden="true">
                                                                             <div class="modal-dialog modal-lg">
                                                                                 <div class="modal-content">
                                                                                     <div class="modal-header">
-                                                                                        <h5 class="modal-title">Edit Laporan Pergantian Shift</h5>
+                                                                                        <h5 class="modal-title">Edit Pamswakarsa</h5>
                                                                                         <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                                                                                         </button>
                                                                                     </div>
                                                                                     <div class="modal-body">
                                                                                         <h3 style="margin-top:-15px; margin-bottom:15px;" >REGU B</h3>
-                                                                                        <form id="form-update-lapshift" name="form-update-lapshift" method="POST" action="/pergantian-shift/{{$tugas->id}}/update">
+                                                                                        <form id="form-update-pamswakarsa" name="form-update-pamswakarsa" method="POST" action="/pamswakarsa/{{$pamswakarsa->id}}/update">
                                                                                             @csrf
-                                                                                            <input type="hidden" name="regu_id" value="{{$tugas->regu_id}}">
+                                                                                            <input type="hidden" name="regu_id" value="{{$pamswakarsa->regu_id}}">
                                                                                             <div class="form-group row">
                                                                                             <label class="col-sm-3 col-form-label">Pukul</label>
                                                                                                 <div class="col-sm-9">
                                                                                                     <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
-                                                                                                        <input name="pukul" type="text" class="form-control" value="{{\Carbon\Carbon::parse($tugas->pukul)->format('H:i')}}"> <span class="input-group-append"><span class="input-group-text">
+                                                                                                        <input name="pukul" type="text" class="form-control" value="{{\Carbon\Carbon::parse($pamswakarsa->pukul)->format('H:i')}}"> <span class="input-group-append"><span class="input-group-text">
                                                                                                             <i class="fa fa-clock-o"></i></span></span>
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
                                                                                             <div class="form-group row">
-                                                                                                <label class="col-sm-3 col-form-label">Uraian Tugas</label>
+                                                                                                <label class="col-sm-3 col-form-label">Uraian pamswakarsa</label>
                                                                                                 <div class="col-sm-9">
-                                                                                                    <textarea required maxlength="150" name="uraian_tugas" rows="4" type="text" oninput="" class="form-control" placeholder="Masukkan Uraian Tugas">{{$tugas->uraian_tugas}}</textarea>
+                                                                                                    <textarea required maxlength="150" name="uraian_pamswakarsa" rows="4" type="text" oninput="" class="form-control" placeholder="Masukkan Uraian pamswakarsa">{{$pamswakarsa->uraian_pamswakarsa}}</textarea>
                                                                                                 </div>
                                                                                             </div>
                                                                                             <div class="form-group row">
                                                                                                 <label class="col-sm-3 col-form-label">Keterangan</label>
                                                                                                 <div class="col-sm-9">
                                                                                                     <select name="keterangan" class="form-control" id="keterangan">
-                                                                                                    <option value="Aman, Tertib Terkendali" {{ $tugas->keterangan == 'Aman, Tertib Terkendali' ? 'selected': '' }}>Aman, Tertib Terkendali</option>
-                                                                                                    <option value="Tidak Aman, Perlu Tindakan Lanjutan" {{ $tugas->keterangan == 'Tidak Aman, Perlu Tindakan Lanjutan' ? 'selected': '' }}>Tidak Aman, Perlu Tindakan Lanjutan</option>
+                                                                                                    <option value="Aman, Tertib Terkendali" {{ $pamswakarsa->keterangan == 'Aman, Tertib Terkendali' ? 'selected': '' }}>Aman, Tertib Terkendali</option>
+                                                                                                    <option value="Tidak Aman, Perlu Tindakan Lanjutan" {{ $pamswakarsa->keterangan == 'Tidak Aman, Perlu Tindakan Lanjutan' ? 'selected': '' }}>Tidak Aman, Perlu Tindakan Lanjutan</option>
                                                                                                     </select>
                                                                                                 </div>
                                                                                             </div>
@@ -337,7 +324,7 @@
                                                                         </div>
                                                                         <!-- MODAL UPDATE B END -->
                                                                         <!--MODAL HAPUS B-->
-                                                                        <div class="modal fade" id="hapusModal{{$tugas->id}}">
+                                                                        <div class="modal fade" id="hapusModal{{$pamswakarsa->id}}">
                                                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                                                 <div class="modal-content">
                                                                                     <div class="modal-body">
@@ -348,7 +335,7 @@
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="modal-footer">
-                                                                                        <form method="POST" action="/pergantian-shift/{{$tugas->id}}/destroy">
+                                                                                        <form method="POST" action="/pamswakarsa/{{$pamswakarsa->id}}/destroy">
                                                                                         @csrf
                                                                                             <button type="submit" class="btn btn-danger btn-sm">Konfirmasi</button>
                                                                                         </form>
@@ -380,13 +367,13 @@
                                                         <div class="modal-dialog modal-lg">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title">Tambah Laporan Pergantian Shift</h5>
+                                                                    <h5 class="modal-title">Tambah Pamswakarsa</h5>
                                                                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body">
                                                                     <h3 style="margin-top:-15px; margin-bottom:15px;" >REGU C</h3>
-                                                                    <form id="form-create-lapshift" name="form-create-lapshift" method="POST" action="{{route('createlapshift')}}">
+                                                                    <form id="form-create-pamswakarsa" name="form-create-pamswakarsa" method="POST" action="{{route('createpamswakarsa')}}">
                                                                         @csrf
                                                                         <input type="hidden" name="regu_id" value="3">
                                                                         <div class="form-group row">
@@ -399,9 +386,9 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group row">
-                                                                            <label class="col-sm-3 col-form-label">Uraian Tugas</label>
+                                                                            <label class="col-sm-3 col-form-label">Uraian pamswakarsa</label>
                                                                             <div class="col-sm-9">
-                                                                                <textarea required maxlength="150" name="uraian_tugas" rows="4" type="text" oninput="" class="form-control" placeholder="Masukkan Uraian Tugas"></textarea>
+                                                                                <textarea required maxlength="150" name="uraian_pamswakarsa" rows="4" type="text" oninput="" class="form-control" placeholder="Masukkan Uraian pamswakarsa"></textarea>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group row">
@@ -429,64 +416,64 @@
                                                             <tr>
                                                                 <th class="width80"><strong>#</strong></th>
                                                                 <th><strong>Jam</strong></th>
-                                                                <th><strong>Uraian Tugas</strong></th>
+                                                                <th><strong>Uraian pamswakarsa</strong></th>
                                                                 <th><strong>Keterangan</strong></th>
                                                                 <th></th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <?php $no = 1; ?>
-                                                            @foreach($tugass->where('regu_id','=','3') as $tugas)
+                                                            @foreach($pamswakarsas->where('regu_id','=','3') as $pamswakarsa)
                                                             <tr>
                                                                 <td><strong>{{$no++}}</strong></td>
-                                                                <td>{{\Carbon\Carbon::parse($tugas->pukul)->format('H:i')}}</td>
-                                                                <td>{{$tugas->uraian_tugas}}</td>
-                                                                <td>{{$tugas->keterangan}}</td>
+                                                                <td>{{\Carbon\Carbon::parse($pamswakarsa->pukul)->format('H:i')}}</td>
+                                                                <td>{{$pamswakarsa->uraian_pamswakarsa}}</td>
+                                                                <td>{{$pamswakarsa->keterangan}}</td>
                                                                 <td>
                                                                     <div class="dropdown">
                                                                         <button type="button" class="btn btn-primary light sharp" data-toggle="dropdown">
                                                                             <svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="5" cy="12" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="19" cy="12" r="2"/></g></svg>
                                                                         </button>
                                                                         <div class="dropdown-menu">
-                                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#editModal{{$tugas->id}}">Edit</a>
-                                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#hapusModal{{$tugas->id}}">Delete</a>
+                                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#editModal{{$pamswakarsa->id}}">Edit</a>
+                                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#hapusModal{{$pamswakarsa->id}}">Delete</a>
                                                                         </div>
                                                                     </div>
                                                                     <!-- MODAL UPDATE C -->
-                                                                    <div class="modal fade bd-example-modal-lg" id="editModal{{$tugas->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                                                                    <div class="modal fade bd-example-modal-lg" id="editModal{{$pamswakarsa->id}}" tabindex="-1" role="dialog" aria-hidden="true">
                                                                         <div class="modal-dialog modal-lg">
                                                                             <div class="modal-content">
                                                                                 <div class="modal-header">
-                                                                                    <h5 class="modal-title">Edit Laporan Pergantian Shift</h5>
+                                                                                    <h5 class="modal-title">Edit Pamswakarsa</h5>
                                                                                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                                                                                     </button>
                                                                                 </div>
                                                                                 <div class="modal-body">
                                                                                     <h3 style="margin-top:-15px; margin-bottom:15px;" >REGU C</h3>
-                                                                                    <form id="form-update-lapshift" name="form-update-lapshift" method="POST" action="/pergantian-shift/{{$tugas->id}}/update">
+                                                                                    <form id="form-update-pamswakarsa" name="form-update-pamswakarsa" method="POST" action="/pamswakarsa/{{$pamswakarsa->id}}/update">
                                                                                         @csrf
-                                                                                        <input type="hidden" name="regu_id" value="{{$tugas->regu_id}}">
+                                                                                        <input type="hidden" name="regu_id" value="{{$pamswakarsa->regu_id}}">
                                                                                         <div class="form-group row">
                                                                                         <label class="col-sm-3 col-form-label">Pukul</label>
                                                                                             <div class="col-sm-9">
                                                                                                 <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
-                                                                                                    <input name="pukul" type="text" class="form-control" value="{{\Carbon\Carbon::parse($tugas->pukul)->format('H:i')}}"> <span class="input-group-append"><span class="input-group-text">
+                                                                                                    <input name="pukul" type="text" class="form-control" value="{{\Carbon\Carbon::parse($pamswakarsa->pukul)->format('H:i')}}"> <span class="input-group-append"><span class="input-group-text">
                                                                                                         <i class="fa fa-clock-o"></i></span></span>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="form-group row">
-                                                                                            <label class="col-sm-3 col-form-label">Uraian Tugas</label>
+                                                                                            <label class="col-sm-3 col-form-label">Uraian pamswakarsa</label>
                                                                                             <div class="col-sm-9">
-                                                                                                <textarea required maxlength="150" name="uraian_tugas" rows="4" type="text" oninput="" class="form-control" placeholder="Masukkan Uraian Tugas">{{$tugas->uraian_tugas}}</textarea>
+                                                                                                <textarea required maxlength="150" name="uraian_pamswakarsa" rows="4" type="text" oninput="" class="form-control" placeholder="Masukkan Uraian pamswakarsa">{{$pamswakarsa->uraian_pamswakarsa}}</textarea>
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="form-group row">
                                                                                             <label class="col-sm-3 col-form-label">Keterangan</label>
                                                                                             <div class="col-sm-9">
                                                                                                 <select name="keterangan" class="form-control" id="keterangan">
-                                                                                                <option value="Aman, Tertib Terkendali" {{ $tugas->keterangan == 'Aman, Tertib Terkendali' ? 'selected': '' }}>Aman, Tertib Terkendali</option>
-                                                                                                <option value="Tidak Aman, Perlu Tindakan Lanjutan" {{ $tugas->keterangan == 'Tidak Aman, Perlu Tindakan Lanjutan' ? 'selected': '' }}>Tidak Aman, Perlu Tindakan Lanjutan</option>
+                                                                                                <option value="Aman, Tertib Terkendali" {{ $pamswakarsa->keterangan == 'Aman, Tertib Terkendali' ? 'selected': '' }}>Aman, Tertib Terkendali</option>
+                                                                                                <option value="Tidak Aman, Perlu Tindakan Lanjutan" {{ $pamswakarsa->keterangan == 'Tidak Aman, Perlu Tindakan Lanjutan' ? 'selected': '' }}>Tidak Aman, Perlu Tindakan Lanjutan</option>
                                                                                                 </select>
                                                                                             </div>
                                                                                         </div>
@@ -501,7 +488,7 @@
                                                                     </div>
                                                                     <!-- MODAL UPDATE C END -->
                                                                     <!--MODAL HAPUS C-->
-                                                                    <div class="modal fade" id="hapusModal{{$tugas->id}}">
+                                                                    <div class="modal fade" id="hapusModal{{$pamswakarsa->id}}">
                                                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                                                             <div class="modal-content">
                                                                                 <div class="modal-body">
@@ -512,7 +499,7 @@
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="modal-footer">
-                                                                                    <form method="POST" action="/pergantian-shift/{{$tugas->id}}/destroy">
+                                                                                    <form method="POST" action="/pamswakarsa/{{$pamswakarsa->id}}/destroy">
                                                                                     @csrf
                                                                                         <button type="submit" class="btn btn-danger btn-sm">Konfirmasi</button>
                                                                                     </form>
@@ -543,13 +530,13 @@
                                                         <div class="modal-dialog modal-lg">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title">Tambah Laporan Pergantian Shift</h5>
+                                                                    <h5 class="modal-title">Tambah Pamswakarsa</h5>
                                                                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body">
                                                                     <h3 style="margin-top:-15px; margin-bottom:15px;" >REGU D</h3>
-                                                                    <form id="form-create-lapshift" name="form-create-lapshift" method="POST" action="{{route('createlapshift')}}">
+                                                                    <form id="form-create-pamswakarsa" name="form-create-pamswakarsa" method="POST" action="{{route('createpamswakarsa')}}">
                                                                         @csrf
                                                                         <input type="hidden" name="regu_id" value="4">
                                                                         <div class="form-group row">
@@ -562,9 +549,9 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group row">
-                                                                            <label class="col-sm-3 col-form-label">Uraian Tugas</label>
+                                                                            <label class="col-sm-3 col-form-label">Uraian pamswakarsa</label>
                                                                             <div class="col-sm-9">
-                                                                                <textarea required maxlength="150" name="uraian_tugas" rows="4" type="text" oninput="" class="form-control" placeholder="Masukkan Uraian Tugas"></textarea>
+                                                                                <textarea required maxlength="150" name="uraian_pamswakarsa" rows="4" type="text" oninput="" class="form-control" placeholder="Masukkan Uraian pamswakarsa"></textarea>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group row">
@@ -592,64 +579,64 @@
                                                             <tr>
                                                                 <th class="width80"><strong>#</strong></th>
                                                                 <th><strong>Jam</strong></th>
-                                                                <th><strong>Uraian Tugas</strong></th>
+                                                                <th><strong>Uraian pamswakarsa</strong></th>
                                                                 <th><strong>Keterangan</strong></th>
                                                                 <th></th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <?php $no = 1; ?>
-                                                            @foreach($tugass->where('regu_id','=','4') as $tugas)
+                                                            @foreach($pamswakarsas->where('regu_id','=','4') as $pamswakarsa)
                                                             <tr>
                                                                 <td><strong>{{$no++}}</strong></td>
-                                                                <td>{{\Carbon\Carbon::parse($tugas->pukul)->format('H:i')}}</td>
-                                                                <td>{{$tugas->uraian_tugas}}</td>
-                                                                <td>{{$tugas->keterangan}}</td>
+                                                                <td>{{\Carbon\Carbon::parse($pamswakarsa->pukul)->format('H:i')}}</td>
+                                                                <td>{{$pamswakarsa->uraian_pamswakarsa}}</td>
+                                                                <td>{{$pamswakarsa->keterangan}}</td>
                                                                 <td>
                                                                     <div class="dropdown">
                                                                         <button type="button" class="btn btn-primary light sharp" data-toggle="dropdown">
                                                                             <svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="5" cy="12" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="19" cy="12" r="2"/></g></svg>
                                                                         </button>
                                                                         <div class="dropdown-menu">
-                                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#editModal{{$tugas->id}}">Edit</a>
-                                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#hapusModal{{$tugas->id}}">Delete</a>
+                                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#editModal{{$pamswakarsa->id}}">Edit</a>
+                                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#hapusModal{{$pamswakarsa->id}}">Delete</a>
                                                                         </div>
                                                                     </div>
                                                                     <!-- MODAL UPDATE D -->
-                                                                    <div class="modal fade bd-example-modal-lg" id="editModal{{$tugas->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                                                                    <div class="modal fade bd-example-modal-lg" id="editModal{{$pamswakarsa->id}}" tabindex="-1" role="dialog" aria-hidden="true">
                                                                         <div class="modal-dialog modal-lg">
                                                                             <div class="modal-content">
                                                                                 <div class="modal-header">
-                                                                                    <h5 class="modal-title">Edit Laporan Pergantian Shift</h5>
+                                                                                    <h5 class="modal-title">Edit Pamswakarsa</h5>
                                                                                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                                                                                     </button>
                                                                                 </div>
                                                                                 <div class="modal-body">
                                                                                     <h3 style="margin-top:-15px; margin-bottom:15px;" >REGU D</h3>
-                                                                                    <form id="form-update-lapshift" name="form-update-lapshift" method="POST" action="/pergantian-shift/{{$tugas->id}}/update">
+                                                                                    <form id="form-update-pamswakarsa" name="form-update-pamswakarsa" method="POST" action="/pamswakarsa/{{$pamswakarsa->id}}/update">
                                                                                         @csrf
-                                                                                        <input type="hidden" name="regu_id" value="{{$tugas->regu_id}}">
+                                                                                        <input type="hidden" name="regu_id" value="{{$pamswakarsa->regu_id}}">
                                                                                         <div class="form-group row">
                                                                                         <label class="col-sm-3 col-form-label">Pukul</label>
                                                                                             <div class="col-sm-9">
                                                                                                 <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
-                                                                                                    <input name="pukul" type="text" class="form-control" value="{{\Carbon\Carbon::parse($tugas->pukul)->format('H:i')}}"> <span class="input-group-append"><span class="input-group-text">
+                                                                                                    <input name="pukul" type="text" class="form-control" value="{{\Carbon\Carbon::parse($pamswakarsa->pukul)->format('H:i')}}"> <span class="input-group-append"><span class="input-group-text">
                                                                                                         <i class="fa fa-clock-o"></i></span></span>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="form-group row">
-                                                                                            <label class="col-sm-3 col-form-label">Uraian Tugas</label>
+                                                                                            <label class="col-sm-3 col-form-label">Uraian pamswakarsa</label>
                                                                                             <div class="col-sm-9">
-                                                                                                <textarea required maxlength="150" name="uraian_tugas" rows="4" type="text" oninput="" class="form-control" placeholder="Masukkan Uraian Tugas">{{$tugas->uraian_tugas}}</textarea>
+                                                                                                <textarea required maxlength="150" name="uraian_pamswakarsa" rows="4" type="text" oninput="" class="form-control" placeholder="Masukkan Uraian pamswakarsa">{{$pamswakarsa->uraian_pamswakarsa}}</textarea>
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="form-group row">
                                                                                             <label class="col-sm-3 col-form-label">Keterangan</label>
                                                                                             <div class="col-sm-9">
                                                                                                 <select name="keterangan" class="form-control" id="keterangan">
-                                                                                                <option value="Aman, Tertib Terkendali" {{ $tugas->keterangan == 'Aman, Tertib Terkendali' ? 'selected': '' }}>Aman, Tertib Terkendali</option>
-                                                                                                <option value="Tidak Aman, Perlu Tindakan Lanjutan" {{ $tugas->keterangan == 'Tidak Aman, Perlu Tindakan Lanjutan' ? 'selected': '' }}>Tidak Aman, Perlu Tindakan Lanjutan</option>
+                                                                                                <option value="Aman, Tertib Terkendali" {{ $pamswakarsa->keterangan == 'Aman, Tertib Terkendali' ? 'selected': '' }}>Aman, Tertib Terkendali</option>
+                                                                                                <option value="Tidak Aman, Perlu Tindakan Lanjutan" {{ $pamswakarsa->keterangan == 'Tidak Aman, Perlu Tindakan Lanjutan' ? 'selected': '' }}>Tidak Aman, Perlu Tindakan Lanjutan</option>
                                                                                                 </select>
                                                                                             </div>
                                                                                         </div>
@@ -664,7 +651,7 @@
                                                                     </div>
                                                                     <!-- MODAL UPDATE D END -->
                                                                     <!--MODAL HAPUS D-->
-                                                                    <div class="modal fade" id="hapusModal{{$tugas->id}}">
+                                                                    <div class="modal fade" id="hapusModal{{$pamswakarsa->id}}">
                                                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                                                             <div class="modal-content">
                                                                                 <div class="modal-body">
@@ -675,7 +662,7 @@
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="modal-footer">
-                                                                                    <form method="POST" action="/pergantian-shift/{{$tugas->id}}/destroy">
+                                                                                    <form method="POST" action="/pamswakarsa/{{$pamswakarsa->id}}/destroy">
                                                                                     @csrf
                                                                                         <button type="submit" class="btn btn-danger btn-sm">Konfirmasi</button>
                                                                                     </form>

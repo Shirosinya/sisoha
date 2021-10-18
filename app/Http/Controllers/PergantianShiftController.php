@@ -19,14 +19,14 @@ class PergantianShiftController extends Controller
     public function index()
     {
 
-        $tugass = Tugas::whereDate('created_at','=',date('Y-m-d'))->get();
-
-        $page_title = 'Tugas Jaga';
+        $zonaid = Auth::user()->zona->id;
+        $tugass = Tugas::whereDate('created_at','=',date('Y-m-d'))->where('zona_id', '=', $zonaid)->get();
+        $page_title = 'Pergantian Shift';
         $page_description = 'Some description for the page';
         $logo = "images/petro-logo.png";
         $logoText = "images/petro-text.png";
         $action = __FUNCTION__;
-        return view('jurnal.pergantianshift', compact('page_title', 'page_description', 'action','logo','logoText','tugass'));
+        return view('jurnal.pergantianshift', compact('page_title', 'page_description', 'action','logo','logoText','tugass', 'zonaid'));
     }
 
     /**
@@ -49,19 +49,20 @@ class PergantianShiftController extends Controller
     {
         $input = $request->all();
         // $time = Carbon::parse($input['pukul'])->format('H:i');
-        // dd($time);
+        // dd($input);
         Tugas::create([
             'pukul' => $input['pukul'],
             'uraian_tugas' => $input['uraian_tugas'],
             'keterangan' => $input['keterangan'],
             'regu_id' => $input['regu_id'],
+            'zona_id' => $input['zona_id'],
         ]);
 
         if($input['regu_id'] == '1'){
             return redirect('/pergantian-shift')->withInput(['tab'=>'tab-reguA']); 
          }elseif($input['regu_id'] == '2'){
              return redirect('/pergantian-shift')->withInput(['tab'=>'tab-reguB']);
-         }elseif ($input['regu_id'] == '3') {
+         }elseif ($input['regu_id'] == '3'){
              return redirect('/pergantian-shift')->withInput(['tab'=>'tab-reguC']);
          }else{
              return redirect('/pergantian-shift')->withInput(['tab'=>'tab-reguD']);

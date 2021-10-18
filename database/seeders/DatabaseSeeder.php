@@ -24,5 +24,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ReguSeeder::class);
         $this->call(RekapSeeder::class);
         $this->call(PosSatpamSeeder::class);
+        $this->call(DetailZonaSeeder::class);
     }
 }

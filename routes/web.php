@@ -39,6 +39,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/createlapshift', 'PergantianShiftController@store')->name('createlapshift');
     Route::post('/pergantian-shift/{id}/update', 'PergantianShiftController@update');
     Route::post('/pergantian-shift/{id}/destroy', 'PergantianShiftController@destroy');
+
+    //pam swakarsa
+    Route::get('/pamswakarsa','PamswakarsaController@index');
+    Route::post('/createpamswakarsa', 'PamswakarsaController@store')->name('createpamswakarsa');
 });
 
 // Route::get('/dashboard', function () {
