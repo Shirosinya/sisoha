@@ -64,10 +64,35 @@
                                                                         <div class="form-group row">
                                                                             <label class="col-sm-3 col-form-label">Wilayah</label>
                                                                             <div class="col-sm-9">
-                                                                                <select name="keterangan" class="form-control" id="keterangan">
-                                                                                <option value="Produksi I">Produksi I</option>
-                                                                                <option value="Pemeliharaan">Pemeliharaan I</option>
+                                                                                <select name="wilayah" class="form-control" id="wilayah">
+                                                                                @foreach($detail_zonas as $detail_zona)
+                                                                                <option value="{{$detail_zona->nama}}">{{$detail_zona->nama}}</option>
+                                                                                @endforeach
                                                                                 </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-sm-3 col-form-label">Petugas</label>
+                                                                            <div class="col-sm-9">
+                                                                                <input required name="nama_petugas" type="text" oninput="this.value = this.value.toUpperCase()" class="form-control" placeholder="Masukkan nama petugas"></input>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-sm-3 col-form-label">PO</label>
+                                                                            <div class="col-sm-9">
+                                                                                <input required name="po" min="0" type="number" class="form-control" placeholder="Jumlah Pekerja Organik.."></input>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-sm-3 col-form-label">PB</label>
+                                                                            <div class="col-sm-9">
+                                                                                <input required name="pb" min="0" type="number" class="form-control" placeholder="Jumlah Pekerja Bantu.."></input>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-sm-3 col-form-label">OK</label>
+                                                                            <div class="col-sm-9">
+                                                                                <input required name="ok" min="0" type="number" class="form-control" placeholder="Orang Kontrak.."></input>
                                                                             </div>
                                                                         </div>
                                                                 </div>
@@ -125,38 +150,48 @@
                                                                                 <div class="modal-body">
                                                                                     <h3 style="margin-top:-15px; margin-bottom:15px;" >REGU A</h3>
                                                                                     <form id="form-update-pamswakarsa" name="form-update-pamswakarsa" method="POST" action="/pamswakarsa/{{$pamswakarsa->id}}/update">
-                                                                                        @csrf
-                                                                                        <input type="hidden" name="regu_id" value="{{$pamswakarsa->regu_id}}">
-                                                                                        <div class="form-group row">
-                                                                                        <label class="col-sm-3 col-form-label">Pukul</label>
-                                                                                            <div class="col-sm-9">
-                                                                                                <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
-                                                                                                    <input name="pukul" type="text" class="form-control" value="{{\Carbon\Carbon::parse($pamswakarsa->pukul)->format('H:i')}}"> <span class="input-group-append"><span class="input-group-text">
-                                                                                                        <i class="fa fa-clock-o"></i></span></span>
-                                                                                                </div>
-                                                                                            </div>
+                                                                                    @csrf
+                                                                                    <input type="hidden" name="regu_id" value="1">
+                                                                                    <div class="form-group row">
+                                                                                        <label class="col-sm-3 col-form-label">Wilayah</label>
+                                                                                        <div class="col-sm-9">
+                                                                                            <select name="wilayah" class="form-control" id="wilayah">
+                                                                                            @foreach($detail_zonas as $detail_zona)
+                                                                                            <option value="{{$detail_zona->nama}}" {{$detail_zona->nama == $pamswakarsa->wilayah ? 'selected' : '' }}>{{$detail_zona->nama}}</option>
+                                                                                            @endforeach
+                                                                                            </select>
                                                                                         </div>
-                                                                                        <div class="form-group row">
-                                                                                            <label class="col-sm-3 col-form-label">Uraian pamswakarsa</label>
-                                                                                            <div class="col-sm-9">
-                                                                                                <textarea required maxlength="150" name="uraian_pamswakarsa" rows="4" type="text" oninput="" class="form-control" placeholder="Masukkan Uraian pamswakarsa">{{$pamswakarsa->uraian_pamswakarsa}}</textarea>
-                                                                                            </div>
+                                                                                    </div>
+                                                                                    <div class="form-group row">
+                                                                                        <label class="col-sm-3 col-form-label">Petugas</label>
+                                                                                        <div class="col-sm-9">
+                                                                                            <input required name="nama_petugas" value="{{$pamswakarsa->nama_petugas}}" type="text" oninput="this.value = this.value.toUpperCase()" class="form-control" placeholder="Masukkan nama petugas"></input>
                                                                                         </div>
-                                                                                        <div class="form-group row">
-                                                                                            <label class="col-sm-3 col-form-label">Keterangan</label>
-                                                                                            <div class="col-sm-9">
-                                                                                                <select name="keterangan" class="form-control" id="keterangan">
-                                                                                                <option value="Aman, Tertib Terkendali" {{ $pamswakarsa->keterangan == 'Aman, Tertib Terkendali' ? 'selected': '' }}>Aman, Tertib Terkendali</option>
-                                                                                                <option value="Tidak Aman, Perlu Tindakan Lanjutan" {{ $pamswakarsa->keterangan == 'Tidak Aman, Perlu Tindakan Lanjutan' ? 'selected': '' }}>Tidak Aman, Perlu Tindakan Lanjutan</option>
-                                                                                                </select>
-                                                                                            </div>
+                                                                                    </div>
+                                                                                    <div class="form-group row">
+                                                                                        <label class="col-sm-3 col-form-label">PO</label>
+                                                                                        <div class="col-sm-9">
+                                                                                            <input required name="po" value="{{$pamswakarsa->po}}" min="0" type="number" class="form-control" placeholder="Jumlah Pekerja Organik.."></input>
                                                                                         </div>
-                                                                                </div>
-                                                                                        <div class="modal-footer">
-                                                                                            <button type="button" class="btn btn-danger light" data-dismiss="modal">Tutup</button>
-                                                                                            <button type="submit" class="btn btn-primary">Update</button>
+                                                                                    </div>
+                                                                                    <div class="form-group row">
+                                                                                        <label class="col-sm-3 col-form-label">PB</label>
+                                                                                        <div class="col-sm-9">
+                                                                                            <input required name="pb" value="{{$pamswakarsa->pb}}" min="0" type="number" class="form-control" placeholder="Jumlah Pekerja Bantu.."></input>
                                                                                         </div>
-                                                                                    </form>
+                                                                                    </div>
+                                                                                    <div class="form-group row">
+                                                                                        <label class="col-sm-3 col-form-label">OK</label>
+                                                                                        <div class="col-sm-9">
+                                                                                            <input required name="ok" value="{{$pamswakarsa->ok}}" min="0" type="number" class="form-control" placeholder="Orang Kontrak.."></input>
+                                                                                        </div>
+                                                                                    </div>
+                                                                            </div>
+                                                                                    <div class="modal-footer">
+                                                                                        <button type="button" class="btn btn-danger light" data-dismiss="modal">Tutup</button>
+                                                                                        <button type="submit" class="btn btn-primary">Ubah</button>
+                                                                                    </div>
+                                                                                </form>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -199,7 +234,7 @@
                                                     </div>
                                                 @endif
                                                 <!-- MODAL TAMBAH B -->
-                                                    <button type="button" class="btn btn-primary btn-md mb-2" data-toggle="modal" data-target="#tambahModalB">+ Tambah Lap. Shift</button>
+                                                    <button type="button" class="btn btn-primary btn-md mb-2" data-toggle="modal" data-target="#tambahModalB">+ Tambah Data</button>
                                                     <div class="modal fade bd-example-modal-lg" id="tambahModalB" tabindex="-1" role="dialog" aria-hidden="true">
                                                         <div class="modal-dialog modal-lg">
                                                             <div class="modal-content">
@@ -214,27 +249,37 @@
                                                                         @csrf
                                                                         <input type="hidden" name="regu_id" value="2">
                                                                         <div class="form-group row">
-                                                                        <label class="col-sm-3 col-form-label">Pukul</label>
+                                                                            <label class="col-sm-3 col-form-label">Wilayah</label>
                                                                             <div class="col-sm-9">
-                                                                                <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
-                                                                                    <input name="pukul" type="text" class="form-control" value="00:00"> <span class="input-group-append"><span class="input-group-text">
-                                                                                        <i class="fa fa-clock-o"></i></span></span>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group row">
-                                                                            <label class="col-sm-3 col-form-label">Uraian pamswakarsa</label>
-                                                                            <div class="col-sm-9">
-                                                                                <textarea required maxlength="150" name="uraian_pamswakarsa" rows="4" type="text" oninput="" class="form-control" placeholder="Masukkan Uraian pamswakarsa"></textarea>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group row">
-                                                                            <label class="col-sm-3 col-form-label">Keterangan</label>
-                                                                            <div class="col-sm-9">
-                                                                                <select name="keterangan" class="form-control" id="keterangan">
-                                                                                <option value="Aman, Tertib Terkendali">Aman, Tertib Terkendali</option>
-                                                                                <option value="Tidak Aman, Perlu Tindakan Lanjutan">Tidak Aman, Perlu Tindakan Lanjutan</option>
+                                                                                <select name="wilayah" class="form-control" id="wilayah">
+                                                                                @foreach($detail_zonas as $detail_zona)
+                                                                                <option value="{{$detail_zona->nama}}">{{$detail_zona->nama}}</option>
+                                                                                @endforeach
                                                                                 </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-sm-3 col-form-label">Petugas</label>
+                                                                            <div class="col-sm-9">
+                                                                                <input required name="nama_petugas" type="text" oninput="this.value = this.value.toUpperCase()" class="form-control" placeholder="Masukkan nama petugas"></input>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-sm-3 col-form-label">PO</label>
+                                                                            <div class="col-sm-9">
+                                                                                <input required name="po" min="0" type="number" class="form-control" placeholder="Jumlah Pekerja Organik.."></input>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-sm-3 col-form-label">PB</label>
+                                                                            <div class="col-sm-9">
+                                                                                <input required name="pb" min="0" type="number" class="form-control" placeholder="Jumlah Pekerja Bantu.."></input>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-sm-3 col-form-label">OK</label>
+                                                                            <div class="col-sm-9">
+                                                                                <input required name="ok" min="0" type="number" class="form-control" placeholder="Orang Kontrak.."></input>
                                                                             </div>
                                                                         </div>
                                                                 </div>
@@ -252,9 +297,11 @@
                                                         <thead>
                                                             <tr>
                                                                 <th class="width80"><strong>#</strong></th>
-                                                                <th><strong>Jam</strong></th>
-                                                                <th><strong>Uraian pamswakarsa</strong></th>
-                                                                <th><strong>Keterangan</strong></th>
+                                                                <th><strong>Wilayah</strong></th>
+                                                                <th><strong>Petugas</strong></th>
+                                                                <th><strong>Pekerja Organik</strong></th>
+                                                                <th><strong>Pekerja Bantu</strong></th>
+                                                                <th><strong>Orang Kontrak</strong></th>
                                                                 <th></th>
                                                             </tr>
                                                         </thead>
@@ -263,9 +310,11 @@
                                                             @foreach($pamswakarsas->where('regu_id','=','2') as $pamswakarsa)
                                                             <tr>
                                                                 <td><strong>{{$no++}}</strong></td>
-                                                                <td>{{\Carbon\Carbon::parse($pamswakarsa->pukul)->format('H:i')}}</td>
-                                                                <td>{{$pamswakarsa->uraian_pamswakarsa}}</td>
-                                                                <td>{{$pamswakarsa->keterangan}}</td>
+                                                                <td>{{$pamswakarsa->wilayah}}</td>
+                                                                <td>{{$pamswakarsa->nama_petugas}}</td>
+                                                                <td>{{$pamswakarsa->po}}</td>
+                                                                <td>{{$pamswakarsa->pb}}</td>
+                                                                <td>{{$pamswakarsa->ok}}</td>
                                                                 <td>
                                                                     <div class="dropdown">
                                                                         <button type="button" class="btn btn-primary light sharp" data-toggle="dropdown">
@@ -275,6 +324,7 @@
                                                                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#editModal{{$pamswakarsa->id}}">Edit</a>
                                                                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#hapusModal{{$pamswakarsa->id}}">Delete</a>
                                                                         </div>
+                                                                    </div>
                                                                         <!-- MODAL UPDATE B -->
                                                                         <div class="modal fade bd-example-modal-lg" id="editModal{{$pamswakarsa->id}}" tabindex="-1" role="dialog" aria-hidden="true">
                                                                             <div class="modal-dialog modal-lg">
@@ -287,38 +337,48 @@
                                                                                     <div class="modal-body">
                                                                                         <h3 style="margin-top:-15px; margin-bottom:15px;" >REGU B</h3>
                                                                                         <form id="form-update-pamswakarsa" name="form-update-pamswakarsa" method="POST" action="/pamswakarsa/{{$pamswakarsa->id}}/update">
-                                                                                            @csrf
-                                                                                            <input type="hidden" name="regu_id" value="{{$pamswakarsa->regu_id}}">
-                                                                                            <div class="form-group row">
-                                                                                            <label class="col-sm-3 col-form-label">Pukul</label>
-                                                                                                <div class="col-sm-9">
-                                                                                                    <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
-                                                                                                        <input name="pukul" type="text" class="form-control" value="{{\Carbon\Carbon::parse($pamswakarsa->pukul)->format('H:i')}}"> <span class="input-group-append"><span class="input-group-text">
-                                                                                                            <i class="fa fa-clock-o"></i></span></span>
-                                                                                                    </div>
-                                                                                                </div>
+                                                                                        @csrf
+                                                                                        <input type="hidden" name="regu_id" value="2">
+                                                                                        <div class="form-group row">
+                                                                                            <label class="col-sm-3 col-form-label">Wilayah</label>
+                                                                                            <div class="col-sm-9">
+                                                                                                <select name="wilayah" class="form-control" id="wilayah">
+                                                                                                @foreach($detail_zonas as $detail_zona)
+                                                                                                <option value="{{$detail_zona->nama}}" {{$detail_zona->nama == $pamswakarsa->wilayah ? 'selected' : '' }}>{{$detail_zona->nama}}</option>
+                                                                                                @endforeach
+                                                                                                </select>
                                                                                             </div>
-                                                                                            <div class="form-group row">
-                                                                                                <label class="col-sm-3 col-form-label">Uraian pamswakarsa</label>
-                                                                                                <div class="col-sm-9">
-                                                                                                    <textarea required maxlength="150" name="uraian_pamswakarsa" rows="4" type="text" oninput="" class="form-control" placeholder="Masukkan Uraian pamswakarsa">{{$pamswakarsa->uraian_pamswakarsa}}</textarea>
-                                                                                                </div>
+                                                                                        </div>
+                                                                                        <div class="form-group row">
+                                                                                            <label class="col-sm-3 col-form-label">Petugas</label>
+                                                                                            <div class="col-sm-9">
+                                                                                                <input required name="nama_petugas" value="{{$pamswakarsa->nama_petugas}}" type="text" oninput="this.value = this.value.toUpperCase()" class="form-control" placeholder="Masukkan nama petugas"></input>
                                                                                             </div>
-                                                                                            <div class="form-group row">
-                                                                                                <label class="col-sm-3 col-form-label">Keterangan</label>
-                                                                                                <div class="col-sm-9">
-                                                                                                    <select name="keterangan" class="form-control" id="keterangan">
-                                                                                                    <option value="Aman, Tertib Terkendali" {{ $pamswakarsa->keterangan == 'Aman, Tertib Terkendali' ? 'selected': '' }}>Aman, Tertib Terkendali</option>
-                                                                                                    <option value="Tidak Aman, Perlu Tindakan Lanjutan" {{ $pamswakarsa->keterangan == 'Tidak Aman, Perlu Tindakan Lanjutan' ? 'selected': '' }}>Tidak Aman, Perlu Tindakan Lanjutan</option>
-                                                                                                    </select>
-                                                                                                </div>
+                                                                                        </div>
+                                                                                        <div class="form-group row">
+                                                                                            <label class="col-sm-3 col-form-label">PO</label>
+                                                                                            <div class="col-sm-9">
+                                                                                                <input required name="po" value="{{$pamswakarsa->po}}" min="0" type="number" class="form-control" placeholder="Jumlah Pekerja Organik.."></input>
                                                                                             </div>
-                                                                                    </div>
-                                                                                            <div class="modal-footer">
-                                                                                                <button type="button" class="btn btn-danger light" data-dismiss="modal">Tutup</button>
-                                                                                                <button type="submit" class="btn btn-primary">Update</button>
+                                                                                        </div>
+                                                                                        <div class="form-group row">
+                                                                                            <label class="col-sm-3 col-form-label">PB</label>
+                                                                                            <div class="col-sm-9">
+                                                                                                <input required name="pb" value="{{$pamswakarsa->pb}}" min="0" type="number" class="form-control" placeholder="Jumlah Pekerja Bantu.."></input>
                                                                                             </div>
-                                                                                        </form>
+                                                                                        </div>
+                                                                                        <div class="form-group row">
+                                                                                            <label class="col-sm-3 col-form-label">OK</label>
+                                                                                            <div class="col-sm-9">
+                                                                                                <input required name="ok" value="{{$pamswakarsa->ok}}" min="0" type="number" class="form-control" placeholder="Orang Kontrak.."></input>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                </div>
+                                                                                        <div class="modal-footer">
+                                                                                            <button type="button" class="btn btn-danger light" data-dismiss="modal">Tutup</button>
+                                                                                            <button type="submit" class="btn btn-primary">Ubah</button>
+                                                                                        </div>
+                                                                                    </form>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -362,7 +422,7 @@
                                                     </div>
                                                 @endif
                                                 <!-- MODAL TAMBAH C -->
-                                                    <button type="button" class="btn btn-primary btn-md mb-2" data-toggle="modal" data-target="#tambahModalC">+ Tambah Lap. Shift</button>
+                                                    <button type="button" class="btn btn-primary btn-md mb-2" data-toggle="modal" data-target="#tambahModalC">+ Tambah Data</button>
                                                     <div class="modal fade bd-example-modal-lg" id="tambahModalC" tabindex="-1" role="dialog" aria-hidden="true">
                                                         <div class="modal-dialog modal-lg">
                                                             <div class="modal-content">
@@ -377,27 +437,37 @@
                                                                         @csrf
                                                                         <input type="hidden" name="regu_id" value="3">
                                                                         <div class="form-group row">
-                                                                        <label class="col-sm-3 col-form-label">Pukul</label>
+                                                                            <label class="col-sm-3 col-form-label">Wilayah</label>
                                                                             <div class="col-sm-9">
-                                                                                <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
-                                                                                    <input name="pukul" type="text" class="form-control" value="00:00"> <span class="input-group-append"><span class="input-group-text">
-                                                                                        <i class="fa fa-clock-o"></i></span></span>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group row">
-                                                                            <label class="col-sm-3 col-form-label">Uraian pamswakarsa</label>
-                                                                            <div class="col-sm-9">
-                                                                                <textarea required maxlength="150" name="uraian_pamswakarsa" rows="4" type="text" oninput="" class="form-control" placeholder="Masukkan Uraian pamswakarsa"></textarea>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group row">
-                                                                            <label class="col-sm-3 col-form-label">Keterangan</label>
-                                                                            <div class="col-sm-9">
-                                                                                <select name="keterangan" class="form-control" id="keterangan">
-                                                                                <option value="Aman, Tertib Terkendali">Aman, Tertib Terkendali</option>
-                                                                                <option value="Tidak Aman, Perlu Tindakan Lanjutan">Tidak Aman, Perlu Tindakan Lanjutan</option>
+                                                                                <select name="wilayah" class="form-control" id="wilayah">
+                                                                                @foreach($detail_zonas as $detail_zona)
+                                                                                <option value="{{$detail_zona->nama}}">{{$detail_zona->nama}}</option>
+                                                                                @endforeach
                                                                                 </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-sm-3 col-form-label">Petugas</label>
+                                                                            <div class="col-sm-9">
+                                                                                <input required name="nama_petugas" type="text" oninput="this.value = this.value.toUpperCase()" class="form-control" placeholder="Masukkan nama petugas"></input>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-sm-3 col-form-label">PO</label>
+                                                                            <div class="col-sm-9">
+                                                                                <input required name="po" min="0" type="number" class="form-control" placeholder="Jumlah Pekerja Organik.."></input>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-sm-3 col-form-label">PB</label>
+                                                                            <div class="col-sm-9">
+                                                                                <input required name="pb" min="0" type="number" class="form-control" placeholder="Jumlah Pekerja Bantu.."></input>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-sm-3 col-form-label">OK</label>
+                                                                            <div class="col-sm-9">
+                                                                                <input required name="ok" min="0" type="number" class="form-control" placeholder="Orang Kontrak.."></input>
                                                                             </div>
                                                                         </div>
                                                                 </div>
@@ -412,12 +482,14 @@
                                                 <!-- MODAL TAMBAH C END -->
                                                 <div class="table-responsive">
                                                     <table class="table table-responsive-md">
-                                                        <thead>
+                                                    <thead>
                                                             <tr>
                                                                 <th class="width80"><strong>#</strong></th>
-                                                                <th><strong>Jam</strong></th>
-                                                                <th><strong>Uraian pamswakarsa</strong></th>
-                                                                <th><strong>Keterangan</strong></th>
+                                                                <th><strong>Wilayah</strong></th>
+                                                                <th><strong>Petugas</strong></th>
+                                                                <th><strong>Pekerja Organik</strong></th>
+                                                                <th><strong>Pekerja Bantu</strong></th>
+                                                                <th><strong>Orang Kontrak</strong></th>
                                                                 <th></th>
                                                             </tr>
                                                         </thead>
@@ -426,9 +498,11 @@
                                                             @foreach($pamswakarsas->where('regu_id','=','3') as $pamswakarsa)
                                                             <tr>
                                                                 <td><strong>{{$no++}}</strong></td>
-                                                                <td>{{\Carbon\Carbon::parse($pamswakarsa->pukul)->format('H:i')}}</td>
-                                                                <td>{{$pamswakarsa->uraian_pamswakarsa}}</td>
-                                                                <td>{{$pamswakarsa->keterangan}}</td>
+                                                                <td>{{$pamswakarsa->wilayah}}</td>
+                                                                <td>{{$pamswakarsa->nama_petugas}}</td>
+                                                                <td>{{$pamswakarsa->po}}</td>
+                                                                <td>{{$pamswakarsa->pb}}</td>
+                                                                <td>{{$pamswakarsa->ok}}</td>
                                                                 <td>
                                                                     <div class="dropdown">
                                                                         <button type="button" class="btn btn-primary light sharp" data-toggle="dropdown">
@@ -452,35 +526,45 @@
                                                                                     <h3 style="margin-top:-15px; margin-bottom:15px;" >REGU C</h3>
                                                                                     <form id="form-update-pamswakarsa" name="form-update-pamswakarsa" method="POST" action="/pamswakarsa/{{$pamswakarsa->id}}/update">
                                                                                         @csrf
-                                                                                        <input type="hidden" name="regu_id" value="{{$pamswakarsa->regu_id}}">
+                                                                                        <input type="hidden" name="regu_id" value="3">
                                                                                         <div class="form-group row">
-                                                                                        <label class="col-sm-3 col-form-label">Pukul</label>
+                                                                                            <label class="col-sm-3 col-form-label">Wilayah</label>
                                                                                             <div class="col-sm-9">
-                                                                                                <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
-                                                                                                    <input name="pukul" type="text" class="form-control" value="{{\Carbon\Carbon::parse($pamswakarsa->pukul)->format('H:i')}}"> <span class="input-group-append"><span class="input-group-text">
-                                                                                                        <i class="fa fa-clock-o"></i></span></span>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div class="form-group row">
-                                                                                            <label class="col-sm-3 col-form-label">Uraian pamswakarsa</label>
-                                                                                            <div class="col-sm-9">
-                                                                                                <textarea required maxlength="150" name="uraian_pamswakarsa" rows="4" type="text" oninput="" class="form-control" placeholder="Masukkan Uraian pamswakarsa">{{$pamswakarsa->uraian_pamswakarsa}}</textarea>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div class="form-group row">
-                                                                                            <label class="col-sm-3 col-form-label">Keterangan</label>
-                                                                                            <div class="col-sm-9">
-                                                                                                <select name="keterangan" class="form-control" id="keterangan">
-                                                                                                <option value="Aman, Tertib Terkendali" {{ $pamswakarsa->keterangan == 'Aman, Tertib Terkendali' ? 'selected': '' }}>Aman, Tertib Terkendali</option>
-                                                                                                <option value="Tidak Aman, Perlu Tindakan Lanjutan" {{ $pamswakarsa->keterangan == 'Tidak Aman, Perlu Tindakan Lanjutan' ? 'selected': '' }}>Tidak Aman, Perlu Tindakan Lanjutan</option>
+                                                                                                <select name="wilayah" class="form-control" id="wilayah">
+                                                                                                @foreach($detail_zonas as $detail_zona)
+                                                                                                <option value="{{$detail_zona->nama}}" {{$detail_zona->nama == $pamswakarsa->wilayah ? 'selected' : '' }}>{{$detail_zona->nama}}</option>
+                                                                                                @endforeach
                                                                                                 </select>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group row">
+                                                                                            <label class="col-sm-3 col-form-label">Petugas</label>
+                                                                                            <div class="col-sm-9">
+                                                                                                <input required name="nama_petugas" value="{{$pamswakarsa->nama_petugas}}" type="text" oninput="this.value = this.value.toUpperCase()" class="form-control" placeholder="Masukkan nama petugas"></input>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group row">
+                                                                                            <label class="col-sm-3 col-form-label">PO</label>
+                                                                                            <div class="col-sm-9">
+                                                                                                <input required name="po" value="{{$pamswakarsa->po}}" min="0" type="number" class="form-control" placeholder="Jumlah Pekerja Organik.."></input>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group row">
+                                                                                            <label class="col-sm-3 col-form-label">PB</label>
+                                                                                            <div class="col-sm-9">
+                                                                                                <input required name="pb" value="{{$pamswakarsa->pb}}" min="0" type="number" class="form-control" placeholder="Jumlah Pekerja Bantu.."></input>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group row">
+                                                                                            <label class="col-sm-3 col-form-label">OK</label>
+                                                                                            <div class="col-sm-9">
+                                                                                                <input required name="ok" value="{{$pamswakarsa->ok}}" min="0" type="number" class="form-control" placeholder="Orang Kontrak.."></input>
                                                                                             </div>
                                                                                         </div>
                                                                                 </div>
                                                                                         <div class="modal-footer">
                                                                                             <button type="button" class="btn btn-danger light" data-dismiss="modal">Tutup</button>
-                                                                                            <button type="submit" class="btn btn-primary">Update</button>
+                                                                                            <button type="submit" class="btn btn-primary">Ubah</button>
                                                                                         </div>
                                                                                     </form>
                                                                             </div>
@@ -525,7 +609,7 @@
                                                     </div>
                                                 @endif
                                                 <!-- MODAL TAMBAH D-->
-                                                    <button type="button" class="btn btn-primary btn-md mb-2" data-toggle="modal" data-target="#tambahModalD">+ Tambah Lap. Shift</button>
+                                                    <button type="button" class="btn btn-primary btn-md mb-2" data-toggle="modal" data-target="#tambahModalD">+ Tambah Data</button>
                                                     <div class="modal fade bd-example-modal-lg" id="tambahModalD" tabindex="-1" role="dialog" aria-hidden="true">
                                                         <div class="modal-dialog modal-lg">
                                                             <div class="modal-content">
@@ -540,27 +624,37 @@
                                                                         @csrf
                                                                         <input type="hidden" name="regu_id" value="4">
                                                                         <div class="form-group row">
-                                                                        <label class="col-sm-3 col-form-label">Pukul</label>
+                                                                            <label class="col-sm-3 col-form-label">Wilayah</label>
                                                                             <div class="col-sm-9">
-                                                                                <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
-                                                                                    <input name="pukul" type="text" class="form-control" value=""> <span class="input-group-append"><span class="input-group-text">
-                                                                                        <i class="fa fa-clock-o"></i></span></span>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group row">
-                                                                            <label class="col-sm-3 col-form-label">Uraian pamswakarsa</label>
-                                                                            <div class="col-sm-9">
-                                                                                <textarea required maxlength="150" name="uraian_pamswakarsa" rows="4" type="text" oninput="" class="form-control" placeholder="Masukkan Uraian pamswakarsa"></textarea>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group row">
-                                                                            <label class="col-sm-3 col-form-label">Keterangan</label>
-                                                                            <div class="col-sm-9">
-                                                                                <select name="keterangan" class="form-control" id="keterangan">
-                                                                                <option value="Aman, Tertib Terkendali">Aman, Tertib Terkendali</option>
-                                                                                <option value="Tidak Aman, Perlu Tindakan Lanjutan">Tidak Aman, Perlu Tindakan Lanjutan</option>
+                                                                                <select name="wilayah" class="form-control" id="wilayah">
+                                                                                @foreach($detail_zonas as $detail_zona)
+                                                                                <option value="{{$detail_zona->nama}}">{{$detail_zona->nama}}</option>
+                                                                                @endforeach
                                                                                 </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-sm-3 col-form-label">Petugas</label>
+                                                                            <div class="col-sm-9">
+                                                                                <input required name="nama_petugas" type="text" oninput="this.value = this.value.toUpperCase()" class="form-control" placeholder="Masukkan nama petugas"></input>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-sm-3 col-form-label">PO</label>
+                                                                            <div class="col-sm-9">
+                                                                                <input required name="po" min="0" type="number" class="form-control" placeholder="Jumlah Pekerja Organik.."></input>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-sm-3 col-form-label">PB</label>
+                                                                            <div class="col-sm-9">
+                                                                                <input required name="pb" min="0" type="number" class="form-control" placeholder="Jumlah Pekerja Bantu.."></input>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-sm-3 col-form-label">OK</label>
+                                                                            <div class="col-sm-9">
+                                                                                <input required name="ok" min="0" type="number" class="form-control" placeholder="Orang Kontrak.."></input>
                                                                             </div>
                                                                         </div>
                                                                 </div>
@@ -575,12 +669,14 @@
                                                 <!-- MODAL TAMBAH D END -->
                                                 <div class="table-responsive">
                                                     <table class="table table-responsive-md">
-                                                        <thead>
+                                                    <thead>
                                                             <tr>
                                                                 <th class="width80"><strong>#</strong></th>
-                                                                <th><strong>Jam</strong></th>
-                                                                <th><strong>Uraian pamswakarsa</strong></th>
-                                                                <th><strong>Keterangan</strong></th>
+                                                                <th><strong>Wilayah</strong></th>
+                                                                <th><strong>Petugas</strong></th>
+                                                                <th><strong>Pekerja Organik</strong></th>
+                                                                <th><strong>Pekerja Bantu</strong></th>
+                                                                <th><strong>Orang Kontrak</strong></th>
                                                                 <th></th>
                                                             </tr>
                                                         </thead>
@@ -589,9 +685,11 @@
                                                             @foreach($pamswakarsas->where('regu_id','=','4') as $pamswakarsa)
                                                             <tr>
                                                                 <td><strong>{{$no++}}</strong></td>
-                                                                <td>{{\Carbon\Carbon::parse($pamswakarsa->pukul)->format('H:i')}}</td>
-                                                                <td>{{$pamswakarsa->uraian_pamswakarsa}}</td>
-                                                                <td>{{$pamswakarsa->keterangan}}</td>
+                                                                <td>{{$pamswakarsa->wilayah}}</td>
+                                                                <td>{{$pamswakarsa->nama_petugas}}</td>
+                                                                <td>{{$pamswakarsa->po}}</td>
+                                                                <td>{{$pamswakarsa->pb}}</td>
+                                                                <td>{{$pamswakarsa->ok}}</td>
                                                                 <td>
                                                                     <div class="dropdown">
                                                                         <button type="button" class="btn btn-primary light sharp" data-toggle="dropdown">
@@ -615,35 +713,45 @@
                                                                                     <h3 style="margin-top:-15px; margin-bottom:15px;" >REGU D</h3>
                                                                                     <form id="form-update-pamswakarsa" name="form-update-pamswakarsa" method="POST" action="/pamswakarsa/{{$pamswakarsa->id}}/update">
                                                                                         @csrf
-                                                                                        <input type="hidden" name="regu_id" value="{{$pamswakarsa->regu_id}}">
+                                                                                        <input type="hidden" name="regu_id" value="4">
                                                                                         <div class="form-group row">
-                                                                                        <label class="col-sm-3 col-form-label">Pukul</label>
+                                                                                            <label class="col-sm-3 col-form-label">Wilayah</label>
                                                                                             <div class="col-sm-9">
-                                                                                                <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
-                                                                                                    <input name="pukul" type="text" class="form-control" value="{{\Carbon\Carbon::parse($pamswakarsa->pukul)->format('H:i')}}"> <span class="input-group-append"><span class="input-group-text">
-                                                                                                        <i class="fa fa-clock-o"></i></span></span>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div class="form-group row">
-                                                                                            <label class="col-sm-3 col-form-label">Uraian pamswakarsa</label>
-                                                                                            <div class="col-sm-9">
-                                                                                                <textarea required maxlength="150" name="uraian_pamswakarsa" rows="4" type="text" oninput="" class="form-control" placeholder="Masukkan Uraian pamswakarsa">{{$pamswakarsa->uraian_pamswakarsa}}</textarea>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div class="form-group row">
-                                                                                            <label class="col-sm-3 col-form-label">Keterangan</label>
-                                                                                            <div class="col-sm-9">
-                                                                                                <select name="keterangan" class="form-control" id="keterangan">
-                                                                                                <option value="Aman, Tertib Terkendali" {{ $pamswakarsa->keterangan == 'Aman, Tertib Terkendali' ? 'selected': '' }}>Aman, Tertib Terkendali</option>
-                                                                                                <option value="Tidak Aman, Perlu Tindakan Lanjutan" {{ $pamswakarsa->keterangan == 'Tidak Aman, Perlu Tindakan Lanjutan' ? 'selected': '' }}>Tidak Aman, Perlu Tindakan Lanjutan</option>
+                                                                                                <select name="wilayah" class="form-control" id="wilayah">
+                                                                                                @foreach($detail_zonas as $detail_zona)
+                                                                                                <option value="{{$detail_zona->nama}}" {{$detail_zona->nama == $pamswakarsa->wilayah ? 'selected' : '' }}>{{$detail_zona->nama}}</option>
+                                                                                                @endforeach
                                                                                                 </select>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group row">
+                                                                                            <label class="col-sm-3 col-form-label">Petugas</label>
+                                                                                            <div class="col-sm-9">
+                                                                                                <input required name="nama_petugas" value="{{$pamswakarsa->nama_petugas}}" type="text" oninput="this.value = this.value.toUpperCase()" class="form-control" placeholder="Masukkan nama petugas"></input>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group row">
+                                                                                            <label class="col-sm-3 col-form-label">PO</label>
+                                                                                            <div class="col-sm-9">
+                                                                                                <input required name="po" value="{{$pamswakarsa->po}}" min="0" type="number" class="form-control" placeholder="Jumlah Pekerja Organik.."></input>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group row">
+                                                                                            <label class="col-sm-3 col-form-label">PB</label>
+                                                                                            <div class="col-sm-9">
+                                                                                                <input required name="pb" value="{{$pamswakarsa->pb}}" min="0" type="number" class="form-control" placeholder="Jumlah Pekerja Bantu.."></input>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group row">
+                                                                                            <label class="col-sm-3 col-form-label">OK</label>
+                                                                                            <div class="col-sm-9">
+                                                                                                <input required name="ok" value="{{$pamswakarsa->ok}}" min="0" type="number" class="form-control" placeholder="Orang Kontrak.."></input>
                                                                                             </div>
                                                                                         </div>
                                                                                 </div>
                                                                                         <div class="modal-footer">
                                                                                             <button type="button" class="btn btn-danger light" data-dismiss="modal">Tutup</button>
-                                                                                            <button type="submit" class="btn btn-primary">Update</button>
+                                                                                            <button type="submit" class="btn btn-primary">Ubah</button>
                                                                                         </div>
                                                                                     </form>
                                                                             </div>

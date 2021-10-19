@@ -5,18 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pamswakarsa extends Model
+class Produksi extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'wilayah',
-        'nama_petugas',
-        'po',
-        'pb',
-        'ok',
-        'regu_id',
+        'nama',
+        'keterangan',
         'zona_id',
+        
     ];
 
     public function zona(){

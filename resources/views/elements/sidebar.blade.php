@@ -22,12 +22,12 @@
                             <li><a href="{!! url('/rekap'); !!}">Rekap</a></li>
                             <li><a href="{!! url('/pergantian-shift'); !!}">Pergantian Shift</a></li>
                             <li><a href="{!! url('/tugas-jaga'); !!}">Tugas Jaga</a></li>
-                            <li><a href="#">Pam Swakarsa</a></li>
-                            <li><a href="#">Produksi</a></li>
-                            <li><a href="#">Pemindahan</a></li>
-                            <li><a href="#">Giat Armada</a></li>
-                            <li><a href="#">Lain-Lain</a></li>
-                            <li><a href="#">Uraian Tugas</a></li>
+                            <li><a href="{!! url('/pamswakarsa'); !!}">Pam Swakarsa</a></li>
+                            <li><a href="{!! url('/produksi'); !!}">Produksi</a></li>
+                            <li><a href="{!! url('/pemindahan'); !!}">Pemindahan</a></li>
+                            <li><a href="{!! url('/giat-armada'); !!}">Giat Armada</a></li>
+                            <li><a href="{!! url('/lain-lain'); !!}">Lain-Lain</a></li>
+                            <li><a href="{!! url('/uraian-tugas'); !!}">Uraian Tugas</a></li>
                         </ul>
                     </li>
                     <li><a class="has-arrow ai-icon" href="{!! url('/regupersonil') !!}" aria-expanded="false">

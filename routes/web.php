@@ -40,9 +40,17 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/pergantian-shift/{id}/update', 'PergantianShiftController@update');
     Route::post('/pergantian-shift/{id}/destroy', 'PergantianShiftController@destroy');
 
-    //pam swakarsa
+    //Pamswakarsa
     Route::get('/pamswakarsa','PamswakarsaController@index');
     Route::post('/createpamswakarsa', 'PamswakarsaController@store')->name('createpamswakarsa');
+    Route::post('/pamswakarsa/{id}/update', 'PamswakarsaController@update');
+    Route::post('/pamswakarsa/{id}/destroy', 'PamswakarsaController@destroy');
+
+    //Produksi
+    Route::get('/produksi','ProduksiController@index');
+    Route::post('/createproduksi', 'ProduksiController@store')->name('createproduksi');
+    Route::post('/produksi/{id}/update', 'ProduksiController@update');
+    Route::post('/produksi/{id}/destroy', 'ProduksiController@destroy');
 });
 
 // Route::get('/dashboard', function () {

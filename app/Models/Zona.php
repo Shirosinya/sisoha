@@ -29,4 +29,9 @@ class Zona extends Model
     {
         return $this->hasMany(Satpam::class);
     }
+
+    public function produksis()
+    {
+        return $this->hasMany(Produksi::class);
+    }
 }
