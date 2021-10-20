@@ -34,4 +34,14 @@ class Zona extends Model
     {
         return $this->hasMany(Produksi::class);
     }
+
+    public function pemindahans()
+    {
+        return $this->hasMany(Pemindahan::class);
+    }
+
+    public function giat_armadas()
+    {
+        return $this->hasMany(GiatArmada::class);
+    }
 }

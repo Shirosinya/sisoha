@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Produksi extends Model
+class GiatArmada extends Model
 {
     use HasFactory;
 
@@ -14,7 +14,6 @@ class Produksi extends Model
         'keterangan',
         'regu_id',
         'zona_id',
-        
     ];
 
     public function zona(){

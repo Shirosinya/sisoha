@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Produksi;
-use App\Models\DetailZona;
+use App\Models\GiatArmada;
 
-class ProduksiController extends Controller
+class GiatArmadaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,16 +15,16 @@ class ProduksiController extends Controller
      */
     public function index()
     {
-        $produksis = Produksi::whereDate('created_at','=',date('Y-m-d'))->get();
+        $giat_armadas = GiatArmada::whereDate('created_at','=',date('Y-m-d'))->get();
         $user_zona = Auth::user()->zona->id;
-        $detail_zonas = DetailZona::where('zona_id', '=', $user_zona)->get();
+        // $detail_zonas = DetailZona::where('zona_id', '=', $user_zona)->get();
         // dd($detail_zonas);
-        $page_title = 'Produksi';
+        $page_title = 'Giat Armada';
         $page_description = 'Some description for the page';
         $logo = "images/petro-logo.png";
         $logoText = "images/petro-text.png";
         $action = __FUNCTION__;
-        return view('jurnal.produksi', compact('page_title', 'page_description', 'action','logo','logoText','produksis', 'detail_zonas'));
+        return view('jurnal.giat-armada', compact('page_title', 'page_description', 'action','logo','logoText','giat_armadas'));
     }
 
     /**
@@ -50,7 +49,7 @@ class ProduksiController extends Controller
         $input = $request->all();
         // $time = Carbon::parse($input['pukul'])->format('H:i');
         // dd($input);
-        Produksi::create([
+        GiatArmada::create([
             'nama' => $input['nama'],
             'keterangan' => $input['keterangan'],
             'regu_id' => $input['regu_id'],
@@ -58,13 +57,13 @@ class ProduksiController extends Controller
         ]);
 
         if($input['regu_id'] == '1'){
-            return redirect('/produksi')->withInput(['tab'=>'tab-reguA']); 
+            return redirect('/giat-armada')->withInput(['tab'=>'tab-reguA']); 
          }elseif($input['regu_id'] == '2'){
-             return redirect('/produksi')->withInput(['tab'=>'tab-reguB']);
+             return redirect('/giat-armada')->withInput(['tab'=>'tab-reguB']);
          }elseif ($input['regu_id'] == '3'){
-             return redirect('/produksi')->withInput(['tab'=>'tab-reguC']);
+             return redirect('/giat-armada')->withInput(['tab'=>'tab-reguC']);
          }else{
-             return redirect('/produksi')->withInput(['tab'=>'tab-reguD']);
+             return redirect('/giat-armada')->withInput(['tab'=>'tab-reguD']);
          }
     }
 
@@ -100,20 +99,20 @@ class ProduksiController extends Controller
     public function update(Request $request, $id)
     {
         $input = $request->all();
-        $produksi = Produksi::where('id',$id)->first();
+        $giat_armada = GiatArmada::where('id',$id)->first();
         // dd($input,$tugas);
-        if($produksi->update([
+        if($giat_armada->update([
             'nama' => $input['nama'],
             'keterangan' => $input['keterangan'],
         ]));
         if($input['regu_id'] == '1'){
-            return redirect('/produksi')->withInput(['tab'=>'tab-reguA'])->with('statusA', 'Data Berhasil Diupdate!'); 
+            return redirect('/giat-armada')->withInput(['tab'=>'tab-reguA'])->with('statusA', 'Data Berhasil Diupdate!'); 
          }elseif($input['regu_id'] == '2'){
-             return redirect('/produksi')->withInput(['tab'=>'tab-reguB'])->with('statusB', 'Data Berhasil Diupdate!');
+             return redirect('/giat-armada')->withInput(['tab'=>'tab-reguB'])->with('statusB', 'Data Berhasil Diupdate!');
          }elseif ($input['regu_id'] == '3') {
-             return redirect('/produksi')->withInput(['tab'=>'tab-reguC'])->with('statusC', 'Data Berhasil Diupdate!');
+             return redirect('/giat-armada')->withInput(['tab'=>'tab-reguC'])->with('statusC', 'Data Berhasil Diupdate!');
          }else{
-             return redirect('/pamswakarsa')->withInput(['tab'=>'tab-reguD'])->with('statusD', 'Data Berhasil Diupdate!');
+             return redirect('/giat-armada')->withInput(['tab'=>'tab-reguD'])->with('statusD', 'Data Berhasil Diupdate!');
          }
     }
 
@@ -125,7 +124,7 @@ class ProduksiController extends Controller
      */
     public function destroy($id)
     {
-        $produksi = Produksi::where('id',$id)->delete();
-        return redirect('/produksi')->with('status', 'Data Berhasil Dihapus');
+        $giat_armada = GiatArmada::where('id',$id)->delete();
+        return redirect('/giat-armada')->with('status', 'Data Berhasil Dihapus');
     }
 }

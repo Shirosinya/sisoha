@@ -5,12 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Produksi extends Model
+class Pemindahan extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'nama',
+        'nama_pemindahan',
+        'gudang',
+        'tujuan',
+        'armada',
         'keterangan',
         'regu_id',
         'zona_id',

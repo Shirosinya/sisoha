@@ -51,6 +51,18 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/createproduksi', 'ProduksiController@store')->name('createproduksi');
     Route::post('/produksi/{id}/update', 'ProduksiController@update');
     Route::post('/produksi/{id}/destroy', 'ProduksiController@destroy');
+
+    //Pemindahan
+    Route::get('/pemindahan','PemindahanController@index');
+    Route::post('/createpemindahan', 'PemindahanController@store')->name('createpemindahan');
+    Route::post('/pemindahan/{id}/update', 'PemindahanController@update');
+    Route::post('/pemindahan/{id}/destroy', 'PemindahanController@destroy');
+
+    //Giat Armada
+    Route::get('/giat-armada','GiatArmadaController@index');
+    Route::post('/createpemindahan', 'GiatArmadaController@store')->name('creategiatarmada');
+    Route::post('/giat-armada/{id}/update', 'GiatArmadaController@update');
+    Route::post('/giat-armada/{id}/destroy', 'GiatArmadaController@destroy');
 });
 
 // Route::get('/dashboard', function () {
