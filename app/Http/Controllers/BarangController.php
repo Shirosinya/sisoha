@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\GiatArmada;
+use App\Models\Barang;
+use App\Models\Inventaris;
 
-class GiatArmadaController extends Controller
+class BarangController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,16 +16,16 @@ class GiatArmadaController extends Controller
      */
     public function index()
     {
-        $giat_armadas = GiatArmada::whereDate('created_at','=',date('Y-m-d'))->get();
         $user_zona = Auth::user()->zona->id;
+        $barangs = Barang::where('zona_id', '=', $user_zona)->get();
         // $detail_zonas = DetailZona::where('zona_id', '=', $user_zona)->get();
         // dd($detail_zonas);
-        $page_title = 'Giat Armada';
+        $page_title = 'Barang';
         $page_description = 'Some description for the page';
         $logo = "images/petro-logo.png";
         $logoText = "images/petro-text.png";
         $action = __FUNCTION__;
-        return view('jurnal.giat-armada', compact('page_title', 'page_description', 'action','logo','logoText','giat_armadas'));
+        return view('barang', compact('page_title', 'page_description', 'action','logo','logoText','barangs'));
     }
 
     /**
@@ -48,23 +49,17 @@ class GiatArmadaController extends Controller
         $user_zona = Auth::user()->zona->id;
         $input = $request->all();
         // $time = Carbon::parse($input['pukul'])->format('H:i');
-        // dd($input);
-        GiatArmada::create([
-            'nama' => $input['nama'],
-            'keterangan' => $input['keterangan'],
-            'regu_id' => $input['regu_id'],
+        $data = Barang::create([
+            'nama_barang' => $input['nama_barang'],
+            'jumlah' => $input['jumlah'],
             'zona_id' => $user_zona,
         ]);
 
-        if($input['regu_id'] == '1'){
-            return redirect('/giat-armada')->withInput(['tab'=>'tab-reguA']); 
-         }elseif($input['regu_id'] == '2'){
-             return redirect('/giat-armada')->withInput(['tab'=>'tab-reguB']);
-         }elseif ($input['regu_id'] == '3'){
-             return redirect('/giat-armada')->withInput(['tab'=>'tab-reguC']);
-         }else{
-             return redirect('/giat-armada')->withInput(['tab'=>'tab-reguD']);
-         }
+        //membuat data inventaris all null except barang_id
+        // Inventaris::create([
+        //     'barang_id' => $data->id,
+        // ]);
+         return redirect('/barang')->with('status','Data Berhasil Ditambah!');
     }
 
     /**
@@ -99,21 +94,14 @@ class GiatArmadaController extends Controller
     public function update(Request $request, $id)
     {
         $input = $request->all();
-        $giat_armada = GiatArmada::where('id',$id)->first();
+        $barang = Barang::where('id',$id)->first();
         // dd($input,$tugas);
-        if($giat_armada->update([
-            'nama' => $input['nama'],
-            'keterangan' => $input['keterangan'],
+        if($barang->update([
+            'nama_barang' => $input['nama_barang'],
+            'jumlah' => $input['jumlah'],
         ]));
-        if($input['regu_id'] == '1'){
-            return redirect('/giat-armada')->withInput(['tab'=>'tab-reguA'])->with('statusA', 'Data Berhasil Diupdate!'); 
-        }elseif($input['regu_id'] == '2'){
-            return redirect('/giat-armada')->withInput(['tab'=>'tab-reguB'])->with('statusB', 'Data Berhasil Diupdate!');
-        }elseif ($input['regu_id'] == '3') {
-            return redirect('/giat-armada')->withInput(['tab'=>'tab-reguC'])->with('statusC', 'Data Berhasil Diupdate!');
-        }else{
-            return redirect('/giat-armada')->withInput(['tab'=>'tab-reguD'])->with('statusD', 'Data Berhasil Diupdate!');
-        }
+
+        return redirect('/barang')->with('status', 'Data Berhasil Diupdate!');
     }
 
     /**
@@ -124,7 +112,7 @@ class GiatArmadaController extends Controller
      */
     public function destroy($id)
     {
-        $giat_armada = GiatArmada::where('id',$id)->delete();
-        return redirect('/giat-armada')->with('status', 'Data Berhasil Dihapus');
+        $barang = Barang::where('id',$id)->delete();
+        return redirect('/barang')->with('status', 'Data Berhasil Dihapus');
     }
 }

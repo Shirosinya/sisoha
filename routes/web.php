@@ -60,9 +60,27 @@ Route::group(['middleware' => ['auth']], function () {
 
     //Giat Armada
     Route::get('/giat-armada','GiatArmadaController@index');
-    Route::post('/createpemindahan', 'GiatArmadaController@store')->name('creategiatarmada');
+    Route::post('/creategiatarmada', 'GiatArmadaController@store')->name('creategiatarmada');
     Route::post('/giat-armada/{id}/update', 'GiatArmadaController@update');
     Route::post('/giat-armada/{id}/destroy', 'GiatArmadaController@destroy');
+
+    //Barang
+    Route::get('/barang','BarangController@index');
+    Route::post('/createbarang', 'BarangController@store')->name('createbarang');
+    Route::post('/barang/{id}/update', 'BarangController@update');
+    Route::post('/barang/{id}/destroy', 'BarangController@destroy');
+
+    //Inventaris
+    Route::get('/inventaris','InventarisController@index');
+    Route::post('/createinventaris', 'InventarisController@store')->name('createinventaris');
+    Route::post('/inventaris/{id}/update', 'InventarisController@update');
+    Route::post('/inventaris/{id}/destroy', 'InventarisController@destroy');
+
+    //Rekap Tugas
+    Route::get('/rekap-tugas','RekapTugasController@index');
+    Route::post('/createrekaptugas', 'RekapTugasController@store')->name('createrekaptugas');
+    Route::post('/rekap-tugas/{id}/update', 'RekapTugasController@update');
+    Route::post('/rekap-tugas/{id}/destroy', 'RekapTugasController@destroy');
 });
 
 // Route::get('/dashboard', function () {

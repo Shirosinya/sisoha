@@ -26,13 +26,18 @@
                             <li><a href="{!! url('/produksi'); !!}">Produksi</a></li>
                             <li><a href="{!! url('/pemindahan'); !!}">Pemindahan</a></li>
                             <li><a href="{!! url('/giat-armada'); !!}">Giat Armada</a></li>
-                            <li><a href="{!! url('/lain-lain'); !!}">Lain-Lain</a></li>
+                            <li><a href="{!! url('/inventaris'); !!}">Inventaris</a></li>
                             <li><a href="{!! url('/uraian-tugas'); !!}">Uraian Tugas</a></li>
                         </ul>
                     </li>
                     <li><a class="has-arrow ai-icon" href="{!! url('/regupersonil') !!}" aria-expanded="false">
 							<i class="la la-group"></i>
 							<span class="nav-text">Personil dan Regu</span>
+						</a>
+                    </li>
+					<li><a class="has-arrow ai-icon" href="{!! url('/barang') !!}" aria-expanded="false">
+							<i class="la la-box"></i>
+							<span class="nav-text">Data Barang</span>
 						</a>
                     </li>
 				<div class="copyright">

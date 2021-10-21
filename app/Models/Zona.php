@@ -44,4 +44,9 @@ class Zona extends Model
     {
         return $this->hasMany(GiatArmada::class);
     }
+
+    public function barangs()
+    {
+        return $this->hasMany(Barang::class);
+    }
 }
