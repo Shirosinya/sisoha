@@ -15,7 +15,12 @@ class CreateRekapTugassTable extends Migration
     {
         Schema::create('rekap_tugass', function (Blueprint $table) {
             $table->id();
+            $table->text('uraian_tugas');
+            $table->time('mulai');
+            $table->time('selesai');
+            $table->string('keterangan')->nullable();
             $table->timestamps();
+            $table->foreignId('satpam_id');
         });
     }
 

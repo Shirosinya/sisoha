@@ -27,7 +27,7 @@
                             <li><a href="{!! url('/pemindahan'); !!}">Pemindahan</a></li>
                             <li><a href="{!! url('/giat-armada'); !!}">Giat Armada</a></li>
                             <li><a href="{!! url('/inventaris'); !!}">Inventaris</a></li>
-                            <li><a href="{!! url('/uraian-tugas'); !!}">Uraian Tugas</a></li>
+                            <li><a href="{!! url('/rekap-tugas'); !!}">Uraian Tugas</a></li>
                         </ul>
                     </li>
                     <li><a class="has-arrow ai-icon" href="{!! url('/regupersonil') !!}" aria-expanded="false">

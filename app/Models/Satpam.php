@@ -37,9 +37,14 @@ class Satpam extends Model
         return $this->belongsTo(Zona::class);
     }
 
-    public function pos_satpam()
+    public function pos_satpams()
     {
         return $this->hasMany(PosSatpam::class);
+    }
+
+    public function rekap_tugass()
+    {
+        return $this->hasMany(RekapTugas::class);
     }
 
     // public function pos()
