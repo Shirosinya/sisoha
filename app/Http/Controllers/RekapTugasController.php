@@ -25,11 +25,11 @@ class RekapTugasController extends Controller
         // {
         //     $query->where('zona_id',$user_zona );
         // }->get();
-        $rekap_tugass = RekapTugas::whereDate('created_at',date('Y-m-d'))
-        ->whereHas('satpam', function ($query) use ($user_zona) 
-        {
-            $query->where('zona_id', $user_zona);
-        })->get();
+        // $rekap_tugass = RekapTugas::whereDate('created_at',date('Y-m-d'))
+        // ->whereHas('satpam', function ($query) use ($user_zona) 
+        // {
+        //     $query->where('zona_id', $user_zona);
+        // })->get();
 
         $rekap_tugassA = RekapTugas::whereDate('created_at',date('Y-m-d'))
         ->whereHas('satpam', function ($query) use ($user_zona) 
@@ -61,7 +61,7 @@ class RekapTugasController extends Controller
         $logo = "images/petro-logo.png";
         $logoText = "images/petro-text.png";
         $action = __FUNCTION__;
-        return view('jurnal.rekap-tugas', compact('page_title', 'page_description', 'action','logo','logoText','rekap_tugass',
+        return view('jurnal.rekap-tugas', compact('page_title', 'page_description', 'action','logo','logoText',
         'satpams', 'rekap_tugassA', 'rekap_tugassB', 'rekap_tugassC', 'rekap_tugassD'));
     }
 

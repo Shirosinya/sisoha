@@ -226,100 +226,55 @@ class RegupersonilController extends Controller
     {   
         if(!is_null($request->datepicker)){
             $date = $request->datepicker;
-            // Hit this url http://shifter.test/api/find?year=2045&month=12&day=27&group=D
-            // to fetch data at Desember 27th 2045, Group D
-            $date = $request->datepicker; //ini ngereturn YYYY-mm-dd (js value) gabisa di dd harus var_dump
-            $str_arr = explode("-",$date); //misahin year month day
-            $year  = $str_arr[0] ?? date('Y');
-            $month = $str_arr[1] ?? date('n');
-            $day   = $str_arr[2] ?? date('d');
-            $day = ltrim($day, '0');
-            $group = null;
-            $code = 400;
-            if($year < 2020){
-                $code = 400;
-                $msg = "year must be greater than 2020";
-            }
-
-            $schedules = generate_schedule($year);
-            if( is_null($group) ){
-                $code = 200;
-                $data = $schedules[int_to_month($month)][$day]["shift"];
-                $msg = "Success fetch data shift on selected day";
-            }else{
-                $code = 200;
-                $data = translate_pattern( $schedules[int_to_month($month)][$day]["shift"][$group] );
-                $msg  = "Success fetch data of group $group on selected day";
-            }
-            $content = [
-                "success" => $code==200? True:False,
-                "data" => $data ?? null,
-                "message" => $msg ?? null,
-            ];
-            $shifts = array($content['data']['A'],$content['data']['B'],$content['data']['C'],$content['data']['D']);
-            $reg = Regu::all();
-            // return "ini = ".strtoupper($shifts[0]);
-            foreach($reg as $regu){
-                $id = $regu->id;
-                $index = $regu->id-1;
-                if($shifts[$index]=="p"){
-                    $value = '1';
-                }elseif($shifts[$index]=="s"){
-                    $value = '2';
-                }elseif($shifts[$index]=="m"){
-                    $value = '3';
-                }else{$value = '4';}
-                $store_shift = Regu::where('id',$id) //updating shift_id
-                    ->update(['shift_id'=>$value]);
-                // dd($shifts);
-            }
         }else{
             $date = date('Y-m-d');
-            $shifts = array();
-            $reg = Regu::all();
-            $str_arr = explode("-",$date); //misahin year month day
-            $year  = $str_arr[0] ?? date('Y');
-            $month = $str_arr[1] ?? date('n');
-            $day   = $str_arr[2] ?? date('d');
-            $day = ltrim($day, '0');
-            $group = null;
+        }
+        // Hit this url http://shifter.test/api/find?year=2045&month=12&day=27&group=D
+        // to fetch data at Desember 27th 2045, Group D
+        // $date = $request->datepicker; //ini ngereturn YYYY-mm-dd (js value) gabisa di dd harus var_dump
+        $str_arr = explode("-",$date); //misahin year month day
+        $year  = $str_arr[0] ?? date('Y');
+        $month = $str_arr[1] ?? date('n');
+        $day   = $str_arr[2] ?? date('d');
+        $day = ltrim($day, '0');
+        $group = null;
+        $code = 400;
+        if($year < 2020){
             $code = 400;
-            if($year < 2020){
-                $code = 400;
-                $msg = "year must be greater than 2020";
-            }
+            $msg = "year must be greater than 2020";
+        }
 
-            $schedules = generate_schedule($year);
-            if( is_null($group) ){
-                $code = 200;
-                $data = $schedules[int_to_month($month)][$day]["shift"];
-                $msg = "Success fetch data shift on selected day";
-            }else{
-                $code = 200;
-                $data = translate_pattern( $schedules[int_to_month($month)][$day]["shift"][$group] );
-                $msg  = "Success fetch data of group $group on selected day";
-            }
-            $content = [
-                "success" => $code==200? True:False,
-                "data" => $data ?? null,
-                "message" => $msg ?? null,
-            ];
-            $shifts = array($content['data']['A'],$content['data']['B'],$content['data']['C'],$content['data']['D']);
-            $reg = Regu::all();
-            // return "ini = ".strtoupper($shifts[0]);
-            foreach($reg as $regu){
-                $id = $regu->id;
-                $index = $regu->id-1;
-                if($shifts[$index]=="p"){
-                    $value = '1';
-                }elseif($shifts[$index]=="s"){
-                    $value = '2';
-                }elseif($shifts[$index]=="m"){
-                    $value = '3';
-                }else{$value = '4';}
-                $store_shift = Regu::where('id',$id) //updating shift_id
-                    ->update(['shift_id'=>$value]);
-            }
+        $schedules = generate_schedule($year);
+        if( is_null($group) ){
+            $code = 200;
+            $data = $schedules[int_to_month($month)][$day]["shift"];
+            $msg = "Success fetch data shift on selected day";
+        }else{
+            $code = 200;
+            $data = translate_pattern( $schedules[int_to_month($month)][$day]["shift"][$group] );
+            $msg  = "Success fetch data of group $group on selected day";
+        }
+        $content = [
+            "success" => $code==200? True:False,
+            "data" => $data ?? null,
+            "message" => $msg ?? null,
+        ];
+        $shifts = array($content['data']['A'],$content['data']['B'],$content['data']['C'],$content['data']['D']);
+        $reg = Regu::all();
+        // return "ini = ".strtoupper($shifts[0]);
+        foreach($reg as $regu){
+            $id = $regu->id;
+            $index = $regu->id-1;
+            if($shifts[$index]=="p"){
+                $value = '1';
+            }elseif($shifts[$index]=="s"){
+                $value = '2';
+            }elseif($shifts[$index]=="m"){
+                $value = '3';
+            }else{$value = '4';}
+            $store_shift = Regu::where('id',$id) //updating shift_id
+                ->update(['shift_id'=>$value]);
+            // dd($shifts);
         }
 
         $leveluser = Auth::user()->level_user; //mengambil level_user

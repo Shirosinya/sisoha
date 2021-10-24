@@ -15,8 +15,8 @@ class GiatArmadaController extends Controller
      */
     public function index()
     {
-        $giat_armadas = GiatArmada::whereDate('created_at','=',date('Y-m-d'))->get();
         $user_zona = Auth::user()->zona->id;
+        $giat_armadas = GiatArmada::whereDate('created_at','=',date('Y-m-d'))->where('zona_id', '=', $user_zona)->get();
         // $detail_zonas = DetailZona::where('zona_id', '=', $user_zona)->get();
         // dd($detail_zonas);
         $page_title = 'Giat Armada';

@@ -399,11 +399,6 @@
                                                                     <td colspan="4" style="text-align:center;">KAJAGA</td>
                                                                 @elseif($reguC->jabatan == 'wakajaga')
                                                                     <td colspan="4" style="text-align:center;">WAKAJAGA</td>
-                                                                @elseif($reguC->pos_satpam->isEmpty())
-                                                                    <td style="text-align:center;">-</td>
-                                                                    <td style="text-align:center;">-</td>
-                                                                    <td style="text-align:center;">-</td>
-                                                                    <td style="text-align:center;">-</td>
                                                                 @else
                                                                     @if($pos_satpams->contains('satpam_id', $reguC->id))
                                                                         @foreach($pos_satpams->where('satpam_id', $reguC->id) as $ps)
@@ -567,11 +562,6 @@
                                                                     <td colspan="4" style="text-align:center;">KAJAGA</td>
                                                                 @elseif($reguD->jabatan == 'wakajaga')
                                                                     <td colspan="4" style="text-align:center;">WAKAJAGA</td>
-                                                                @elseif($reguD->pos_satpam->isEmpty())
-                                                                    <td style="text-align:center;">-</td>
-                                                                    <td style="text-align:center;">-</td>
-                                                                    <td style="text-align:center;">-</td>
-                                                                    <td style="text-align:center;">-</td>
                                                                 @else
                                                                     @if($pos_satpams->contains('satpam_id', $reguD->id))
                                                                         @foreach($pos_satpams->where('satpam_id', $reguD->id) as $ps)

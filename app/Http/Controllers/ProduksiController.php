@@ -16,8 +16,8 @@ class ProduksiController extends Controller
      */
     public function index()
     {
-        $produksis = Produksi::whereDate('created_at','=',date('Y-m-d'))->get();
         $user_zona = Auth::user()->zona->id;
+        $produksis = Produksi::whereDate('created_at','=',date('Y-m-d'))->where('zona_id', '=', $user_zona)->get();
         $detail_zonas = DetailZona::where('zona_id', '=', $user_zona)->get();
         // dd($detail_zonas);
         $page_title = 'Produksi';

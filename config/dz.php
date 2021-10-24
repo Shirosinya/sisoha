@@ -306,7 +306,6 @@ return [
 					'js/plugins-init/datatables.init.js',
 					'vendor/morris/raphael-min.js',
 					'vendor/morris/morris.min.js',
-					'js/plugins-init/morris-init2.js',
 					'js/deznav-init.js',
 
 					'vendor/moment/moment.min.js',

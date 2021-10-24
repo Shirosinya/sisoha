@@ -23,14 +23,17 @@ Auth::routes();
 // Route::get('/login', 'OmahadminController@page_login')->name('login');
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', 'HomeController@index')->name('home');
+
+    //Regu dan Personil
     Route::get('/regupersonil', 'RegupersonilController@index');
     Route::post('/createpersonil', 'RegupersonilController@store')->name('createpersonil');
     Route::post('/regupersonil/{id}/update','RegupersonilController@update');
     Route::post('/regupersonil/{id}/destroy','RegupersonilController@destroy');
     Route::GET('/regupersonil/{datepicker}','RegupersonilController@index');
 
-    //rekap
-    Route::get('/rekap', 'RekapController@index');
+    //Rekap
+    Route::get('/rekap','RekapController@index');
+    Route::get('/rekap/{datepicker}','RekapController@index');
     
     //tugas jaga
     Route::get('/tugas-jaga', 'TugasJagaController@index');
@@ -83,6 +86,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/createrekaptugas', 'RekapTugasController@store')->name('createrekaptugas');
     Route::post('/rekap-tugas/{id}/update', 'RekapTugasController@update');
     Route::post('/rekap-tugas/{id}/destroy', 'RekapTugasController@destroy');
+
 });
 
 // Route::get('/dashboard', function () {
