@@ -42,7 +42,7 @@
                     </li>
 				<div class="copyright">
 					<p><strong>Sisoha</strong> ©All Rights Reserved 2021</p>
-					<p>Developed by Fernaldi W. & DesignZone</p>
+					<p>Developed by Fernaldi W.</p>
 				</div>
 			</div>
         </div>

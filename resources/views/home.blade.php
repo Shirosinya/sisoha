@@ -70,10 +70,8 @@
 												<p class="fs-18 mb-0 text-black font-w500">Total Personil Semua Zona</p>
 												<span class="fs-13">...</span>
 											</div>
-											<div class="d-inline-block position-relative donut-chart-sale">
-												<span class="donut1" data-peity='{ "fill": ["rgb(55, 209, 90)", "rgba(236, 236, 236, 1)"],   "innerRadius": 38, "radius": 10}'>7/8</span>
-												<small class="text-success">90%</small>
-												<span class="circle bgl-success"></span>
+											<div class="d-inline-block position-relative" >
+												<i class="la la-user" style="width:100px; height:100px;"></i>
 											</div>
 										</div>
 									</div>
