@@ -34,6 +34,7 @@ Route::group(['middleware' => ['auth']], function () {
     //Rekap
     Route::get('/rekap','RekapController@index');
     Route::get('/rekap/{datepicker}','RekapController@index');
+    Route::get('/export-pdf/{date}/{reguid}','RekapController@exportPdf')->name('export-pdf');
     
     //tugas jaga
     Route::get('/tugas-jaga', 'TugasJagaController@index');
