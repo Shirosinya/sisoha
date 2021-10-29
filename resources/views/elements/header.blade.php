@@ -2,12 +2,13 @@
             Header start
         ***********************************-->
         <div class="header">
-            <div class="header-content">
+            <div class="header-content"  style="background-color: rgba(219,222,243, 0.2);">
                 <nav class="navbar navbar-expand">
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
                             <div class="dashboard_bar">
-                                <div class="search_bar dropdown">
+                                <img src="images/Sintasian.png" alt="sintasian" style="width: 250px; height: 70px;">
+                                <!-- <div class="search_bar dropdown">
                                 <div class="dropdown-menu p-0 m-0">
                                     <form>
                                         <input class="form-control" type="search" placeholder="Search Here" aria-label="Search">
@@ -18,14 +19,14 @@
 										<path d="M23.7871 22.7761L17.9548 16.9437C19.5193 15.145 20.4665 12.7982 20.4665 10.2333C20.4665 4.58714 15.8741 0 10.2333 0C4.58714 0 0 4.59246 0 10.2333C0 15.8741 4.59246 20.4665 10.2333 20.4665C12.7982 20.4665 15.145 19.5193 16.9437 17.9548L22.7761 23.7871C22.9144 23.9255 23.1007 24 23.2816 24C23.4625 24 23.6488 23.9308 23.7871 23.7871C24.0639 23.5104 24.0639 23.0528 23.7871 22.7761ZM1.43149 10.2333C1.43149 5.38004 5.38004 1.43681 10.2279 1.43681C15.0812 1.43681 19.0244 5.38537 19.0244 10.2333C19.0244 15.0812 15.0812 19.035 10.2279 19.035C5.38004 19.035 1.43149 15.0865 1.43149 10.2333Z" fill="#009E3C"/>
 									</svg>
                                 </span>
-                            </div>
+                            </div> -->
                             </div>
                         </div>
 
                         <ul class="navbar-nav header-right">
                             <li class="nav-item dropdown header-profile">
                                 <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-									<div class="header-info">
+									<div class="header-info" style="border: none;">
 										<span class="text-black">{{Auth::user()->nama}}</span>
 										<p class="fs-12 mb-0">{{Auth::user()->email}}</p>
 									</div>
