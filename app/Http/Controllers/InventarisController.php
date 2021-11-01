@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Barang;
 use App\Models\Inventaris;
+use App\Models\Regu;
 
 use Illuminate\Http\Request;
 
@@ -26,7 +27,14 @@ class InventarisController extends Controller
         $logo = "images/petro-logo.png";
         $logoText = "images/petro-text.png";
         $action = __FUNCTION__;
-        return view('jurnal.inventaris', compact('page_title', 'page_description', 'action','logo','logoText','inventariss','barangs'));
+
+        //regu shift
+        $regus_active = Regu::where('shift_id', '!=', '4')->get();
+        $regusArr = array();
+        foreach($regus_active as $regu){
+            array_push($regusArr,$regu->id);
+        }
+        return view('jurnal.inventaris', compact('page_title', 'page_description', 'action','logo','logoText','inventariss','barangs', 'regusArr'));
     }
 
     /**

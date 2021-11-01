@@ -26,7 +26,14 @@ class PergantianShiftController extends Controller
         $logo = "images/petro-logo.png";
         $logoText = "images/petro-text.png";
         $action = __FUNCTION__;
-        return view('jurnal.pergantianshift', compact('page_title', 'page_description', 'action','logo','logoText','tugass', 'zonaid'));
+
+        //regu shift
+        $regus_active = Regu::where('shift_id', '!=', '4')->get();
+        $regusArr = array();
+        foreach($regus_active as $regu){
+            array_push($regusArr,$regu->id);
+        }
+        return view('jurnal.pergantianshift', compact('page_title', 'page_description', 'action','logo','logoText','tugass', 'zonaid', 'regusArr'));
     }
 
     /**

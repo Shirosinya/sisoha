@@ -47,7 +47,9 @@
                                                     </div>
                                                 @endif
                                                 <!-- MODAL TAMBAH A-->
+                                                    @if(in_array('1', $regusArr))
                                                     <button type="button" class="btn btn-primary btn-md mb-2" data-toggle="modal" data-target="#tambahModalA">+ Tambah Lap. Shift</button>
+                                                    @endif
                                                     <div class="modal fade bd-example-modal-lg" id="tambahModalA" tabindex="-1" role="dialog" aria-hidden="true">
                                                         <div class="modal-dialog modal-lg">
                                                             <div class="modal-content">
@@ -211,7 +213,9 @@
                                                     </div>
                                                 @endif
                                                 <!-- MODAL TAMBAH B -->
+                                                    @if(in_array('2', $regusArr))
                                                     <button type="button" class="btn btn-primary btn-md mb-2" data-toggle="modal" data-target="#tambahModalB">+ Tambah Lap. Shift</button>
+                                                    @endif
                                                     <div class="modal fade bd-example-modal-lg" id="tambahModalB" tabindex="-1" role="dialog" aria-hidden="true">
                                                         <div class="modal-dialog modal-lg">
                                                             <div class="modal-content">
@@ -375,7 +379,9 @@
                                                     </div>
                                                 @endif
                                                 <!-- MODAL TAMBAH C -->
+                                                    @if(in_array('3', $regusArr))
                                                     <button type="button" class="btn btn-primary btn-md mb-2" data-toggle="modal" data-target="#tambahModalC">+ Tambah Lap. Shift</button>
+                                                    @endif
                                                     <div class="modal fade bd-example-modal-lg" id="tambahModalC" tabindex="-1" role="dialog" aria-hidden="true">
                                                         <div class="modal-dialog modal-lg">
                                                             <div class="modal-content">
@@ -538,7 +544,9 @@
                                                     </div>
                                                 @endif
                                                 <!-- MODAL TAMBAH D-->
+                                                    @if(in_array('4', $regusArr))
                                                     <button type="button" class="btn btn-primary btn-md mb-2" data-toggle="modal" data-target="#tambahModalD">+ Tambah Lap. Shift</button>
+                                                    @endif
                                                     <div class="modal fade bd-example-modal-lg" id="tambahModalD" tabindex="-1" role="dialog" aria-hidden="true">
                                                         <div class="modal-dialog modal-lg">
                                                             <div class="modal-content">

@@ -94,7 +94,7 @@
                                                                 <td style="text-align:center;">{{$reguA->status}}</td>
                                                                 @if($reguA->jabatan == 'kajaga' || $reguA->jabatan == 'wakajaga')
                                                                 <td style="text-align:center;"></td>
-                                                                @else
+                                                                @elseif(in_array('1', $regusArr))
                                                                 <td style="text-align:center;">
                                                                     <div class="d-flex">
                                                                         <button type="button" style="border:none;" data-toggle="modal" data-target="#editModal{{$reguA->id}}">
@@ -257,7 +257,7 @@
                                                                 <td style="text-align:center;">{{$reguB->status}}</td>
                                                                 @if($reguB->jabatan == 'kajaga' || $reguB->jabatan == 'wakajaga')
                                                                 <td style="text-align:center;"></td>
-                                                                @else
+                                                                @elseif(in_array('2', $regusArr))
                                                                 <td style="text-align:center;">
                                                                     <div class="d-flex">
                                                                         <button type="button" style="border:none;" data-toggle="modal" data-target="#editModal{{$reguB->id}}">
@@ -420,7 +420,7 @@
                                                                 <td style="text-align:center;">{{$reguC->status}}</td>
                                                                 @if($reguC->jabatan == 'kajaga' || $reguC->jabatan == 'wakajaga')
                                                                 <td style="text-align:center;"></td>
-                                                                @else
+                                                                @elseif(in_array('3', $regusArr))
                                                                 <td>
                                                                     <div class="d-flex">
                                                                         <button type="button" style="border:none;" data-toggle="modal" data-target="#editModal{{$reguC->id}}">
@@ -583,7 +583,7 @@
                                                                 <td style="text-align:center;">{{$reguD->status}}</td>
                                                                 @if($reguD->jabatan == 'kajaga' || $reguD->jabatan == 'wakajaga')
                                                                 <td style="text-align:center;"></td>
-                                                                @else
+                                                                @elseif(in_array('4', $regusArr))
                                                                 <td style="text-align:center;">
                                                                     <div class="d-flex">
                                                                         <button type="button" style="border:none;" data-toggle="modal" data-target="#editModal{{$reguD->id}}">

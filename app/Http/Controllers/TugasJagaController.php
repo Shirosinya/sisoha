@@ -78,7 +78,7 @@ class TugasJagaController extends Controller
             $satpams = Satpam::all();
         }else{                      //else, akan ditampilkan sesuai zona masing2 akun
             $userzona = Auth::user()->zona->id;
-            $satpams = Satpam::all()->where('zona_id',$userzona);
+            $satpams = Satpam::orderBy('jabatan', 'ASC')->where('zona_id',$userzona)->get();
         }
 
         $poss = Pos::all()->where('zona_id', '=', $userzona);
@@ -120,6 +120,7 @@ class TugasJagaController extends Controller
         foreach ($reguD_arr as $reguD){
             $shiftD =$reguD->regu->shift->id;
         }
+        // dd($satpams);
 
         //mengambil detail shift dari shift hari ini
         $detail_shiftA = DetailShift::all()->where('shift_id','=',$shiftA);
@@ -130,10 +131,17 @@ class TugasJagaController extends Controller
         //mengambil data pos satpam hari ini
         $pos_satpams = PosSatpam::whereDate('created_at','=',date('Y-m-d'))->get();
         // dd($pos_satpams);
+
+        //regu shift
+        $regus_active = Regu::where('shift_id', '!=', '4')->get();
+        $regusArr = array();
+        foreach($regus_active as $regu){
+            array_push($regusArr,$regu->id);
+        }
      
         return view('jurnal.tugas-jaga', compact('page_title', 'page_description','shiftA','shiftB','shiftC','shiftD',
         'action','logo','logoText','poss','satpams','reguA_arr','reguB_arr','reguC_arr','reguD_arr', 'detail_shiftA',
-        'detail_shiftB','detail_shiftC','detail_shiftD','pos_satpams'));
+        'detail_shiftB','detail_shiftC','detail_shiftD','pos_satpams', 'regusArr'));
     }
 
     /**

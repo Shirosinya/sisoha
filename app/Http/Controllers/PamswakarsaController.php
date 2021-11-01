@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Pamswakarsa;
 use App\Models\DetailZona;
+use App\Models\Regu;
 
 class PamswakarsaController extends Controller
 {
@@ -25,7 +26,14 @@ class PamswakarsaController extends Controller
         $logo = "images/petro-logo.png";
         $logoText = "images/petro-text.png";
         $action = __FUNCTION__;
-        return view('jurnal.pamswakarsa', compact('page_title', 'page_description', 'action','logo','logoText','pamswakarsas', 'detail_zonas'));
+
+        //regu shift
+        $regus_active = Regu::where('shift_id', '!=', '4')->get();
+        $regusArr = array();
+        foreach($regus_active as $regu){
+            array_push($regusArr,$regu->id);
+        }
+        return view('jurnal.pamswakarsa', compact('page_title', 'page_description', 'action','logo','logoText','pamswakarsas', 'detail_zonas', 'regusArr'));
     }
 
     /**

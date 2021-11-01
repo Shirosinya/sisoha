@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use App\Models\RekapTugas;
 use App\Models\Satpam;
+use App\Models\Regu;
 
 
 class RekapTugasController extends Controller
@@ -61,8 +62,15 @@ class RekapTugasController extends Controller
         $logo = "images/petro-logo.png";
         $logoText = "images/petro-text.png";
         $action = __FUNCTION__;
+
+        //regu shift
+        $regus_active = Regu::where('shift_id', '!=', '4')->get();
+        $regusArr = array();
+        foreach($regus_active as $regu){
+            array_push($regusArr,$regu->id);
+        }
         return view('jurnal.rekap-tugas', compact('page_title', 'page_description', 'action','logo','logoText',
-        'satpams', 'rekap_tugassA', 'rekap_tugassB', 'rekap_tugassC', 'rekap_tugassD'));
+        'satpams', 'rekap_tugassA', 'rekap_tugassB', 'rekap_tugassC', 'rekap_tugassD', 'regusArr'));
     }
 
     /**

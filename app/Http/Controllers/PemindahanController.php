@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Pemindahan;
+use App\Models\Regu;
 
 class PemindahanController extends Controller
 {
@@ -24,7 +25,14 @@ class PemindahanController extends Controller
         $logo = "images/petro-logo.png";
         $logoText = "images/petro-text.png";
         $action = __FUNCTION__;
-        return view('jurnal.pemindahan', compact('page_title', 'page_description', 'action','logo','logoText','pemindahans'));
+
+        //regu shift
+        $regus_active = Regu::where('shift_id', '!=', '4')->get();
+        $regusArr = array();
+        foreach($regus_active as $regu){
+            array_push($regusArr,$regu->id);
+        }
+        return view('jurnal.pemindahan', compact('page_title', 'page_description', 'action','logo','logoText','pemindahans', 'regusArr'));
     }
 
     /**
