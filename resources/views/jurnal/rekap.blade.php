@@ -51,11 +51,9 @@
                                     <div class="tab-content">
                                         <div class="tab-pane fade show active" id="tab-reguA" role="tabpanel">
                                             <div class="pt-4">
-                                                @if(in_array('1', $regusArr))
                                                 <div class="col-lg-4">
                                                     <a href="/export-pdf/{{$date}}/1" class="btn btn-info btn-xsm" style="margin-bottom: 20px;"><i class="la la-file-pdf-o"></i>Export PDF</a>
                                                 </div>
-                                                @endif
                                                 <!-- LAP PERGANTIAN SHIFT -->
                                                 <div class="col-lg-12">
                                                     <div class="card">
@@ -378,11 +376,9 @@
                                         </div>
                                         <div class="tab-pane fade" id="tab-reguB" role="tabpanel">
                                             <div class="pt-4">
-                                                @if(in_array('2', $regusArr))
                                                 <div class="col-lg-4">
                                                     <a href="/export-pdf/{{$date}}/2" class="btn btn-info btn-xsm" style="margin-bottom: 20px;"><i class="la la-file-pdf-o"></i>Export PDF</a>
                                                 </div>
-                                                @endif
                                                 <!-- LAP PERGANTIAN SHIFT -->
                                                 <div class="col-lg-12">
                                                     <div class="card">
@@ -705,11 +701,9 @@
                                         </div>
                                         <div class="tab-pane fade" id="tab-reguC" role="tabpanel">
                                             <div class="pt-4">
-                                                @if(in_array('3', $regusArr))
                                                 <div class="col-lg-4">
                                                     <a href="/export-pdf/{{$date}}/3" class="btn btn-info btn-xsm" style="margin-bottom: 20px;"><i class="la la-file-pdf-o"></i>Export PDF</a>
                                                 </div>
-                                                @endif
                                                 <!-- LAP PERGANTIAN SHIFT -->
                                                 <div class="col-lg-12">
                                                     <div class="card">
@@ -1032,11 +1026,9 @@
                                         </div>
                                         <div class="tab-pane fade" id="tab-reguD" role="tabpanel">
                                             <div class="pt-4">
-                                                @if(in_array('4', $regusArr))
                                                 <div class="col-lg-4">
                                                     <a href="/export-pdf/{{$date}}/4" class="btn btn-info btn-xsm" style="margin-bottom: 20px;"><i class="la la-file-pdf-o"></i>Export PDF</a>
                                                 </div>
-                                                @endif
                                                 <!-- LAP PERGANTIAN SHIFT -->
                                                 <div class="col-lg-12">
                                                     <div class="card">
