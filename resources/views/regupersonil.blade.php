@@ -322,7 +322,7 @@
                                                                                     <div class="modal-dialog modal-lg">
                                                                                         <div class="modal-content">
                                                                                             <div class="modal-header">
-                                                                                                <h2 class="modal-title"><strong>{{$value->zona->nama}} - {{$regu->nama}}</strong></h2>
+                                                                                                <h2 class="modal-title"><strong>{{$namazona}} - {{$regu->nama}}</strong></h2>
                                                                                                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                                                                                                 </button>
                                                                                             </div>

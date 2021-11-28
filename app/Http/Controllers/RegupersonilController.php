@@ -283,6 +283,7 @@ class RegupersonilController extends Controller
             // $regus = Regu::all();
         }else{                      //else, akan ditampilkan sesuai zona masing2 akun
             $userzona = Auth::user()->zona->id;
+            $namazona = Auth::user()->zona->nama;
             $satpams = Satpam::all()->where('zona_id',$userzona);
         }
         $page_title = 'Regu dan Personil';
@@ -293,7 +294,7 @@ class RegupersonilController extends Controller
         $regus = Regu::all(); //memanggil isi Model Regu setelah fungsi plot, agar menampilkan data terupdate
 
         return view('regupersonil', compact('page_title', 'page_description','action','logo','logoText','satpams',
-        'regus','shifts','day'));
+        'regus','shifts','day', 'namazona'));
     }
 
     /**
