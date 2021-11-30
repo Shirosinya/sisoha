@@ -156,8 +156,19 @@ class RekapTugasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        // dd($input['regu_id']);
+        $rekaptugas = RekapTugas::where('id',$id)->delete();
+        if($input['regu_id'] == '1'){
+            return redirect('/rekap-tugas')->withInput(['tab'=>'tab-reguA'])->with('statusA', 'Data Berhasil Dihapus'); 
+        }elseif($input['regu_id'] == '2'){
+            return redirect('/rekap-tugas')->withInput(['tab'=>'tab-reguB'])->with('statusB', 'Data Berhasil Dihapus');
+        }elseif ($input['regu_id'] == '3') {
+            return redirect('/rekap-tugas')->withInput(['tab'=>'tab-reguC'])->with('statusC', 'Data Berhasil Dihapus');
+        }else{
+            return redirect('/rekap-tugas')->withInput(['tab'=>'tab-reguD'])->with('statusD', 'Data Berhasil Dihapus');
+        }
     }
 }

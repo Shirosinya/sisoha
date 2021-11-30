@@ -130,9 +130,18 @@ class GiatArmadaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
+        $input = $request->all();
         $giat_armada = GiatArmada::where('id',$id)->delete();
-        return redirect('/giat-armada')->with('status', 'Data Berhasil Dihapus');
+        if($input['regu_id'] == '1'){
+            return redirect('/giat-armada')->withInput(['tab'=>'tab-reguA'])->with('statusA', 'Data Berhasil Dihapus'); 
+        }elseif($input['regu_id'] == '2'){
+            return redirect('/giat-armada')->withInput(['tab'=>'tab-reguB'])->with('statusB', 'Data Berhasil Dihapus');
+        }elseif ($input['regu_id'] == '3') {
+            return redirect('/giat-armada')->withInput(['tab'=>'tab-reguC'])->with('statusC', 'Data Berhasil Dihapus');
+        }else{
+            return redirect('/giat-armada')->withInput(['tab'=>'tab-reguD'])->with('statusD', 'Data Berhasil Dihapus');
+        }
     }
 }

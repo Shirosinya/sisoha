@@ -136,9 +136,18 @@ class PemindahanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
+        $input = $request->all();
         $pemindahan = Pemindahan::where('id',$id)->delete();
-        return redirect('/pemindahan')->with('status', 'Data Berhasil Dihapus');
+        if($input['regu_id'] == '1'){
+            return redirect('/pemindahan')->withInput(['tab'=>'tab-reguA'])->with('statusA', 'Data Berhasil Dihapus'); 
+        }elseif($input['regu_id'] == '2'){
+            return redirect('/pemindahan')->withInput(['tab'=>'tab-reguB'])->with('statusB', 'Data Berhasil Dihapus');
+        }elseif ($input['regu_id'] == '3') {
+            return redirect('/pemindahan')->withInput(['tab'=>'tab-reguC'])->with('statusC', 'Data Berhasil Dihapus');
+        }else{
+            return redirect('/pemindahan')->withInput(['tab'=>'tab-reguD'])->with('statusD', 'Data Berhasil Dihapus');
+        }
     }
 }

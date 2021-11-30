@@ -137,9 +137,18 @@ class PamswakarsaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
+        $input = $request->all();
         $pamswakarsa = Pamswakarsa::where('id',$id)->delete();
-        return redirect('/pamswakarsa')->with('status', 'Data Berhasil Dihapus');
+        if($input['regu_id'] == '1'){
+            return redirect('/pamswakarsa')->withInput(['tab'=>'tab-reguA'])->with('statusA', 'Data Berhasil Dihapus'); 
+        }elseif($input['regu_id'] == '2'){
+            return redirect('/pamswakarsa')->withInput(['tab'=>'tab-reguB'])->with('statusB', 'Data Berhasil Dihapus');
+        }elseif ($input['regu_id'] == '3') {
+            return redirect('/pamswakarsa')->withInput(['tab'=>'tab-reguC'])->with('statusC', 'Data Berhasil Dihapus');
+        }else{
+            return redirect('/pamswakarsa')->withInput(['tab'=>'tab-reguD'])->with('statusD', 'Data Berhasil Dihapus');
+        }
     }
 }

@@ -228,6 +228,7 @@
                                                                                 <div class="modal-footer">
                                                                                     <form method="POST" action="/rekap-tugas/{{$rekap_tugas->id}}/destroy">
                                                                                     @csrf
+                                                                                        <input type="hidden" name="regu_id" value="1">
                                                                                         <button type="submit" class="btn btn-danger btn-sm">Konfirmasi</button>
                                                                                     </form>
                                                                                     <button class="btn btn-link btn-sm" data-dismiss="modal">Batal</button>
@@ -433,6 +434,7 @@
                                                                                     <div class="modal-footer">
                                                                                         <form method="POST" action="/rekap-tugas/{{$rekap_tugas->id}}/destroy">
                                                                                         @csrf
+                                                                                            <input type="hidden" name="regu_id" value="2">
                                                                                             <button type="submit" class="btn btn-danger btn-sm">Konfirmasi</button>
                                                                                         </form>
                                                                                         <button class="btn btn-link btn-sm" data-dismiss="modal">Batal</button>
@@ -639,6 +641,7 @@
                                                                                 <div class="modal-footer">
                                                                                     <form method="POST" action="/rekap-tugas/{{$rekap_tugas->id}}/destroy">
                                                                                     @csrf
+                                                                                        <input type="hidden" name="regu_id" value="3">
                                                                                         <button type="submit" class="btn btn-danger btn-sm">Konfirmasi</button>
                                                                                     </form>
                                                                                     <button class="btn btn-link btn-sm" data-dismiss="modal">Batal</button>
@@ -844,6 +847,7 @@
                                                                                 <div class="modal-footer">
                                                                                     <form method="POST" action="/rekap-tugas/{{$rekap_tugas->id}}/destroy">
                                                                                     @csrf
+                                                                                        <input type="hidden" name="regu_id" value="4">
                                                                                         <button type="submit" class="btn btn-danger btn-sm">Konfirmasi</button>
                                                                                     </form>
                                                                                     <button class="btn btn-link btn-sm" data-dismiss="modal">Batal</button>
