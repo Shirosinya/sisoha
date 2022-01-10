@@ -12,7 +12,8 @@ class Pos extends Model
     public $table = "poss";
 
     protected $fillable=[
-        'nama',
+        'nama_pos',
+        'keterangan',
     ];
 
     // public function satpam()

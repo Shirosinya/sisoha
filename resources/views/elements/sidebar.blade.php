@@ -40,8 +40,13 @@
 							<span class="nav-text">Data Barang</span>
 						</a>
                     </li>
+					<li><a class="has-arrow ai-icon" href="{!! url('/pos-zona') !!}" aria-expanded="false">
+							<i class="la la-building"></i>
+							<span class="nav-text">Data Pos Zona</span>
+						</a>
+                    </li>
 				<div class="copyright">
-					<p><strong>Sintasian</strong> ©All Rights Reserved 2021</p>
+					<p><strong>Sintasian</strong> ©All Rights Reserved <?php echo date('Y'); ?></p>
 					<!-- <p>Developed by Fernaldi W.</p> -->
 				</div>
 			</div>

@@ -8,7 +8,7 @@
 <div class="container-fluid">
                 <div class="page-titles">
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item active"><a href="javascript:void(0)">Data Barang</a></li>
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">Pos Zona</a></li>
 					</ol>
                 </div>
                 <!-- row -->
@@ -21,36 +21,33 @@
                             </div>
                         @endif
                         <div class="card">
-                            <!-- <div class="card-header">
-                                <h4 class="card-title">Regu dan Personil</h4>
-                            </div> -->
                             <div class="card-body">
                                 <!-- Nav tabs -->
                                 <div class="pt-4">
                                     <div class="table-responsive">
                                         <!-- MODAL TAMBAH -->
-                                        <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#tambahModal">+ Tambah Barang</button>
+                                        <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#tambahModal">+ Tambah Pos Zona</button>
                                         <div class="modal fade bd-example-modal-lg" id="tambahModal" tabindex="-1" role="dialog" aria-hidden="true">
                                             <div class="modal-dialog modal-lg">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title">Tambah Data Barang</h5>
+                                                        <h5 class="modal-title">Tambah Pos Zona</h5>
                                                         <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form id="form-create-barang" name="form-create-barang" method="POST" action="{{route('createbarang')}}">
+                                                        <form id="form-create-pos-zona" name="form-create-pos-zona" method="POST" action="{{route('createpos-zona')}}">
                                                             @csrf
                                                             <div class="form-group row">
-                                                                <label class="col-sm-3 col-form-label">Nama Barang</label>
+                                                                <label class="col-sm-3 col-form-label">Nama Pos</label>
                                                                 <div class="col-sm-9">
-                                                                    <input required name="nama_barang" value="" type="text" class="form-control" placeholder="Masukkan nama barang..">
+                                                                    <input required name="nama_pos" value="" type="text" class="form-control" placeholder="Masukkan nama pos..">
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
-                                                                <label class="col-sm-3 col-form-label">Jumlah</label>
+                                                                <label class="col-sm-3 col-form-label">Keterangan (opsional)</label>
                                                                 <div class="col-sm-9">
-                                                                    <input required name="jumlah" value="" type="number" min="0" class="form-control" placeholder="Masukkan jumlah barang..">
+                                                                    <textarea name="keterangan" row="4" class="form-control" placeholder="Masukkan keterangan pos.."></textarea>
                                                                 </div>
                                                             </div>
                                                     </div>
@@ -67,18 +64,18 @@
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>Nama Barang</th>
-                                                    <th>Jumlah</th>
+                                                    <th>Nama Pos</th>
+                                                    <th>Keterangan</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody> 
                                             <?php $i = 1;?>
-                                            @foreach($barangs as $value )
+                                            @foreach($poss as $value )
                                                 <tr>
                                                     <td>{{$i++}}</td>
-                                                    <td>{{$value->nama_barang}}</td>
-                                                    <td>{{$value->jumlah}}</td>
+                                                    <td>{{$value->nama_pos}}</td>
+                                                    <td>{{$value->keterangan}}</td>
                                                     <td>
                                                         <div class="d-flex">
                                                             <button type="button" style="border:none;" data-toggle="modal" data-target="#editModal{{$value->id}}">
@@ -96,23 +93,23 @@
                                                     <div class="modal-dialog modal-lg">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title">Update Data Barang</h5>
+                                                                <h5 class="modal-title">Update Data Pos Zona</h5>
                                                                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form id="form-update-barang" name="form-update-barang" method="POST" action="/barang/{{$value->id}}/update">
+                                                                <form id="form-update-pos" name="form-update-pos" method="POST" action="/pos-zona/{{$value->id}}/update">
                                                                     @csrf
                                                                     <div class="form-group row">
                                                                         <label class="col-sm-3 col-form-label">Nama</label>
                                                                         <div class="col-sm-9">
-                                                                            <input name="nama_barang" value="{{ $value->nama_barang }}" type="text" class="form-control" placeholder="Masukkan nama barang..">
+                                                                            <input name="nama_pos" value="{{ $value->nama_pos }}" type="text" class="form-control" placeholder="Masukkan nama pos..">
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row">
-                                                                        <label class="col-sm-3 col-form-label">Jumlah</label>
+                                                                        <label class="col-sm-3 col-form-label">Keterangan (opsional)</label>
                                                                         <div class="col-sm-9">
-                                                                            <input name="jumlah" value="{{ $value->jumlah }}" type="number" min="0" class="form-control" placeholder="Masukkan jumlah barang..">
+                                                                            <textarea name="keterangan" row="4" class="form-control" placeholder="Masukkan keterangan pos..">{{$value->keterangan}}</textarea>
                                                                         </div>
                                                                     </div>
                                                             </div>
@@ -135,7 +132,7 @@
                                                                     </p>
                                                                     <p>Data yang dihapus tidak dapat dikembalikan.</p> 
                                                                 </div>
-                                                                    <form method="POST" action="/barang/{{$value->id}}/destroy">
+                                                                    <form method="POST" action="/pos-zona/{{$value->id}}/destroy">
                                                                     @csrf
                                                                         <button type="submit" class="btn btn-danger btn-sm">Konfirmasi</button>
                                                                     </form>

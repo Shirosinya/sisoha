@@ -88,6 +88,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/rekap-tugas/{id}/update', 'RekapTugasController@update');
     Route::post('/rekap-tugas/{id}/destroy', 'RekapTugasController@destroy');
 
+    //Pos Zona
+    Route::get('/pos-zona','PosController@index');
+    Route::post('/createpos-zona', 'PosController@store')->name('createpos-zona');
+    Route::post('/pos-zona/{id}/update', 'PosController@update');
+    Route::post('/pos-zona/{id}/destroy', 'PosController@destroy');
+
+
 });
 
 // Route::get('/dashboard', function () {

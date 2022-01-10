@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Pos;
 
 class PosController extends Controller
 {
@@ -13,17 +15,14 @@ class PosController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $user_zona = Auth::user()->zona->id;
+        $poss = Pos::where('zona_id', '=', $user_zona)->get();
+        $page_title = 'Pos Zona';
+        $page_description = 'Some description for the page';
+        $logo = "images/petro-logo.png";
+        $logoText = "images/petro-text.png";
+        $action = __FUNCTION__;
+        return view('pos_zona', compact('page_title', 'page_description', 'action','logo','logoText','poss'));
     }
 
     /**
@@ -34,29 +33,14 @@ class PosController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $user_zona = Auth::user()->zona->id;
+        $input = $request->all();
+        $data = Pos::create([
+            'nama_pos' => $input['nama_pos'],
+            'keterangan' => $input['keterangan'],
+            'zona_id' => $user_zona,
+        ]);
+        return redirect('/pos-zona')->with('status','Data Berhasil Ditambah!');
     }
 
     /**
@@ -68,7 +52,16 @@ class PosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        $input = $request->all();
+        $pos = Pos::where('id',$id)->first();
+        // dd($input,$tugas);
+        if($pos->update([
+            'nama_pos' => $input['nama_pos'],
+            'jumlah' => $input['jumlah'],
+        ]));
+
+        return redirect('/pos-zona')->with('status', 'Data Berhasil Diupdate!');
     }
 
     /**
@@ -79,6 +72,7 @@ class PosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $pos = Pos::where('id',$id)->delete();
+        return redirect('/pos-zona')->with('status', 'Data Berhasil Dihapus');
     }
 }
