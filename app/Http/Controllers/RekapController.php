@@ -52,6 +52,11 @@ class RekapController extends Controller
 
             //Pergantian Shift
             $tugass = Tugas::whereDate('created_at','=',$date)->where('zona_id', '=', $userzona)->get();
+            
+            $count_tugassA = $tugass->where('regu_id','1')->count();
+            $count_tugassB = $tugass->where('regu_id','2')->count();
+            $count_tugassC = $tugass->where('regu_id','3')->count();
+            $count_tugassD = $tugass->where('regu_id','4')->count();
 
             //Tugas Jaga
             $shifts = array();
@@ -153,17 +158,42 @@ class RekapController extends Controller
             //Pamswakarsa
             $pamswakarsas = Pamswakarsa::whereDate('created_at','=',$date)->where('zona_id', '=', $userzona)->get();
 
+            $count_pamswakarsasA = $pamswakarsas->where('regu_id','1')->count();
+            $count_pamswakarsasB = $pamswakarsas->where('regu_id','2')->count();
+            $count_pamswakarsasC = $pamswakarsas->where('regu_id','3')->count();
+            $count_pamswakarsasD = $pamswakarsas->where('regu_id','4')->count();
+
             //Produksi
             $produksis = Produksi::whereDate('created_at','=',$date)->where('zona_id', '=', $userzona)->get();
+
+            $count_produksisA = $produksis->where('regu_id','1')->count();
+            $count_produksisB = $produksis->where('regu_id','2')->count();
+            $count_produksisC = $produksis->where('regu_id','3')->count();
+            $count_produksisD = $produksis->where('regu_id','4')->count();
 
             //Pemindahan
             $pemindahans = Pemindahan::whereDate('created_at','=',$date)->where('zona_id', '=', $userzona)->get();
             
+            $count_pemindahansA = $pemindahans->where('regu_id','1')->count();
+            $count_pemindahansB = $pemindahans->where('regu_id','2')->count();
+            $count_pemindahansC = $pemindahans->where('regu_id','3')->count();
+            $count_pemindahansD = $pemindahans->where('regu_id','4')->count();
+
             //Giat Armada
             $giat_armadas = GiatArmada::whereDate('created_at','=',$date)->where('zona_id', '=', $userzona)->get();
 
+            $count_giat_armadasA = $giat_armadas->where('regu_id','1')->count();
+            $count_giat_armadasB = $giat_armadas->where('regu_id','2')->count();
+            $count_giat_armadasC = $giat_armadas->where('regu_id','3')->count();
+            $count_giat_armadasD = $giat_armadas->where('regu_id','4')->count();
+
             //Inventaris
             $inventariss = Inventaris::whereDate('created_at','=',$date)->where('zona_id', '=', $userzona)->get();
+            
+            $count_inventarissA = $inventariss->where('regu_id','1')->count();
+            $count_inventarissB = $inventariss->where('regu_id','2')->count();
+            $count_inventarissC = $inventariss->where('regu_id','3')->count();
+            $count_inventarissD = $inventariss->where('regu_id','4')->count();
 
             //Rekap Tugas
             $rekap_tugassA = RekapTugas::whereDate('created_at',$date)
@@ -190,6 +220,11 @@ class RekapController extends Controller
                 $query->where('zona_id', $userzona)->where('regu_id', '4');
             })->get();
 
+            $count_rekap_tugassA = $rekap_tugassA->count();
+            $count_rekap_tugassB = $rekap_tugassB->count();
+            $count_rekap_tugassC = $rekap_tugassC->count();
+            $count_rekap_tugassD = $rekap_tugassD->count();
+
             //regu shift
             $regus_active = Regu::where('shift_id', '!=', '4')->get();
             $regusArr = array();
@@ -199,7 +234,14 @@ class RekapController extends Controller
         return view('jurnal.rekap', compact('page_title', 'page_description','action','logo','logoText','tugass', 'satpams',
         'reguA_arr','reguB_arr','reguC_arr','reguD_arr', 'detail_shiftA', 'detail_shiftB','detail_shiftC','detail_shiftD','pos_satpams', 
         'pamswakarsas', 'produksis', 'pemindahans', 'giat_armadas', 'inventariss', 'rekap_tugassA', 'rekap_tugassB', 
-        'rekap_tugassC', 'rekap_tugassD', 'date', 'regusArr'));
+        'rekap_tugassC', 'rekap_tugassD', 'date', 'regusArr',
+        'count_tugassA', 'count_tugassB', 'count_tugassC', 'count_tugassD',
+        'count_pamswakarsasA', 'count_pamswakarsasB', 'count_pamswakarsasC', 'count_pamswakarsasD',
+        'count_produksisA', 'count_produksisB', 'count_produksisC', 'count_produksisD',
+        'count_pemindahansA', 'count_pemindahansB', 'count_pemindahansC', 'count_pemindahansD',
+        'count_giat_armadasA', 'count_giat_armadasB', 'count_giat_armadasC', 'count_giat_armadasD',
+        'count_inventarissA', 'count_inventarissB', 'count_inventarissC', 'count_inventarissD',
+        'count_rekap_tugassA', 'count_rekap_tugassB', 'count_rekap_tugassC', 'count_rekap_tugassD'));
     }
 
     public function exportPdf($date, $reguid){

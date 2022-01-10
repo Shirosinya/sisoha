@@ -51,9 +51,40 @@
                                     <div class="tab-content">
                                         <div class="tab-pane fade show active" id="tab-reguA" role="tabpanel">
                                             <div class="pt-4">
-                                                <div class="col-lg-4">
-                                                    <a href="/export-pdf/{{$date}}/1" class="btn btn-info btn-xsm" style="margin-bottom: 20px;"><i class="la la-file-pdf-o"></i>Export PDF</a>
+                                                @if(in_array('1', $regusArr))
+                                                <div class="row col-lg-12">
+                                                    <div class="col-lg-2">
+                                                        <a href="/export-pdf/{{$date}}/1" class="btn btn-info btn-xsm" style="margin-bottom: 20px;"><i class="la la-file-pdf-o"></i>Export PDF</a>
+                                                    </div>
+                                                    <!-- Notif pengisian tabel -->
+                                                    <div class="col-lg-8 mb-3">
+                                                        <ul style="color: red;">
+                                                            @if($count_tugassA == '0')
+                                                            <li>Tabel Pergantian Shift belum diisi.</li>
+                                                            @endif
+                                                            @if($count_pamswakarsasA == '0')
+                                                            <li>Tabel Pamswakarsa belum diisi.</li>
+                                                            @endif
+                                                            @if($count_produksisA == '0')
+                                                            <li>Tabel Produksi belum diisi.</li>
+                                                            @endif
+                                                            @if($count_pemindahansA == '0')
+                                                            <li>Tabel Pemindahan belum diisi.</li>
+                                                            @endif
+                                                            @if($count_giat_armadasA == '0')
+                                                            <li>Tabel Giat Armada belum diisi.</li>
+                                                            @endif
+                                                            @if($count_inventarissA == '0')
+                                                            <li>Tabel Inventaris belum diisi.</li>
+                                                            @endif
+                                                            @if($count_rekap_tugassA == '0')
+                                                            <li>Tabel Rekap Tugas belum diisi.</li>
+                                                            @endif
+                                                        </ul>
+                                                    </div>
+                                                    <!-- Notif pengisian tabel END-->
                                                 </div>
+                                                @endif
                                                 <!-- LAP PERGANTIAN SHIFT -->
                                                 <div class="col-lg-12">
                                                     <div class="card">
@@ -376,9 +407,40 @@
                                         </div>
                                         <div class="tab-pane fade" id="tab-reguB" role="tabpanel">
                                             <div class="pt-4">
-                                                <div class="col-lg-4">
-                                                    <a href="/export-pdf/{{$date}}/2" class="btn btn-info btn-xsm" style="margin-bottom: 20px;"><i class="la la-file-pdf-o"></i>Export PDF</a>
+                                                @if(in_array('2', $regusArr))
+                                                <div class="row col-lg-12">
+                                                    <div class="col-lg-2">
+                                                        <a href="/export-pdf/{{$date}}/2" class="btn btn-info btn-xsm" style="margin-bottom: 20px;"><i class="la la-file-pdf-o"></i>Export PDF</a>
+                                                    </div>
+                                                    <!-- Notif pengisian tabel -->
+                                                    <div class="col-lg-8 mb-3">
+                                                        <ul style="color: red;">
+                                                            @if($count_tugassB == '0')
+                                                            <li>Tabel Pergantian Shift belum diisi.</li>
+                                                            @endif
+                                                            @if($count_pamswakarsasB == '0')
+                                                            <li>Tabel Pamswakarsa belum diisi.</li>
+                                                            @endif
+                                                            @if($count_produksisB == '0')
+                                                            <li>Tabel Produksi belum diisi.</li>
+                                                            @endif
+                                                            @if($count_pemindahansB == '0')
+                                                            <li>Tabel Pemindahan belum diisi.</li>
+                                                            @endif
+                                                            @if($count_giat_armadasB == '0')
+                                                            <li>Tabel Giat Armada belum diisi.</li>
+                                                            @endif
+                                                            @if($count_inventarissB == '0')
+                                                            <li>Tabel Inventaris belum diisi.</li>
+                                                            @endif
+                                                            @if($count_rekap_tugassB == '0')
+                                                            <li>Tabel Rekap Tugas belum diisi.</li>
+                                                            @endif
+                                                        </ul>
+                                                    </div>
+                                                    <!-- Notif pengisian tabel END-->
                                                 </div>
+                                                @endif
                                                 <!-- LAP PERGANTIAN SHIFT -->
                                                 <div class="col-lg-12">
                                                     <div class="card">
@@ -701,9 +763,40 @@
                                         </div>
                                         <div class="tab-pane fade" id="tab-reguC" role="tabpanel">
                                             <div class="pt-4">
-                                                <div class="col-lg-4">
-                                                    <a href="/export-pdf/{{$date}}/3" class="btn btn-info btn-xsm" style="margin-bottom: 20px;"><i class="la la-file-pdf-o"></i>Export PDF</a>
+                                                @if(in_array('3', $regusArr))
+                                                <div class="row col-lg-12">
+                                                    <div class="col-lg-2">
+                                                        <a href="/export-pdf/{{$date}}/3" class="btn btn-info btn-xsm" style="margin-bottom: 20px;"><i class="la la-file-pdf-o"></i>Export PDF</a>
+                                                    </div>
+                                                    <!-- Notif pengisian tabel -->
+                                                    <div class="col-lg-8 mb-3">
+                                                        <ul style="color: red;">
+                                                            @if($count_tugassC == '0')
+                                                            <li>Tabel Pergantian Shift belum diisi.</li>
+                                                            @endif
+                                                            @if($count_pamswakarsasC == '0')
+                                                            <li>Tabel Pamswakarsa belum diisi.</li>
+                                                            @endif
+                                                            @if($count_produksisC == '0')
+                                                            <li>Tabel Produksi belum diisi.</li>
+                                                            @endif
+                                                            @if($count_pemindahansC == '0')
+                                                            <li>Tabel Pemindahan belum diisi.</li>
+                                                            @endif
+                                                            @if($count_giat_armadasC == '0')
+                                                            <li>Tabel Giat Armada belum diisi.</li>
+                                                            @endif
+                                                            @if($count_inventarissC == '0')
+                                                            <li>Tabel Inventaris belum diisi.</li>
+                                                            @endif
+                                                            @if($count_rekap_tugassC == '0')
+                                                            <li>Tabel Rekap Tugas belum diisi.</li>
+                                                            @endif
+                                                        </ul>
+                                                    </div>
+                                                    <!-- Notif pengisian tabel END-->
                                                 </div>
+                                                @endif
                                                 <!-- LAP PERGANTIAN SHIFT -->
                                                 <div class="col-lg-12">
                                                     <div class="card">
@@ -1026,9 +1119,40 @@
                                         </div>
                                         <div class="tab-pane fade" id="tab-reguD" role="tabpanel">
                                             <div class="pt-4">
-                                                <div class="col-lg-4">
-                                                    <a href="/export-pdf/{{$date}}/4" class="btn btn-info btn-xsm" style="margin-bottom: 20px;"><i class="la la-file-pdf-o"></i>Export PDF</a>
+                                                @if(in_array('4', $regusArr))
+                                                <div class="row col-lg-12">
+                                                    <div class="col-lg-2">
+                                                        <a href="/export-pdf/{{$date}}/4" class="btn btn-info btn-xsm" style="margin-bottom: 20px;"><i class="la la-file-pdf-o"></i>Export PDF</a>
+                                                    </div>
+                                                    <!-- Notif pengisian tabel -->
+                                                    <div class="col-lg-8 mb-3">
+                                                        <ul style="color: red;">
+                                                            @if($count_tugassD == '0')
+                                                            <li>Tabel Pergantian Shift belum diisi.</li>
+                                                            @endif
+                                                            @if($count_pamswakarsasD == '0')
+                                                            <li>Tabel Pamswakarsa belum diisi.</li>
+                                                            @endif
+                                                            @if($count_produksisD == '0')
+                                                            <li>Tabel Produksi belum diisi.</li>
+                                                            @endif
+                                                            @if($count_pemindahansD == '0')
+                                                            <li>Tabel Pemindahan belum diisi.</li>
+                                                            @endif
+                                                            @if($count_giat_armadasD == '0')
+                                                            <li>Tabel Giat Armada belum diisi.</li>
+                                                            @endif
+                                                            @if($count_inventarissD == '0')
+                                                            <li>Tabel Inventaris belum diisi.</li>
+                                                            @endif
+                                                            @if($count_rekap_tugassD == '0')
+                                                            <li>Tabel Rekap Tugas belum diisi.</li>
+                                                            @endif
+                                                        </ul>
+                                                    </div>
+                                                    <!-- Notif pengisian tabel END-->
                                                 </div>
+                                                @endif
                                                 <!-- LAP PERGANTIAN SHIFT -->
                                                 <div class="col-lg-12">
                                                     <div class="card">

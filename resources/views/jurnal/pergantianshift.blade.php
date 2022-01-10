@@ -45,6 +45,10 @@
                                                     <div class="alert alert-success">
                                                         {{ session('statusA') }}
                                                     </div>
+                                                @elseif(session('dangerA'))    
+                                                    <div class="alert alert-danger">
+                                                        {{ session('dangerA') }}
+                                                    </div>
                                                 @endif
                                                 <!-- MODAL TAMBAH A-->
                                                     @if(in_array('1', $regusArr))
@@ -189,6 +193,7 @@
                                                                                 <div class="modal-footer">
                                                                                     <form method="POST" action="/pergantian-shift/{{$tugas->id}}/destroy">
                                                                                     @csrf
+                                                                                        <input type="hidden" name="regu_id" value="1">
                                                                                         <button type="submit" class="btn btn-danger btn-sm">Konfirmasi</button>
                                                                                     </form>
                                                                                     <button class="btn btn-link btn-sm" data-dismiss="modal">Batal</button>
@@ -210,6 +215,10 @@
                                                 @if (session('statusB'))
                                                     <div class="alert alert-success">
                                                         {{ session('statusB') }}
+                                                    </div>
+                                                @elseif(session('dangerB'))    
+                                                    <div class="alert alert-danger">
+                                                        {{ session('dangerB') }}
                                                     </div>
                                                 @endif
                                                 <!-- MODAL TAMBAH B -->
@@ -354,6 +363,7 @@
                                                                                     <div class="modal-footer">
                                                                                         <form method="POST" action="/pergantian-shift/{{$tugas->id}}/destroy">
                                                                                         @csrf
+                                                                                            <input type="hidden" name="regu_id" value="2">
                                                                                             <button type="submit" class="btn btn-danger btn-sm">Konfirmasi</button>
                                                                                         </form>
                                                                                         <button class="btn btn-link btn-sm" data-dismiss="modal">Batal</button>
@@ -377,6 +387,10 @@
                                                     <div class="alert alert-success">
                                                         {{ session('statusC') }}
                                                     </div>
+                                                @elseif(session('dangerC'))    
+                                                    <div class="alert alert-danger">
+                                                        {{ session('dangerC') }}
+                                                    </div>
                                                 @endif
                                                 <!-- MODAL TAMBAH C -->
                                                     @if(in_array('3', $regusArr))
@@ -395,6 +409,7 @@
                                                                     <form id="form-create-lapshift" name="form-create-lapshift" method="POST" action="{{route('createlapshift')}}">
                                                                         @csrf
                                                                         <input type="hidden" name="regu_id" value="3">
+                                                                        <input type="hidden" name="zona_id" value="{{$zonaid}}">
                                                                         <div class="form-group row">
                                                                         <label class="col-sm-3 col-form-label">Pukul</label>
                                                                             <div class="col-sm-9">
@@ -520,6 +535,7 @@
                                                                                 <div class="modal-footer">
                                                                                     <form method="POST" action="/pergantian-shift/{{$tugas->id}}/destroy">
                                                                                     @csrf
+                                                                                        <input type="hidden" name="regu_id" value="3">
                                                                                         <button type="submit" class="btn btn-danger btn-sm">Konfirmasi</button>
                                                                                     </form>
                                                                                     <button class="btn btn-link btn-sm" data-dismiss="modal">Batal</button>
@@ -542,6 +558,10 @@
                                                     <div class="alert alert-success">
                                                         {{ session('statusD') }}
                                                     </div>
+                                                @elseif(session('dangerD'))    
+                                                    <div class="alert alert-danger">
+                                                        {{ session('dangerD') }}
+                                                    </div>
                                                 @endif
                                                 <!-- MODAL TAMBAH D-->
                                                     @if(in_array('4', $regusArr))
@@ -560,6 +580,7 @@
                                                                     <form id="form-create-lapshift" name="form-create-lapshift" method="POST" action="{{route('createlapshift')}}">
                                                                         @csrf
                                                                         <input type="hidden" name="regu_id" value="4">
+                                                                        <input type="hidden" name="zona_id" value="{{$zonaid}}">
                                                                         <div class="form-group row">
                                                                         <label class="col-sm-3 col-form-label">Pukul</label>
                                                                             <div class="col-sm-9">
@@ -685,6 +706,7 @@
                                                                                 <div class="modal-footer">
                                                                                     <form method="POST" action="/pergantian-shift/{{$tugas->id}}/destroy">
                                                                                     @csrf
+                                                                                        <input type="hidden" name="regu_id" value="4">
                                                                                         <button type="submit" class="btn btn-danger btn-sm">Konfirmasi</button>
                                                                                     </form>
                                                                                     <button class="btn btn-link btn-sm" data-dismiss="modal">Batal</button>

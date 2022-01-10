@@ -66,13 +66,13 @@ class PergantianShiftController extends Controller
         ]);
 
         if($input['regu_id'] == '1'){
-            return redirect('/pergantian-shift')->withInput(['tab'=>'tab-reguA']); 
+            return redirect('/pergantian-shift')->withInput(['tab'=>'tab-reguA'])->with('statusA', 'Data Berhasil Diupdate!'); 
          }elseif($input['regu_id'] == '2'){
-             return redirect('/pergantian-shift')->withInput(['tab'=>'tab-reguB']);
+             return redirect('/pergantian-shift')->withInput(['tab'=>'tab-reguB'])->with('statusB', 'Data Berhasil Diupdate!');
          }elseif ($input['regu_id'] == '3'){
-             return redirect('/pergantian-shift')->withInput(['tab'=>'tab-reguC']);
+             return redirect('/pergantian-shift')->withInput(['tab'=>'tab-reguC'])->with('statusC', 'Data Berhasil Diupdate!');
          }else{
-             return redirect('/pergantian-shift')->withInput(['tab'=>'tab-reguD']);
+             return redirect('/pergantian-shift')->withInput(['tab'=>'tab-reguD'])->with('statusD', 'Data Berhasil Diupdate!');
          }
     }
 
@@ -132,9 +132,19 @@ class PergantianShiftController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
+        
+        $input = $request->all();
         $tugas = Tugas::where('id',$id)->delete();
-        return redirect('/pergantian-shift')->with('status', 'Data Berhasil Dihapus');
+        if($input['regu_id'] == '1'){
+            return redirect('/pergantian-shift')->withInput(['tab'=>'tab-reguA'])->with('dangerA', 'Data Berhasil Dihapus!'); 
+         }elseif($input['regu_id'] == '2'){
+             return redirect('/pergantian-shift')->withInput(['tab'=>'tab-reguB'])->with('dangerB', 'Data Berhasil Dihapus!');
+         }elseif ($input['regu_id'] == '3') {
+             return redirect('/pergantian-shift')->withInput(['tab'=>'tab-reguC'])->with('dangerC', 'Data Berhasil Dihapus!');
+         }else{
+             return redirect('/pergantian-shift')->withInput(['tab'=>'tab-reguD'])->with('dangerD', 'Data Berhasil Dihapus!');
+         }
     }
 }
