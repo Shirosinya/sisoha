@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 use App\Models\RekapTugas;
 use App\Models\Satpam;
 use App\Models\Regu;
@@ -115,13 +116,14 @@ class RekapTugasController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'uraian_tugas' => 'required',
             'mulai' => 'required',
             'selesai' => 'required',
             'keterangan' => 'required',
             'lampirans' => 'required',
-            'lampirans.*' => 'mimes:jpg,png,jpeg|max:4000',
+            'lampirans.*' => 'mimes:jpg,png,jpeg,PNG|max:4000',
         ]);
         $user_zona = Auth::user()->zona->id;
         $input = $request->all();
@@ -154,36 +156,14 @@ class RekapTugasController extends Controller
         
         
         if($input['regu_id'] == '1'){
-            return redirect('/rekap-tugas')->withInput(['tab'=>'tab-reguA'])->with('status','Data Berhasil Ditambah!'); 
+            return redirect('/rekap-tugas')->withInput(['tab'=>'tab-reguA'])->with('statusA','Data Berhasil Ditambah!'); 
         }elseif($input['regu_id'] == '2'){
-            return redirect('/rekap-tugas')->withInput(['tab'=>'tab-reguB'])->with('status','Data Berhasil Ditambah!');
+            return redirect('/rekap-tugas')->withInput(['tab'=>'tab-reguB'])->with('statusB','Data Berhasil Ditambah!');
         }elseif ($input['regu_id'] == '3'){
-            return redirect('/rekap-tugas')->withInput(['tab'=>'tab-reguC'])->with('status','Data Berhasil Ditambah!');
+            return redirect('/rekap-tugas')->withInput(['tab'=>'tab-reguC'])->with('statusC','Data Berhasil Ditambah!');
         }else{
-            return redirect('/rekap-tugas')->withInput(['tab'=>'tab-reguD'])->with('status','Data Berhasil Ditambah!');
+            return redirect('/rekap-tugas')->withInput(['tab'=>'tab-reguD'])->with('statusD','Data Berhasil Ditambah!');
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -195,7 +175,56 @@ class RekapTugasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // dd($request->all());
+        $request->validate([
+            'uraian_tugas' => 'required',
+            'mulai' => 'required',
+            'selesai' => 'required',
+            'keterangan' => 'required',
+            'lampirans' => 'required',
+            'lampirans.*' => 'mimes:jpg,png,jpeg,PNG|max:4000',
+        ]);
+        $user_zona = Auth::user()->zona->id;
+        $input = $request->all();
+        $rekap_tugas = RekapTugas::where('id',$id);
+        $rekap_tugas->update([
+            'uraian_tugas' => $input['uraian_tugas'],
+            'mulai' => $input['mulai'],
+            'selesai' => $input['selesai'],
+            'keterangan' => $input['keterangan'],
+            'satpam_id' => $input['satpam_id'],
+        ]);
+
+        $lampirans = Lampiran::where('rekap_tugas_id', $id)->get();
+        Lampiran::where('rekap_tugas_id', $id)->delete();
+        foreach($lampirans as $lampiran){
+            File::delete('storage/lampiran/'.$lampiran->nama_lampiran);
+        }
+
+        foreach($input['lampirans'] as $lampiran){
+            $random = Str::random(10);
+            $destination_path = 'public/lampiran/';
+            $image = $lampiran;
+            // $image_name = $image->getCLientOriginalName();
+            $ext = $lampiran->extension();
+            $image_name = $random.'.'.$ext;
+            $path = $lampiran->storeAs($destination_path, $image_name);
+            // dd($data->id);
+            Lampiran::create([
+                'nama_lampiran' => $image_name,
+                'rekap_tugas_id' => $id,
+            ]);
+        }
+        if($input['regu_id'] == '1'){
+            return redirect('/rekap-tugas')->withInput(['tab'=>'tab-reguA'])->with('statusA','Data Berhasil Diupdate!'); 
+        }elseif($input['regu_id'] == '2'){
+            return redirect('/rekap-tugas')->withInput(['tab'=>'tab-reguB'])->with('statusB','Data Berhasil Diupdate!');
+        }elseif ($input['regu_id'] == '3'){
+            return redirect('/rekap-tugas')->withInput(['tab'=>'tab-reguC'])->with('statusC','Data Berhasil Diupdate!');
+        }else{
+            return redirect('/rekap-tugas')->withInput(['tab'=>'tab-reguD'])->with('statusD','Data Berhasil Diupdate!');
+        }
+
     }
 
     /**
@@ -209,6 +238,13 @@ class RekapTugasController extends Controller
         $input = $request->all();
         // dd($input['regu_id']);
         $rekaptugas = RekapTugas::where('id',$id)->delete();
+        $lampirans = Lampiran::where('rekap_tugas_id', $id)->get();
+        Lampiran::where('rekap_tugas_id', $id)->delete();
+
+        foreach($lampirans as $lampiran){
+            File::delete('storage/lampiran/'.$lampiran->nama_lampiran);
+        }
+
         if($input['regu_id'] == '1'){
             return redirect('/rekap-tugas')->withInput(['tab'=>'tab-reguA'])->with('statusA', 'Data Berhasil Dihapus'); 
         }elseif($input['regu_id'] == '2'){
