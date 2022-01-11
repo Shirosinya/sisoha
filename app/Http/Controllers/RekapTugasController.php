@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use App\Models\RekapTugas;
 use App\Models\Satpam;
 use App\Models\Regu;
+use App\Models\Lampiran;
 
 
 class RekapTugasController extends Controller
@@ -37,7 +39,6 @@ class RekapTugasController extends Controller
         {
             $query->where('zona_id', $user_zona)->where('regu_id', '=', '1');
         })->get();
-
         $rekap_tugassB = RekapTugas::whereDate('created_at',date('Y-m-d'))
         ->whereHas('satpam', function ($query) use ($user_zona) 
         {
@@ -69,8 +70,31 @@ class RekapTugasController extends Controller
         foreach($regus_active as $regu){
             array_push($regusArr,$regu->id);
         }
+
+        $rekap_tugassA_ids = array();
+        foreach($rekap_tugassA as $rekap){
+            array_push($rekap_tugassA_ids, $rekap->id);
+        }
+        $rekap_tugassB_ids = array();
+        foreach($rekap_tugassB as $rekap){
+            array_push($rekap_tugassB_ids, $rekap->id);
+        }
+        $rekap_tugassC_ids = array();
+        foreach($rekap_tugassC as $rekap){
+            array_push($rekap_tugassC_ids, $rekap->id);
+        }
+        $rekap_tugassD_ids = array();
+        foreach($rekap_tugassD as $rekap){
+            array_push($rekap_tugassD_ids, $rekap->id);
+        }
+        //lampiran
+        $lampiransA = Lampiran::whereIn('rekap_tugas_id',$rekap_tugassA_ids)->get();
+        $lampiransB = Lampiran::whereIn('rekap_tugas_id',$rekap_tugassB_ids)->get();
+        $lampiransC = Lampiran::whereIn('rekap_tugas_id',$rekap_tugassC_ids)->get();
+        $lampiransD = Lampiran::whereIn('rekap_tugas_id',$rekap_tugassD_ids)->get();
         return view('jurnal.rekap-tugas', compact('page_title', 'page_description', 'action','logo','logoText',
-        'satpams', 'rekap_tugassA', 'rekap_tugassB', 'rekap_tugassC', 'rekap_tugassD', 'regusArr'));
+        'satpams', 'rekap_tugassA', 'rekap_tugassB', 'rekap_tugassC', 'rekap_tugassD', 'regusArr', 'lampiransA',
+        'lampiransB', 'lampiransC', 'lampiransD'));
     }
 
     /**
@@ -91,10 +115,18 @@ class RekapTugasController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'uraian_tugas' => 'required',
+            'mulai' => 'required',
+            'selesai' => 'required',
+            'keterangan' => 'required',
+            'lampirans' => 'required',
+            'lampirans.*' => 'mimes:jpg,png,jpeg|max:4000',
+        ]);
         $user_zona = Auth::user()->zona->id;
         $input = $request->all();
         // $time = Carbon::parse($input['pukul'])->format('H:i');
-        // dd($input);
+        // dd(isset($input['lampirans']));
         // $satpam = Satpam::where('id',$input['satpam_id'])->first();
         // dd($satpam->regu_id);
         $data = RekapTugas::create([
@@ -104,6 +136,22 @@ class RekapTugasController extends Controller
             'keterangan' => $input['keterangan'],
             'satpam_id' => $input['satpam_id'],
         ]);
+
+        foreach($input['lampirans'] as $lampiran){
+            $random = Str::random(10);
+            $destination_path = 'public/lampiran/';
+            $image = $lampiran;
+            // $image_name = $image->getCLientOriginalName();
+            $ext = $lampiran->extension();
+            $image_name = $random.'.'.$ext;
+            $path = $lampiran->storeAs($destination_path, $image_name);
+            // dd($data->id);
+            Lampiran::create([
+                'nama_lampiran' => $image_name,
+                'rekap_tugas_id' => $data->id,
+            ]);
+        }
+        
         
         if($input['regu_id'] == '1'){
             return redirect('/rekap-tugas')->withInput(['tab'=>'tab-reguA'])->with('status','Data Berhasil Ditambah!'); 

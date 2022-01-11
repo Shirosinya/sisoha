@@ -58,7 +58,7 @@ class PosController extends Controller
         // dd($input,$tugas);
         if($pos->update([
             'nama_pos' => $input['nama_pos'],
-            'jumlah' => $input['jumlah'],
+            'keterangan' => $input['keterangan'],
         ]));
 
         return redirect('/pos-zona')->with('status', 'Data Berhasil Diupdate!');

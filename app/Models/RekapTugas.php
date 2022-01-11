@@ -22,4 +22,8 @@ class RekapTugas extends Model
     public function satpam(){
         return $this->belongsTo(Satpam::class);
     }
+
+    public function lampirans(){
+        return $this->hasMany(Lampiran::class);
+    }
 }

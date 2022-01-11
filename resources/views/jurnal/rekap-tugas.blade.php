@@ -60,7 +60,7 @@
                                                                 </div>
                                                                 <div class="modal-body">
                                                                     <h3 style="margin-top:-15px; margin-bottom:15px;" >REGU A</h3>
-                                                                    <form id="form-create-rekaptugas" name="form-create-rekaptugas" method="POST" action="{{route('createrekaptugas')}}">
+                                                                    <form id="form-create-rekaptugas" name="form-create-rekaptugas" method="POST" action="{{route('createrekaptugas')}}" enctype="multipart/form-data" >
                                                                         @csrf
                                                                         <input type="hidden" name="regu_id" value="1">
                                                                         <div class="form-group row">
@@ -97,6 +97,12 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group row">
+                                                                            <label class="col-sm-3 col-form-label">Lampiran<span style="color: red;">*</span></label>
+                                                                            <div class="col-sm-9">
+                                                                                <input required name="lampirans[]" type="file" class="form-control-file" id="file" multiple="multiple">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
                                                                             <label class="col-sm-3 col-form-label">Petugas</label>
                                                                             <div class="col-sm-9">
                                                                                 <select name="satpam_id" class="form-control" id="satpam_id">
@@ -124,6 +130,7 @@
                                                                 <th><strong>Jam</strong></th>
                                                                 <th><strong>Uraian Tugas</strong></th>
                                                                 <th><strong>Keterangan</strong></th>
+                                                                <th><strong>Lampiran</strong></th>
                                                                 <th><strong>Petugas</strong></th>
                                                                 <th></th>
                                                             </tr>
@@ -136,6 +143,58 @@
                                                                 <td>{{\Carbon\Carbon::parse($rekap_tugas->mulai)->format('H:i')}} - {{\Carbon\Carbon::parse($rekap_tugas->selesai)->format('H:i')}}</td>
                                                                 <td>{{$rekap_tugas->uraian_tugas}}</td>
                                                                 <td>{{$rekap_tugas->keterangan}}</td>
+                                                                <td>
+                                                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#imagesModal{{$rekap_tugas->id}}" style=""><i class="la la-eye"></i></button>
+                                                                    <div class="modal fade bd-example-modal-lg" id="imagesModal{{$rekap_tugas->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                                                                        <div class="modal-dialog modal-xl">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <!-- <h5 class="modal-title">Edit Rekap Tugas</h5> -->
+                                                                                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                                                                    </button>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    <div id="carouselExampleIndicators{{$rekap_tugas->id}}" class="carousel slide" data-ride="carousel">
+                                                                                        <ol class="carousel-indicators">
+                                                                                            <?php $i = 0;?>
+                                                                                            @foreach($lampiransA->where('rekap_tugas_id', '=',$rekap_tugas->id) as $lampiran)
+                                                                                                @if($i == 0)
+                                                                                                    <li data-target="#carouselExampleIndicators{{$rekap_tugas->id}}" data-slide-to="0" class="active"></li>
+                                                                                                @else
+                                                                                                    <li data-target="#carouselExampleIndicators{{$rekap_tugas->id}}" data-slide-to="{{$i}}"></li>
+                                                                                                @endif
+                                                                                                <?php $i++;?>
+                                                                                            @endforeach
+                                                                                        </ol>
+                                                                                        <div class="carousel-inner">
+                                                                                            <?php $w = 0; ?>
+                                                                                            @foreach($lampiransA->where('rekap_tugas_id', '=',$rekap_tugas->id) as $lampiran)
+                                                                                                @if($w == 0)
+                                                                                                <div class="carousel-item active">
+                                                                                                    <img class="d-block w-100 img-responsive" style="width: 100%; height: auto" src="{{asset('/storage/lampiran/'.$lampiran->nama_lampiran)}}" alt="{{$lampiran->nama_lampiran}}">
+                                                                                                </div>
+                                                                                                @else
+                                                                                                <div class="carousel-item">
+                                                                                                    <img class="d-block w-100 img-responsive" style="width: 100%; height: auto" src="{{asset('/storage/lampiran/'.$lampiran->nama_lampiran)}}" alt="{{$lampiran->nama_lampiran}}">
+                                                                                                </div>
+                                                                                                @endif
+                                                                                                <?php $w++; ?>
+                                                                                            @endforeach
+                                                                                        </div>
+                                                                                        <a class="carousel-control-prev" href="#carouselExampleIndicators{{$rekap_tugas->id}}" role="button" data-slide="prev">
+                                                                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                                                            <span class="sr-only">Previous</span>
+                                                                                        </a>
+                                                                                        <a class="carousel-control-next" href="#carouselExampleIndicators{{$rekap_tugas->id}}" role="button" data-slide="next">
+                                                                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                                                            <span class="sr-only">Next</span>
+                                                                                        </a>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
                                                                 <td>{{$rekap_tugas->satpam->nama}}</td>
                                                                 <td>
                                                                     <div class="dropdown">
@@ -673,7 +732,7 @@
                                                         <div class="modal-dialog modal-lg">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title">Tambah rekaptugas</h5>
+                                                                    <h5 class="modal-title">Tambah Rekap Tugas</h5>
                                                                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                                                                     </button>
                                                                 </div>
@@ -771,7 +830,7 @@
                                                                         <div class="modal-dialog modal-lg">
                                                                             <div class="modal-content">
                                                                                 <div class="modal-header">
-                                                                                    <h5 class="modal-title">Edit rekaptugas</h5>
+                                                                                    <h5 class="modal-title">Edit Rekap Tugas</h5>
                                                                                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                                                                                     </button>
                                                                                 </div>
