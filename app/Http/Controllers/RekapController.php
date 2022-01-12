@@ -103,7 +103,7 @@ class RekapController extends Controller
                     ->update(['shift_id'=>$value]);
             }
 
-            $satpams = Satpam::all()->where('zona_id',$userzona);
+            $satpams = Satpam::orderBy('jabatan', 'ASC')->where('zona_id',$userzona)->get();
 
             $poss = Pos::all()->where('zona_id', '=', $userzona);
             $pos_array = array();
