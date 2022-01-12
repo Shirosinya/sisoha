@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/securit7/sintasian.securitypg.com
+    - /bin/cp -r * $DEPLOYPATH #copy all from root
