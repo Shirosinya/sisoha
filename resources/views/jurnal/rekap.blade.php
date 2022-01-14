@@ -28,7 +28,7 @@
                         </div>
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">REKAP</h4>
+                                <h4 class="card-title">RIKIP</h4>
                                 <h4 class="card-title"><?php setlocale(LC_ALL, 'IND');
                                     echo \Carbon\Carbon::parse($date)->formatLocalized('%A, %d %B %Y'); ?></h4>
                             </div>
