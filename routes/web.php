@@ -19,6 +19,10 @@ use Illuminate\Support\Facades\Route;
     Route::get('/', 'Auth\AuthenticatedSessionController@create');
 // });
 
+Route::get('/storage-link', function () {
+    Artisan::call('storage:link');
+});
+
 Auth::routes();
 // Route::get('/login', 'OmahadminController@page_login')->name('login');
 Route::group(['middleware' => ['auth']], function () {
