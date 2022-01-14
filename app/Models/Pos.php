@@ -14,6 +14,7 @@ class Pos extends Model
     protected $fillable=[
         'nama_pos',
         'keterangan',
+        'zona_id',
     ];
 
     // public function satpam()

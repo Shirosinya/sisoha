@@ -22,7 +22,7 @@ class PosController extends Controller
         $logo = "images/petro-logo.png";
         $logoText = "images/petro-text.png";
         $action = __FUNCTION__;
-        return view('pos_zona', compact('page_title', 'page_description', 'action','logo','logoText','poss'));
+        return view('pos_zona', compact('page_title', 'page_description', 'action','logo','logoText','poss','user_zona'));
     }
 
     /**
