@@ -16,14 +16,14 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         $this->call(UserSeeder::class);
         $this->call(ZonaSeeder::class);
-        $this->call(SatpamSeeder::class);
-        $this->call(PosSeeder::class);
+        // $this->call(SatpamSeeder::class);
+        // $this->call(PosSeeder::class);
         $this->call(DetailShiftSeeder::class);
         $this->call(ShiftSeeder::class);
-        $this->call(TugasSeeder::class);
+        // $this->call(TugasSeeder::class);
         $this->call(ReguSeeder::class);
-        $this->call(RekapSeeder::class);
-        $this->call(PosSatpamSeeder::class);
+        // $this->call(RekapSeeder::class);
+        // $this->call(PosSatpamSeeder::class);
         $this->call(DetailZonaSeeder::class);
     }
 }
