@@ -97,17 +97,6 @@ class RekapTugasController extends Controller
         'satpams', 'rekap_tugassA', 'rekap_tugassB', 'rekap_tugassC', 'rekap_tugassD', 'regusArr', 'lampiransA',
         'lampiransB', 'lampiransC', 'lampiransD'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -122,7 +111,7 @@ class RekapTugasController extends Controller
             'mulai' => 'required',
             'selesai' => 'required',
             'keterangan' => 'required',
-            'lampirans' => 'required',
+            // 'lampirans' => 'required',
             'lampirans.*' => 'mimes:jpg,png,jpeg,PNG|max:4000',
         ]);
         $user_zona = Auth::user()->zona->id;
@@ -139,19 +128,23 @@ class RekapTugasController extends Controller
             'satpam_id' => $input['satpam_id'],
         ]);
 
-        foreach($input['lampirans'] as $lampiran){
-            $random = Str::random(10);
-            $destination_path = 'public/lampiran/';
-            $image = $lampiran;
-            // $image_name = $image->getCLientOriginalName();
-            $ext = $lampiran->extension();
-            $image_name = $random.'.'.$ext;
-            $path = $lampiran->storeAs($destination_path, $image_name);
-            // dd($data->id);
-            Lampiran::create([
-                'nama_lampiran' => $image_name,
-                'rekap_tugas_id' => $data->id,
-            ]);
+        if(isset($input['lampirans'])){
+
+            foreach($input['lampirans'] as $lampiran){
+                $random = Str::random(10);
+                $destination_path = 'public/lampiran/';
+                $image = $lampiran;
+                // $image_name = $image->getCLientOriginalName();
+                $ext = $lampiran->extension();
+                $image_name = $random.'.'.$ext;
+                $path = $lampiran->storeAs($destination_path, $image_name);
+                // dd($data->id);
+                Lampiran::create([
+                    'nama_lampiran' => $image_name,
+                    'rekap_tugas_id' => $data->id,
+                ]);
+            }
+
         }
         
         
@@ -181,7 +174,7 @@ class RekapTugasController extends Controller
             'mulai' => 'required',
             'selesai' => 'required',
             'keterangan' => 'required',
-            'lampirans' => 'required',
+            // 'lampirans' => 'required',
             'lampirans.*' => 'mimes:jpg,png,jpeg,PNG|max:4000',
         ]);
         $user_zona = Auth::user()->zona->id;
@@ -201,20 +194,25 @@ class RekapTugasController extends Controller
             File::delete('storage/lampiran/'.$lampiran->nama_lampiran);
         }
 
-        foreach($input['lampirans'] as $lampiran){
-            $random = Str::random(10);
-            $destination_path = 'public/lampiran/';
-            $image = $lampiran;
-            // $image_name = $image->getCLientOriginalName();
-            $ext = $lampiran->extension();
-            $image_name = $random.'.'.$ext;
-            $path = $lampiran->storeAs($destination_path, $image_name);
-            // dd($data->id);
-            Lampiran::create([
-                'nama_lampiran' => $image_name,
-                'rekap_tugas_id' => $id,
-            ]);
+        if(isset($input['lampirans'])){
+
+            foreach($input['lampirans'] as $lampiran){
+                $random = Str::random(10);
+                $destination_path = 'public/lampiran/';
+                $image = $lampiran;
+                // $image_name = $image->getCLientOriginalName();
+                $ext = $lampiran->extension();
+                $image_name = $random.'.'.$ext;
+                $path = $lampiran->storeAs($destination_path, $image_name);
+                // dd($data->id);
+                Lampiran::create([
+                    'nama_lampiran' => $image_name,
+                    'rekap_tugas_id' => $id,
+                ]);
+            } 
+
         }
+
         if($input['regu_id'] == '1'){
             return redirect('/rekap-tugas')->withInput(['tab'=>'tab-reguA'])->with('statusA','Data Berhasil Diupdate!'); 
         }elseif($input['regu_id'] == '2'){

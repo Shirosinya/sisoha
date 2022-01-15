@@ -111,7 +111,8 @@
                                                                         <div class="form-group row">
                                                                             <label class="col-sm-3 col-form-label">Lampiran</label>
                                                                             <div class="col-sm-9">
-                                                                                <input required name="lampirans[]" type="file" class="form-control-file" multiple="multiple">
+                                                                                <input name="lampirans[]" type="file" class="form-control-file" multiple="multiple">
+                                                                                                <p style="color: red;">*max 4MB</p>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group row">
@@ -269,7 +270,8 @@
                                                                                     <div class="form-group row">
                                                                                         <label class="col-sm-3 col-form-label">Lampiran</label>
                                                                                         <div class="col-sm-9">
-                                                                                            <input required name="lampirans[]" type="file" class="form-control-file" multiple="multiple">
+                                                                                            <input name="lampirans[]" type="file" class="form-control-file" multiple="multiple">
+                                                                                                <p style="color: red;">*max 4MB</p>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="form-group row">
@@ -383,7 +385,8 @@
                                                                         <div class="form-group row">
                                                                             <label class="col-sm-3 col-form-label">Lampiran</label>
                                                                             <div class="col-sm-9">
-                                                                                <input required name="lampirans[]" type="file" class="form-control-file" multiple="multiple">
+                                                                                <input name="lampirans[]" type="file" class="form-control-file" multiple="multiple">
+                                                                                                <p style="color: red;">*max 4MB</p>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group row">
@@ -541,7 +544,8 @@
                                                                                         <div class="form-group row">
                                                                                             <label class="col-sm-3 col-form-label">Lampiran</label>
                                                                                             <div class="col-sm-9">
-                                                                                                <input required name="lampirans[]" type="file" class="form-control-file" multiple="multiple">
+                                                                                                <input name="lampirans[]" type="file" class="form-control-file" multiple="multiple">
+                                                                                                <p style="color: red;">*max 4MB</p>
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="form-group row">
@@ -656,7 +660,8 @@
                                                                         <div class="form-group row">
                                                                             <label class="col-sm-3 col-form-label">Lampiran</label>
                                                                             <div class="col-sm-9">
-                                                                                <input required name="lampirans[]" type="file" class="form-control-file" multiple="multiple">
+                                                                                <input name="lampirans[]" type="file" class="form-control-file" multiple="multiple">
+                                                                                                <p style="color: red;">*max 4MB</p>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group row">
@@ -814,7 +819,8 @@
                                                                                         <div class="form-group row">
                                                                                             <label class="col-sm-3 col-form-label">Lampiran</label>
                                                                                             <div class="col-sm-9">
-                                                                                                <input required name="lampirans[]" type="file" class="form-control-file" multiple="multiple">
+                                                                                                <input name="lampirans[]" type="file" class="form-control-file" multiple="multiple">
+                                                                                                <p style="color: red;">*max 4MB</p>
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="form-group row">
@@ -928,7 +934,8 @@
                                                                         <div class="form-group row">
                                                                             <label class="col-sm-3 col-form-label">Lampiran</label>
                                                                             <div class="col-sm-9">
-                                                                                <input required name="lampirans[]" type="file" class="form-control-file" multiple="multiple">
+                                                                                <input name="lampirans[]" type="file" class="form-control-file" multiple="multiple">
+                                                                                                <p style="color: red;">*max 4MB</p>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group row">
@@ -1086,7 +1093,8 @@
                                                                                         <div class="form-group row">
                                                                                             <label class="col-sm-3 col-form-label">Lampiran</label>
                                                                                             <div class="col-sm-9">
-                                                                                                <input required name="lampirans[]" type="file" class="form-control-file" multiple="multiple">
+                                                                                                <input name="lampirans[]" type="file" class="form-control-file" multiple="multiple">
+                                                                                                <p style="color: red;">*max 4MB</p>
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="form-group row">
