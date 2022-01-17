@@ -30,6 +30,18 @@
                                 <h4 class="card-title">Regu dan Personil</h4>
                             </div> -->
                             <div class="card-body">
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <ul class="p-0 m-0" style="list-style: none;">
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
                                 <!-- Nav tabs -->
                                 <div class="default-tab">
                                     <ul class="nav nav-tabs" role="tablist">
@@ -60,13 +72,13 @@
                                                                             <div class="form-group row">
                                                                                 <label class="col-sm-3 col-form-label">Nama</label>
                                                                                 <div class="col-sm-9">
-                                                                                    <input name="nama" type="text" class="form-control" placeholder="Masukkan Nama Personil">
+                                                                                    <input required name="nama" type="text" class="form-control" placeholder="Masukkan Nama Personil">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group row">
                                                                                 <label class="col-sm-3 col-form-label">NIK</label>
                                                                                 <div class="col-sm-9">
-                                                                                    <input name="nik" type="text" oninput="this.value = this.value.toUpperCase()" class="form-control" placeholder="Masukkan NIK">
+                                                                                    <input required name="nik" type="text" oninput="this.value = this.value.toUpperCase()" class="form-control" placeholder="Masukkan NIK">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group row">
@@ -166,7 +178,7 @@
                                                                                             <label class="col-sm-3 col-form-label">Nama</label>
                                                                                             <div class="col-sm-9">
                                                                                                 
-                                                                                                <input name="nama" value="{{ $value->nama }}" type="text" class="form-control" placeholder="Masukkan Nama Personil">
+                                                                                                <input required name="nama" value="{{ $value->nama }}" type="text" class="form-control" placeholder="Masukkan Nama Personil">
                                                                                             
                                                                                                 <!-- <input name="nama" value="" type="text" class="form-control" placeholder="Masukkan Nama Personil"> -->
                                                                                             
@@ -175,7 +187,7 @@
                                                                                         <div class="form-group row">
                                                                                             <label class="col-sm-3 col-form-label">NIK</label>
                                                                                             <div class="col-sm-9">
-                                                                                                <input name="nik" value="{{ $value->nik }}" type="text" oninput="this.value = this.value.toUpperCase()" class="form-control" placeholder="Masukkan NIK">
+                                                                                                <input required name="nik" value="{{ $value->nik }}" type="text" oninput="this.value = this.value.toUpperCase()" class="form-control" placeholder="Masukkan NIK">
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="form-group row">

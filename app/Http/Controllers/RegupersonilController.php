@@ -314,7 +314,16 @@ class RegupersonilController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        $request->validate([
+            'nama' => 'required|max:64',
+            'nik' => 'required|unique:satpams|max:16',
+            'regu_id' => 'nullable',
+            'jabatan' => 'required',
+            'status' => 'required',
+            'zona_id' => 'nullable',
+        ]);
+
         $input = $request->all();
         // dd($input);
         $userzona = Auth::user()->zona->id;
@@ -328,27 +337,6 @@ class RegupersonilController extends Controller
         ]);
         return redirect('/regupersonil')->with('status', 'Data Berhasil Ditambah');
     }
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -359,6 +347,13 @@ class RegupersonilController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'nama' => 'required:max:64',
+            'nik' => 'required|unique:satpams|max:16',
+            'regu_id' => 'nullable',
+            'jabatan' => 'required',
+            'status' => 'required',
+        ]);
         $input = $request->all();
         $satpam = Satpam::where('id',$id)->first();
         // dd($input);

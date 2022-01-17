@@ -35,17 +35,6 @@ class ProduksiController extends Controller
         }
         return view('jurnal.produksi', compact('page_title', 'page_description', 'action','logo','logoText','produksis', 'detail_zonas', 'regusArr'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -54,6 +43,12 @@ class ProduksiController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nama' => 'required|max:64',
+            'keterangan' => 'required|max:255',
+            'regu_id' => 'required',
+            'zona_id' => 'required',
+        ]);
         $user_zona = Auth::user()->zona->id;
         $input = $request->all();
         // $time = Carbon::parse($input['pukul'])->format('H:i');
@@ -77,28 +72,6 @@ class ProduksiController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -107,6 +80,10 @@ class ProduksiController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'nama' => 'required|max:64',
+            'keterangan' => 'required|max:255',
+        ]);
         $input = $request->all();
         $produksi = Produksi::where('id',$id)->first();
         // dd($input,$tugas);

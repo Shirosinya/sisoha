@@ -33,6 +33,11 @@ class PosController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nama_pos' => 'required|max:64',
+            'keterangan' => 'nullable|max:255',
+            'zona_id' => 'required',
+        ]);
         $user_zona = Auth::user()->zona->id;
         $input = $request->all();
         $data = Pos::create([
@@ -52,6 +57,10 @@ class PosController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'nama_pos' => 'required|max:64',
+            'keterangan' => 'nullable|max:255',
+        ]);
         
         $input = $request->all();
         $pos = Pos::where('id',$id)->first();

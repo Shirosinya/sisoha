@@ -37,16 +37,6 @@ class PergantianShiftController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -54,6 +44,13 @@ class PergantianShiftController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'pukul' => 'required',
+            'uraian_tugas' => 'required|string|max:255',
+            'keterangan' => 'required',
+            'regu_id' => 'required',
+            'zona_id' => 'required',
+        ]);
         $input = $request->all();
         // $time = Carbon::parse($input['pukul'])->format('H:i');
         // dd($input);
@@ -77,28 +74,6 @@ class PergantianShiftController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -107,6 +82,11 @@ class PergantianShiftController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'pukul' => 'required',
+            'uraian_tugas' => 'required|string|max:255',
+            'keterangan' => 'required',
+        ]);
         $input = $request->all();
         $tugas = Tugas::where('id',$id)->first();
         // dd($input,$tugas);

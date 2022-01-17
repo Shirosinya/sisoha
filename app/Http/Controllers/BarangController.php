@@ -36,6 +36,12 @@ class BarangController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nama_barang' => 'required|max:64',
+            'jumlah' => 'required|integer',
+            'zona_id' => 'required',
+        ]);
+
         $user_zona = Auth::user()->zona->id;
         $input = $request->all();
         // $time = Carbon::parse($input['pukul'])->format('H:i');
@@ -61,6 +67,11 @@ class BarangController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'nama_barang' => 'required|max:64',
+            'jumlah' => 'required|integer',
+        ]);
+        
         $input = $request->all();
         $barang = Barang::where('id',$id)->first();
         // dd($input,$tugas);

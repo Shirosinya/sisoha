@@ -53,6 +53,12 @@ class GiatArmadaController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nama' => 'required|string|max:64',
+            'keterangan' => 'required|max:255',
+            'zona_id' => 'required',
+        ]);
+
         $user_zona = Auth::user()->zona->id;
         $input = $request->all();
         // $time = Carbon::parse($input['pukul'])->format('H:i');
@@ -76,28 +82,6 @@ class GiatArmadaController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -106,6 +90,10 @@ class GiatArmadaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'nama' => 'required|string|max:64',
+            'keterangan' => 'required|max:255',
+        ]);
         $input = $request->all();
         $giat_armada = GiatArmada::where('id',$id)->first();
         // dd($input,$tugas);

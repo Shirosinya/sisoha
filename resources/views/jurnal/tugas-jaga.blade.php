@@ -23,6 +23,18 @@
                             <!-- <button type="button" class="btn btn-primary mb-2" data-toggle="modal"
                             data-target="#tambahModal">+ Tambah Personil</button> -->
                             <div class="card-body">
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <ul class="p-0 m-0" style="list-style: none;">
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
                                 <div class="default-tab">
                                     <ul class="nav nav-tabs" id="tabMenu" role="tablist">
                                         <li class="nav-item">

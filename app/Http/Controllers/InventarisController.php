@@ -38,16 +38,6 @@ class InventarisController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -55,6 +45,13 @@ class InventarisController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'kondisi' => 'required',
+            'keterangan' => 'nullable|max:255',
+            'barang_id' => 'required',
+            'regu_id' => 'nullable',
+            'zona_id' => 'nullable',
+        ]);
         $user_zona = Auth::user()->zona->id;
         $input = $request->all();
         // $time = Carbon::parse($input['pukul'])->format('H:i');
@@ -82,29 +79,6 @@ class InventarisController extends Controller
             return redirect('/inventaris')->withInput(['tab'=>'tab-reguD'])->with('status','Data Berhasil Ditambah!');
         }
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
     /**
      * Update the specified resource in storage.
      *
@@ -114,6 +88,11 @@ class InventarisController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'kondisi' => 'required',
+            'keterangan' => 'nullable|max:255',
+            'barang_id' => 'required',
+        ]);
         $input = $request->all();
         $inventaris = Inventaris::where('id',$id)->first();
         // dd($input,$tugas);
