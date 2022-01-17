@@ -90,7 +90,7 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group row">
-                                                                            <label class="col-sm-3 col-form-label">Uraian Tugas</label>
+                                                                            <label class="col-sm-3 col-form-label">Uraian Tugas<p style="color:red;"> *max 255 huruf</p></label>
                                                                             <div class="col-sm-9">
                                                                                 <textarea required maxlength="150" name="uraian_tugas" rows="4" type="text" oninput="" class="form-control" placeholder="Masukkan Uraian Tugas"></textarea>
                                                                             </div>
@@ -167,7 +167,7 @@
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="form-group row">
-                                                                                            <label class="col-sm-3 col-form-label">Uraian Tugas</label>
+                                                                                            <label class="col-sm-3 col-form-label">Uraian Tugas<p style="color:red;"> *max 255 huruf</p></label>
                                                                                             <div class="col-sm-9">
                                                                                                 <textarea required maxlength="150" name="uraian_tugas" rows="4" type="text" oninput="" class="form-control" placeholder="Masukkan Uraian Tugas">{{$tugas->uraian_tugas}}</textarea>
                                                                                             </div>
@@ -261,7 +261,7 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group row">
-                                                                            <label class="col-sm-3 col-form-label">Uraian Tugas</label>
+                                                                            <label class="col-sm-3 col-form-label">Uraian Tugas<p style="color:red;"> *max 255 huruf</p></label>
                                                                             <div class="col-sm-9">
                                                                                 <textarea required maxlength="150" name="uraian_tugas" rows="4" type="text" oninput="" class="form-control" placeholder="Masukkan Uraian Tugas"></textarea>
                                                                             </div>
@@ -337,7 +337,7 @@
                                                                                                 </div>
                                                                                             </div>
                                                                                             <div class="form-group row">
-                                                                                                <label class="col-sm-3 col-form-label">Uraian Tugas</label>
+                                                                                                <label class="col-sm-3 col-form-label">Uraian Tugas<p style="color:red;"> *max 255 huruf</p></label>
                                                                                                 <div class="col-sm-9">
                                                                                                     <textarea required maxlength="150" name="uraian_tugas" rows="4" type="text" oninput="" class="form-control" placeholder="Masukkan Uraian Tugas">{{$tugas->uraian_tugas}}</textarea>
                                                                                                 </div>
@@ -432,7 +432,7 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group row">
-                                                                            <label class="col-sm-3 col-form-label">Uraian Tugas</label>
+                                                                            <label class="col-sm-3 col-form-label">Uraian Tugas<p style="color:red;"> *max 255 huruf</p></label>
                                                                             <div class="col-sm-9">
                                                                                 <textarea required maxlength="150" name="uraian_tugas" rows="4" type="text" oninput="" class="form-control" placeholder="Masukkan Uraian Tugas"></textarea>
                                                                             </div>
@@ -509,7 +509,7 @@
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="form-group row">
-                                                                                            <label class="col-sm-3 col-form-label">Uraian Tugas</label>
+                                                                                            <label class="col-sm-3 col-form-label">Uraian Tugas<p style="color:red;"> *max 255 huruf</p></label>
                                                                                             <div class="col-sm-9">
                                                                                                 <textarea required maxlength="150" name="uraian_tugas" rows="4" type="text" oninput="" class="form-control" placeholder="Masukkan Uraian Tugas">{{$tugas->uraian_tugas}}</textarea>
                                                                                             </div>
@@ -603,7 +603,7 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group row">
-                                                                            <label class="col-sm-3 col-form-label">Uraian Tugas</label>
+                                                                            <label class="col-sm-3 col-form-label">Uraian Tugas<p style="color:red;"> *max 255 huruf</p></label>
                                                                             <div class="col-sm-9">
                                                                                 <textarea required maxlength="150" name="uraian_tugas" rows="4" type="text" oninput="" class="form-control" placeholder="Masukkan Uraian Tugas"></textarea>
                                                                             </div>
@@ -680,7 +680,7 @@
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="form-group row">
-                                                                                            <label class="col-sm-3 col-form-label">Uraian Tugas</label>
+                                                                                            <label class="col-sm-3 col-form-label">Uraian Tugas<p style="color:red;"> *max 255 huruf</p></label>
                                                                                             <div class="col-sm-9">
                                                                                                 <textarea required maxlength="150" name="uraian_tugas" rows="4" type="text" oninput="" class="form-control" placeholder="Masukkan Uraian Tugas">{{$tugas->uraian_tugas}}</textarea>
                                                                                             </div>
