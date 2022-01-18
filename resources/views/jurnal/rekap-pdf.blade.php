@@ -7,15 +7,26 @@
   border-collapse: collapse;
   width: 100%;
 }
+#css-table1 {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
 
 #css-table td, #css-table th {
   border: 1px solid #ddd;
   padding: 8px;
 }
 
+#css-table1 td, #css-table1 th {
+  border: 2px solid black;
+  text-align: center;
+  padding: 10px;
+}
+
 #css-table tr:nth-child(even){background-color: #f2f2f2;}
 
-#css-table tr:hover {background-color: #ddd;}
+/* #css-table tr:hover {background-color: #ddd;} */
 
 #css-table th {
   padding-top: 12px;
@@ -24,6 +35,14 @@
   background-color: #dbdbdb;
   color: black;
   border: 1px solid white;
+
+}#css-table1 th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #ffff;
+  color: black;
+  border: 2px solid black;
 }
 </style>
 </head>
@@ -31,17 +50,34 @@
     <div class="container-fluid">
         <!-- row -->
         <div class="row">
-            <h3>Hari, Tanggal : <span style="font-weight:normal"><?php setlocale(LC_ALL, 'IND'); echo \Carbon\Carbon::parse($date)->formatLocalized('%A, %d %B %Y'); ?></span></h3>
-            
-            <h3>Regu/Shift : 
-            @foreach($regus_active as $regu_active)
-                @if($regu_active->id == $reguid)
-                <span style="font-weight:normal">{{$regu_active->nama}} / Shift {{$regu_active->shift_id}}</span>
-                @endif
-            @endforeach
-            </h3>
             <div class="col-lg-12">
-            
+                <table id="css-table1" style="background-color:white;">
+                <tr>
+                    <th rowspan="3"><img src="{{base64_decode($image)}}" height="100px" width="100px" alt="petro-logo"></th>
+                    <th><h2>JURNAL HARIAN POS INDUK ZONA {{$userzona}}
+                    @foreach($regus_active as $regu_active)
+                        @if($regu_active->id == $reguid)
+                        <span>{{strtoupper($regu_active->nama)}}</span>
+                        @endif
+                    @endforeach</h2></th>
+                </tr>
+                <tr>
+                    <td style="font-weight:bold;">HAL/SUBJEK : LAPORAN HARIAN (JURNAL)<br>
+                    HARI/TANGGAL :  <span style="font-weight:bold"><?php setlocale(LC_ALL, 'IND'); echo \Carbon\Carbon::parse($date)->formatLocalized('%A, %d %B %Y'); ?></span><br>
+                    REGU/SHIFT : 
+                    @foreach($regus_active as $regu_active)
+                        @if($regu_active->id == $reguid)
+                        <span style="font-weight:bold">{{$regu_active->nama}} / Shift {{$regu_active->shift_id}}</span>
+                        <br>
+                        PUKUL : {{\Carbon\Carbon::parse($regu_active->shift->mulai)->format('H:i')}} - {{\Carbon\Carbon::parse($regu_active->shift->selesai)->format('H:i')}} 
+                        <br>
+                        @endif
+                    @endforeach
+                    </td>
+                </tr>
+                </table>
+            </div>
+            <div class="col-lg-12">
                 @if($reguid == '1')
                 <!-- LAP PERGANTIAN SHIFT -->
                 <div class="col-lg-12">

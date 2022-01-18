@@ -396,6 +396,8 @@ class RekapController extends Controller
             array_push($regusArr,$regu->id);
         }
 
+        $image = base64_encode(url('images\petro-logo-big.png'));
+        // dd(base64_decode($image));
         view()->share([
         'reguid' => $reguid,
         'pos_satpams' => $pos_satpams,
@@ -420,84 +422,24 @@ class RekapController extends Controller
         'rekap_tugassC' => $rekap_tugassC,
         'rekap_tugassD' => $rekap_tugassD,
         'regusArr' => $regusArr,
-        'regus_active' => $regus_active
+        'regus_active' => $regus_active,
+        'image' => $image,
+        'userzona' => $userzona,
         
-    ]);
+        ]);
 
-    if($reguid == '1'){
-        $namaRegu = ' Regu A';
-    }elseif($reguid == '2'){
-        $namaRegu = ' Regu B';
-    }elseif($reguid == '3'){
-        $namaRegu = ' Regu C';
-    }else{$namaRegu = ' Regu D';}
+        if($reguid == '1'){
+            $namaRegu = ' Regu A';
+        }elseif($reguid == '2'){
+            $namaRegu = ' Regu B';
+        }elseif($reguid == '3'){
+            $namaRegu = ' Regu C';
+        }else{
+            $namaRegu = ' Regu D';
+        }
+
+        // return view('jurnal.rekap-pdf');
         $pdf = PDF::loadview('jurnal.rekap-pdf');
         return $pdf->download($date.$namaRegu.' Jurnal-Rekap.pdf');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }
