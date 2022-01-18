@@ -11,6 +11,7 @@
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
+  margin-bottom: 20px;
 }
 
 #css-table td, #css-table th {
@@ -53,7 +54,7 @@
             <div class="col-lg-12">
                 <table id="css-table1" style="background-color:white;">
                 <tr>
-                    <th rowspan="3"><img src="{{url('images/petro-logo-big.png')}}" height="50px" width="50px" alt="petro-logo"></th>
+                    <th rowspan="3"><img src="{{url('images/petro-logo-big.png')}}" height="100px" width="100px" alt="petro-logo"></th>
                     <th><h2>JURNAL HARIAN POS INDUK ZONA {{$userzona}}
                     @foreach($regus_active as $regu_active)
                         @if($regu_active->id == $reguid)
