@@ -54,7 +54,7 @@
             <div class="col-lg-12">
                 <table id="css-table1" style="background-color:white;">
                 <tr>
-                    <th rowspan="3"><img src="{{url('images/petro-logo-big.png')}}" height="100px" width="100px" style="margin-bottom:5px;" alt="petro-logo"></th>
+                    <th rowspan="2"><img src="{{url('images/petro-logo-big.png')}}" height="100px" width="100px" alt="petro-logo"></th>
                     <th><h2>JURNAL HARIAN POS INDUK ZONA {{$userzona}}
                     @foreach($regus_active as $regu_active)
                         @if($regu_active->id == $reguid)
