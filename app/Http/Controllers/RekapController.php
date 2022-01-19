@@ -440,6 +440,18 @@ class RekapController extends Controller
 
         // return view('jurnal.rekap-pdf');
         $pdf = PDF::loadview('jurnal.rekap-pdf');
+        $pdf->output();
+        $canvas = $pdf->getDomPDF()->getCanvas();    
+        $height = $canvas->get_height();
+        $width = $canvas->get_width();
+        //if want just one page watermark just delete the "Multiply" param
+        $canvas->set_opacity(.1,"Multiply");
+        $canvas->page_text($width/5, $height/2, 'SINTASIAN',
+        null, 70, array(0,0,0),2,2,-30);
+        // page_text(x axis value, y axis value, 'your text, font(or null), 
+        // font size,rgb color array, word space, char space, angle(- or +));
+        
+        // return $pdf->stream();
         return $pdf->download($date.$namaRegu.' Jurnal-Rekap.pdf');
     }
 }
