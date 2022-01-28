@@ -22,7 +22,7 @@ class ZonaSeeder extends Seeder
             ['Zona 5'],
             ['Zona Kawasan'],
             ['Zona TUKS'],
-            ['Pamtup'],
+            ['Security Shift'],
     ];
         foreach ($zonas as $key => $value) {
             $zona = Zona::updateOrCreate([
