@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
             ['zona5', 'kajaga','5'],
             ['zonakawasan', 'kajaga','6'],
             ['zonatuks', 'kajaga','7'],
-            ['pamtup', 'kajaga','8'],
+            ['securityshift', 'kajaga','8'],
     ];
         foreach ($users as $key => $value) {
             $user = User::updateOrCreate([
