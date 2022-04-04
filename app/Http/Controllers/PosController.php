@@ -36,7 +36,6 @@ class PosController extends Controller
         $request->validate([
             'nama_pos' => 'required|max:64',
             'keterangan' => 'nullable|max:255',
-            'zona_id' => 'required',
         ]);
         $user_zona = Auth::user()->zona->id;
         $input = $request->all();

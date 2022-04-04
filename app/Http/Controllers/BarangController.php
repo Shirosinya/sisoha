@@ -38,8 +38,7 @@ class BarangController extends Controller
     {
         $request->validate([
             'nama_barang' => 'required|max:64',
-            'jumlah' => 'required|integer',
-            'zona_id' => 'required',
+            'jumlah' => 'required|integer'
         ]);
 
         $user_zona = Auth::user()->zona->id;
